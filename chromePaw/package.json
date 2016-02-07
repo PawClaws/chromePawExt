@@ -1,0 +1,22 @@
+{
+  "name": "paw",
+  "version": "1.0.0",
+  "description": "Simulated touches and gestures for automated testing",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Workiva/paw.git"
+  },
+  "scripts": {
+    "install": "bower install",
+    "update": "bower install"
+  },
+  "dependencies": {
+    "connect": "^2.17.3",
+    "gulp": "^3.6.2",
+    "ip": "^0.3.0",
+    "mkdirp": "^0.5.0",
+    "moment": "^2.6.0",
+    "open": "0.0.5",
+    "raw-body": "^1.1.6"
+  }
+}
