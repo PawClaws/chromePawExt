@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/PawClaws/chromePawExt.png?label=ready&title=Ready)](https://waffle.io/PawClaws/chromePawExt)
 # chromePawExt
 A chrome extension implementing paw
 
