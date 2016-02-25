@@ -1,0 +1,71 @@
+body,.trans{background-color:rgba(0,0,0,0)!important;}
+
+.script-border{
+	border: 2px solid;
+	margin-left: 4px;
+	padding: 8px;
+	border-color: #FF8300;
+	border-radius: 4px;
+	background: #F5F4F4;
+}
+
+.my-div{
+	float: left;
+	margin-top: 4px;
+}
+
+.modern {
+    display: inline-block;
+	margin-bottom: 10px;
+	padding: 8px 15px;
+    background: #B8ED01;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 4px;
+    transition: all 0.3s ease-out;
+    box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.5), 
+        0 2px 2px rgba(0,0,0,0.3), 
+        0 0 4px 1px rgba(0,0,0,0.2); 
+    /* Font styles */
+    text-decoration: none;
+    text-shadow: 0 1px rgba(255,255,255,0.7);
+}
+
+.modern:hover {
+    background: #C7FE0A
+}
+
+.embossed-link {
+    box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.5), 
+        0 2px 2px rgba(0,0,0,0.3), 0 0 4px 1px rgba(0,0,0,0.2), 
+        inset 0 3px 2px rgba(255,255,255,.22), 
+        inset 0 -3px 2px rgba(0,0,0,.15), 
+        inset 0 20px 10px rgba(255,255,255,.12), 
+        0 0 4px 1px rgba(0,0,0,.1), 0 3px 2px rgba(0,0,0,.2);
+}
+
+.embossed-link:active {
+    box-shadow: 
+        inset 0 -2px 1px rgba(255,255,255,0.2), 
+        inset 0 3px 2px rgba(0,0,0,0.12);
+}
+
+.mac {
+    display: block;
+    border: none;
+    border-radius: 20px;
+    padding: 5px 8px;
+    color: #333;
+    box-shadow: 
+        inset 0 2px 0 rgba(0,0,0,.2), 
+        0 0 4px rgba(0,0,0,0.1);
+}
+
+.mac:focus {
+    outline: none;
+    box-shadow: 
+        inset 0 2px 0 rgba(0,0,0,.2), 
+        0 0 4px rgba(0,0,0,0.1), 
+        0 0 5px 1px #51CBEE;
+}

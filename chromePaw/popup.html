@@ -39,21 +39,31 @@
     <script src="src/Gestures.js"></script>
     <script src="src/Paw.js"></script>
     <script src="recordControl/record/main.js"></script> 
-<script src='siteScript/loadControlModule.js'></script>    
+	<script src='siteScript/loadControlModule.js'></script>    
+	
 </head>
     <body>
     <!-- The recording surface -->
 
 
     <!-- The tool drawer -->
-    <div id="drawer">
+    <div id="drawer" class='ng-scope my-div'>
         
-
-        <button id="record" class="btn btn-primary" ng-click="fn.toggleRecord()">{{m.btnMsg}}</button>
-        <div ng-repeat="r in m.recordings">
-            <button class="btn btn-primary playBtn" ng-disabled="!m.script.length || m.isRecording" ng-click="fn.playback(r)">Play</button>
-            <button class="btn btn-primary" ng-disabled="!m.script.length || m.isRecording" ng-click="fn.del($index)">Del</button>
-            <input type="text"
+        <button style="margin-left: 4px;"  class="btn modern embossed-link" ng-click="fn.toggleRecord()">{{m.btnMsg}}</button>
+        
+		<div class="script-border" ng-repeat="r in m.recordings">
+            
+			<button id="playBtnId" class="btn modern embossed-link playBtn" ng-disabled="!m.script.length || m.isRecording" ng-click="fn.playback(r)">Play</button>
+            
+			<button class="btn modern embossed-link" ng-disabled="!m.script.length || m.isRecording" ng-click="fn.del($index)">Delete</button>
+			
+			<button class="btn modern embossed-link" ng-disabled="!m.script.length || m.isRecording" ng-click="fn.hide($index)">Hide</button>
+			
+			<!-- <button id="show" class="btn modern embossed-link" ng-disabled="!m.script.length || m.isRecording" >Show</button> -->
+			</br>
+			Paw Script Filename:
+			</br>
+            <input type="text" class = "mac"
                    ng-model="r.name"
                    ng-blur="fn.addGestureToPaw($index)"
                    ng-focus="fn.removeGestureFromPaw($index)"
@@ -66,17 +76,23 @@
         <label><input style='display:none' type="checkbox" ng-model="m.relative"/></label>
 
         JS Module System:
+		</br>
         <label><input type="radio" ng-model="m.umd" value="" ng-change="fn.generatePawScript()"/> None </label>
         <label><input type="radio" ng-model="m.umd" value="AMD" ng-change="fn.generatePawScript()"/> AMD </label>
         <label><input type="radio" ng-model="m.umd" value="UMD" ng-change="fn.generatePawScript()"/> UMD </label>
-
+		
+		
+		
+		
+		
         
         <textarea style='display:none' class="js" ng-model="m.script" width="100%"></textarea>
     </div>
-
-        
-         
+	
+		
+          
          
          
     </body>
+    <script src='/siteScript/uiFacade.js'></script>
 </html>

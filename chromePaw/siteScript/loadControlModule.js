@@ -89,6 +89,7 @@ angular.module('record', ['cfp.hotkeys'])
 
         function copyTouches(ev) {
             var result = [];
+            console.log(ev);
             var touches = ev.touches;
             if (touches) {
                 var len = touches.length;

@@ -276,6 +276,14 @@ angular.module('record', ['cfp.hotkeys'])
                 $scope.m.recordings.splice(i, 1);
                 $scope.fn.generatePawScript();
             },
+			hide: function(i){
+				//window.alert('hide function being called');
+				var r = $scope.m.recordings[i];
+                delete(paw[r.name]);
+                $scope.m.recordings.splice(i, 1);
+                $scope.fn.generatePawScript();
+				
+			},
             addGestureToPaw: function(i) {
                 var r = $scope.m.recordings[i];
                 Train.mixFunctionInto(paw, r.name, r.fn);
@@ -343,6 +351,7 @@ angular.module('record', ['cfp.hotkeys'])
                     $http.post(window.location.origin + '/CustomGestures', data);
                 }
             }
+			
         };
         $scope.fn.generatePawScript();
     });
