@@ -1,6 +1,7 @@
 body,.trans{background-color:rgba(0,0,0,0)!important;}
 
-.script-border{
+
+.recording{
 	border: 2px solid;
 	margin-left: 4px;
 	padding: 8px;
@@ -10,7 +11,7 @@ body,.trans{background-color:rgba(0,0,0,0)!important;}
 }
 
 .my-div{
-	float: left;
+	display: inline-block!important;
 	margin-top: 4px;
 }
 

@@ -253,6 +253,10 @@ angular.module('record', ['cfp.hotkeys'])
                     clearTimeout(autoStopInterval);
                 }
                 else {
+					// Get a reference to the show/hide all button to set the text to 'Hide All' if it's not already set
+					var btn = document.getElementById("showBtn");
+					btn.innerHTML = 'Hide All';
+				
                     // start recording, clear everything
                     var name = 'gesture' + ($scope.m.recordings.length + 1);
                     $scope.m.recording = {
@@ -273,11 +277,75 @@ angular.module('record', ['cfp.hotkeys'])
                 paw[r.name].call(paw);
             },
             del: function(i) {
+				// Animate the recording's deletion using jQuery
+				var id = "recording" + i;
+				var elem = document.getElementById(id);
+				
+				$(elem).toggle("explode", 800);
+				
+				// Delete the recording from the array
                 var r = $scope.m.recordings[i];
                 delete(paw[r.name]);
                 $scope.m.recordings.splice(i, 1);
                 $scope.fn.generatePawScript();
             },
+			hide: function(i) {
+				var id = "recording" + i;
+				var elem = document.getElementById(id);
+				var btn = document.getElementById("showBtn");
+				var count = 0;
+				
+				 $(elem).toggle("fold", { direction: "left" }, 600);
+				 
+				 $(elem).promise().done(function(){
+					for (var i = 0; i < ($scope.m.recordings.length); i++) {
+						id = "recording" + i;
+						elem = document.getElementById(id);
+					
+						if(!($(elem).is(":visible"))){
+							count++;
+						}
+					}
+					
+					if(count == ($scope.m.recordings.length)){
+						btn.innerHTML = 'Show All';
+					}else{
+						btn.innerHTML = 'Hide All';
+					}
+				});
+				
+            },
+			showHideAll: function() {
+			
+				var btn = document.getElementById("showBtn");
+				var id;
+				var elem;
+				
+				if(btn.innerHTML == 'Hide All'){
+					for (var i = 0; i < ($scope.m.recordings.length); i++) {
+						id = "recording" + i;
+						elem = document.getElementById(id);
+						
+						if($(elem).is(":visible")){
+							$(elem).toggle("fold", { direction: "left" }, 600);
+						}
+					}
+					
+					btn.innerHTML = 'Show All';
+					
+				}else if(btn.innerHTML == 'Show All'){
+					for (var i = 0; i < ($scope.m.recordings.length); i++) {
+						id = "recording" + i;
+						elem = document.getElementById(id);
+						
+						if(!($(elem).is(":visible"))){
+							$(elem).toggle("fold", { direction: "left" }, 600);
+						}
+					}
+					
+					btn.innerHTML = 'Hide All';
+				}
+			},
             addGestureToPaw: function(i) {
                 var r = $scope.m.recordings[i];
                 Train.mixFunctionInto(paw, r.name, r.fn);
