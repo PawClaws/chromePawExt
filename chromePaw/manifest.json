@@ -19,8 +19,8 @@
         "siteScript/jquery-2.1.4.min.js",
         "siteScript/bootstrap/js/bootstrap.js",
         "siteScript/jquery-ui-1.11.4/jquery-ui.min.js",
-        "siteScript/FloatingLabels.js",
         "loadPopup.js",
+        "siteScript/FloatingLabels.js",
         "siteScript/transparency.js",
         "siteScript/plates.js",
         "siteScript/mori.js",
@@ -37,10 +37,10 @@
         "src/Train.js",
         "src/WheelEventSimulator.js",
         "src/Gestures.js",
-        "src/Paw.js",
-        "siteScript/loadControlModule.js"
+        "src/Paw.js"
+        
         ],
-   "run_at":"document_start" 
+   "run_at":"document_end" 
 }],
   "permissions": [
     "activeTab",
