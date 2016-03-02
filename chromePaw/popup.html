@@ -1,46 +1,9 @@
 <!DOCTYPE html>
-<html ng-app="record" ng-controller="recordCtrl" class='disallowEvents'>
+<html ng-app="record" ng-controller="recordCtrl" class='ng-scope'>
 <head>
-   <link href="siteScript/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-<link href="siteStyle/FloatingLabels.css" rel="stylesheet" />
-<link href="siteScript/jquery-ui-1.11.4/jquery-ui.min.css" rel="stylesheet" />
-<link href="siteScript/jquery-ui-1.11.4/jquery-ui.structure.min.css" rel="stylesheet" />
-<link href="siteScript/jquery-ui-1.11.4/jquery-ui.theme.min.css" rel="stylesheet" />
-<script src="siteScript/jquery-2.1.4.min.js"></script>
-<script src="siteScript/bootstrap/js/bootstrap.js"></script>
-<script src="siteScript/jquery-ui-1.11.4/jquery-ui.min.js"></script>
-<script src="siteScript/FloatingLabels.js"></script>
-<script src="siteScript/transparency.js"></script>
-<script src="siteScript/plates.js"></script>
-<script src="siteScript/mori.js"></script>
-<script src="siteScript/immutable.js"></script>
-<script src="siteScript/underscore-observe-master/demo/js/underscore.js"></script>
-<script src="siteScript/underscore-observe-master/demo/js/json2.js"></script>
-<script src="siteScript/underscore-observe-master/underscore-observe.js"></script>
-<script src="siteScript/jquery.directive.js-master/jquery.directive.js"></script> 
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-
-    <link rel="shortcut icon" sizes="196x196" href="recordControl/paw196.png">
-    <link rel="shortcut icon" sizes="128x128" href="recordControl/paw128.png">
-    <link rel="apple-touch-icon" sizes="128x128" href="recordControl/paw128.png">
-    <link rel="apple-touch-icon-precomposed" sizes="128x128" href="recordControl/paw128.png">
-
-    <link rel="stylesheet" href="bower_components/angular-hotkeys/src/hotkeys.css">
-    <link rel="stylesheet" href="siteStyle/style.css">
-        <script src="bower_components/q/q.js"></script>
-    <script src="bower_components/mousetrap/mousetrap.min.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-hotkeys/src/hotkeys.js"></script>
-    <script src="src/ViewportRelative.js"></script>
-    <script src="src/Train.js"></script>
-    <script src="src/WheelEventSimulator.js"></script>
-    <script src="src/Gestures.js"></script>
-    <script src="src/Paw.js"></script>
-    <!--<script src="recordControl/record/main.js"></script>--> 
-	<script src='siteScript/loadControlModule.js'></script>    
-	
+    <meta name="apple-mobile-web-app-capable" content="yes">	
 </head>
     <body>
     <!-- The recording surface -->
@@ -48,7 +11,7 @@
 
     <!-- The tool drawer -->
     <div id='dragBox' class='ui-widget-content allowEvents'>
-    <div id="drawer" class='ng-scope allowEvents'>
+    <div id="drawer" class='allowEvents'>
         <!-- {{m.btnMsg}} -->
         <button id='btnRecord' style="margin-left: 4px;"  class="btn modern embossed-link allowEvents" ng-click="fn.toggleRecord()">{{m.btnMsg}}</button>
 <button id='btnShowAll' style="margin-left: 4px;"  class="btn modern embossed-link allowEvents" ng-click="fn.showAll()">Show All</button>        

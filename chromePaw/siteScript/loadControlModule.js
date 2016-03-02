@@ -50,8 +50,9 @@ angular.module('record', ['cfp.hotkeys'])
         var autoStopInterval;
         var mouseDown = false; // move to top
         var eventsToRecord = [
-             'click',
-            // 'scroll',
+            'click',
+            'scroll',
+            'contextmenu',
             'mouseup',
             'mousedown',
             'mousemove',
@@ -72,24 +73,25 @@ angular.module('record', ['cfp.hotkeys'])
             recordings: [],
             script: null,
             relative: true,
-            umd: 'AMD'
+            umd: null
         };
 
         function autoStop() {
-            var left = $scope.m.stopAt - Date.now();
-            $scope.$apply(function() {
-                if (left <= 0) {
-                    $scope.fn.toggleRecord();
-                }
-                else {
-                    $scope.m.secondsLeft = Math.ceil(left / 1000);
-                }
-            });
+            //var left = $scope.m.stopAt - Date.now();
+            //$scope.$apply(function() {
+            //    if (left <= 0) {
+            //        $scope.fn.toggleRecord();
+            //    }
+            //    else {
+            //        $scope.m.secondsLeft = Math.ceil(left / 1000);
+            //    }
+            //});
+            return;
         }
 
         function copyTouches(ev) {
             var result = [];
-            console.log(ev);
+            //console.log(ev);
             var touches = ev.touches;
             if (touches) {
                 var len = touches.length;
@@ -162,7 +164,7 @@ angular.module('record', ['cfp.hotkeys'])
                 $scope.m.recording.data.push(['            ', '.touch(', touchesToString(touches), ')']);
             }
             else if (evtype === 'touchmove'  || evtype === 'mousemove') {
-                if (mouseDown) {
+                if (mouseDown==true) {
                     $scope.m.recording.data.push(['            ', '.move(', touchesToString(touches), ')']);
                 }
             }
@@ -171,13 +173,13 @@ angular.module('record', ['cfp.hotkeys'])
                 $scope.m.recording.data.push(['            ', '.release()']);
             }
             else if (evtype === 'click') {
-                $scope.m.recording.data.push(['            ', '.tap(', touchesToString(touches[0]), ')']);
+                $scope.m.recording.data.push(['            ', '.tap(', touchesToString(touches), ')']);
             }
             else if (evtype === 'mousewheel' || evtype === 'scroll') {
                 $scope.m.recording.data.push([
                     '            ',
                     '.wheel(',
-                    touchesToString(touches[0]),
+                    touchesToString(touches),
                     ', { deltaX: ',
                     ev.deltaX,
                     ', deltaY: ',
@@ -185,7 +187,9 @@ angular.module('record', ['cfp.hotkeys'])
                     '})'
                 ]);
             } else {
-                console.log('Some event', ev);
+                console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+                console.log(ev);
+                console.log('-------------------------------');
             }
         }
 
