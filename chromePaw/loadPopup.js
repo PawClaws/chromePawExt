@@ -1,11 +1,21 @@
-document.onreadystatechange = function () {
-  if (document.readyState == "interactive") {
+     document.getElementsByTagName('html')[0].setAttribute("ng-app", "record");
+     document.getElementsByTagName('html')[0].setAttribute("ng-controller", "recordCtrl");
 
-     //document.getElementsByTagName('html')[0].setAttribute("ng-app", "record");
-     //document.getElementsByTagName('html')[0].setAttribute("ng-controller", "recordCtrl");
+     $.get(chrome.extension.getURL("popup.html"),function(d){
+        var code=d.split('<body>')[1].split('</body>')[0];
+        code+='</div>'
+        code='<div id="guiContainer" style="position:absolute!important; top:0!important; left:0!important; overflow:visible!important; width:100%; height:100%; background:none!important; z-index:10000!important; pointer-events:none!important;">'+code
+        $('body').append(code);
+     });
+
+document.onreadystatechange = function () {
+  if (document.readyState == "complete") {
+
+
+
      //document.getElementsByTagName('html')[0].setAttribute("style", "margin:50px!important;");
      //document.getElementsByTagName('html')[0].setAttribute('class','ng-scope');
-     document.body.innerHTML+='<object style="position:absolute!important; top:0!important; left:0!important; height:100%!important; width:100%!important; background-color:rgba(0,0,0,0)!important; z-index:100!important;" type="text/html" data="'+chrome.extension.getURL("popup.html")+'"></object>';
+     //document.body.innerHTML+= type="text/html" data="'+chrome.extension.getURL("popup.html")+'"></object>';
   }
 }
 

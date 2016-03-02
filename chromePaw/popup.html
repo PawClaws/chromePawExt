@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="record" ng-controller="recordCtrl">
+<html ng-app="record" ng-controller="recordCtrl" class='disallowEvents'>
 <head>
    <link href="siteScript/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 <link href="siteStyle/FloatingLabels.css" rel="stylesheet" />
@@ -38,7 +38,7 @@
     <script src="src/WheelEventSimulator.js"></script>
     <script src="src/Gestures.js"></script>
     <script src="src/Paw.js"></script>
-    <script src="recordControl/record/main.js"></script> 
+    <!--<script src="recordControl/record/main.js"></script>--> 
 	<script src='siteScript/loadControlModule.js'></script>    
 	
 </head>
@@ -47,17 +47,17 @@
 
 
     <!-- The tool drawer -->
-    <div id="drawer" class='ng-scope my-div'>
+    <div id="drawer" class='ng-scope my-div' class=''>
         <!-- {{m.btnMsg}} -->
-        <button style="margin-left: 4px;"  class="btn modern embossed-link" ng-click="fn.toggleRecord()">Allo</button>
+        <button id='btnRecord' style="margin-left: 4px;"  class="btn modern embossed-link allowEvents" ng-click="fn.toggleRecord()">{{m.btnMsg}}</button>
         
 		<div class="script-border" ng-repeat="r in m.recordings">
             
-			<button id="playBtnId" class="btn modern embossed-link playBtn" ng-disabled="!m.script.length || m.isRecording" ng-click="fn.playback(r)">Play</button>
+			<button id="playBtnId" class="btn modern embossed-link playBtn allowEvents" ng-disabled="!m.script.length || m.isRecording" ng-click="fn.playback(r)">Play</button>
             
-			<button class="btn modern embossed-link" ng-disabled="!m.script.length || m.isRecording" ng-click="fn.del($index)">Delete</button>
+			<button class="btn modern embossed-link allowEvents" ng-disabled="!m.script.length || m.isRecording" ng-click="fn.del($index)">Delete</button>
 			
-			<button class="btn modern embossed-link" ng-disabled="!m.script.length || m.isRecording" ng-click="fn.hide($index)">Hide</button>
+			<button class="btn modern embossed-link allowEvents" ng-disabled="!m.script.length || m.isRecording" ng-click="fn.hide($index)">Hide</button>
 			
 			<!-- <button id="show" class="btn modern embossed-link" ng-disabled="!m.script.length || m.isRecording" >Show</button> -->
 			</br>
@@ -68,7 +68,9 @@
                    ng-blur="fn.addGestureToPaw($index)"
                    ng-focus="fn.removeGestureFromPaw($index)"
                    ng-change="fn.generatePawScript()"
-                   required pattern="[a-zA-Z0-9]+"/>
+                   required pattern="[a-zA-Z0-9]+"
+                   class="allowEvents"
+                   />
         
 
         
@@ -77,22 +79,10 @@
 
         JS Module System:
 		</br>
-        <label><input type="radio" ng-model="m.umd" value="" ng-change="fn.generatePawScript()"/> None </label>
-        <label><input type="radio" ng-model="m.umd" value="AMD" ng-change="fn.generatePawScript()"/> AMD </label>
-        <label><input type="radio" ng-model="m.umd" value="UMD" ng-change="fn.generatePawScript()"/> UMD </label>
-		
-		
-		
-		
-		
-        
+        <label><input type="radio" class="allowEvents" ng-model="m.umd" value="" ng-change="fn.generatePawScript()"/> None </label>
+        <label><input type="radio" class="allowEvents" ng-model="m.umd" value="AMD" ng-change="fn.generatePawScript()"/> AMD </label>
+        <label><input type="radio" class="allowEvents" ng-model="m.umd" value="UMD" ng-change="fn.generatePawScript()"/> UMD </label>
         <textarea style='display:none' class="js" ng-model="m.script" width="100%"></textarea>
     </div>
-	
-		
-          
-         
-         
     </body>
-    <script src='/siteScript/uiFacade.js'></script>
 </html>

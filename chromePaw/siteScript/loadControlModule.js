@@ -50,7 +50,7 @@ angular.module('record', ['cfp.hotkeys'])
         var autoStopInterval;
         var mouseDown = false; // move to top
         var eventsToRecord = [
-            // 'click',
+             'click',
             // 'scroll',
             'mouseup',
             'mousedown',
@@ -236,6 +236,7 @@ angular.module('record', ['cfp.hotkeys'])
                 $scope.m.btnMsg = $scope.m.isRecording ? 'Stop' : 'Record';
 
                 if (!$scope.m.isRecording) {
+
                     // stopped recording
                     $scope.m.recording.data.unshift('$scope.m.recording.fn = function(options, done) {');
                     $scope.m.recording.data.push('            .then(done);');
