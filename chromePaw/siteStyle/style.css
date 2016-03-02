@@ -3,6 +3,16 @@ body,.trans{background-color:rgba(0,0,0,0)!important;}
 .allowEvents{pointer-events:all!important;}
 .disallowEvents{pointer-events:none!important;}
 
+#dragBox{
+    padding:1%;
+    border-style:solid;
+    border-width:1px;
+    border-color:black;
+    width:25%;
+}
+
+
+
 .script-border{
 	border: 2px solid;
 	margin-left: 4px;

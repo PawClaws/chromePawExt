@@ -47,9 +47,11 @@
 
 
     <!-- The tool drawer -->
-    <div id="drawer" class='ng-scope my-div' class=''>
+    <div id='dragBox' class='ui-widget-content allowEvents'>
+    <div id="drawer" class='ng-scope allowEvents'>
         <!-- {{m.btnMsg}} -->
         <button id='btnRecord' style="margin-left: 4px;"  class="btn modern embossed-link allowEvents" ng-click="fn.toggleRecord()">{{m.btnMsg}}</button>
+<button id='btnShowAll' style="margin-left: 4px;"  class="btn modern embossed-link allowEvents" ng-click="fn.showAll()">Show All</button>        
         
 		<div class="script-border" ng-repeat="r in m.recordings">
             
@@ -84,5 +86,7 @@
         <label><input type="radio" class="allowEvents" ng-model="m.umd" value="UMD" ng-change="fn.generatePawScript()"/> UMD </label>
         <textarea style='display:none' class="js" ng-model="m.script" width="100%"></textarea>
     </div>
+</div>    
+    
     </body>
 </html>
