@@ -7,7 +7,7 @@ $(document).ready(()=>{
     //Injected View
     var angularCode=
             [
-                   '<div id="guiContainer" style="position:absolute!important; top:0!important; left:0!important; overflow:visible!important; width:100%; height:100%; background:none!important; z-index:100000!important; pointer-events:none!important;">', 
+                   '<div class="hidden" id="guiContainer" style="position:absolute!important; top:0!important; left:0!important; overflow:visible!important; width:100%; height:100%; background:none!important; z-index:100000!important; pointer-events:none!important;">', 
                    '<div id="dragBox" class="ui-widget-content allowEvents">',
                    '<div id="drawer" class="allowEvents">',
                    '<button id="btnRecord" style="margin-left: 4px;"  class="btn modern embossed-link allowEvents" ng-click="fn.toggleRecord()">{{m.btnMsg}}</button>',
@@ -23,6 +23,7 @@ $(document).ready(()=>{
                                
     $('body').append(angularCode.reduce((xi0,xi1)=>xi0+xi1));   
     $('#dragBox').draggable();
+    
 /*-----------------------------------------------------------------------------------------------------*/   
 /*---ANGULAR-CONTROLLER--------------------------------------------------------------------------------*/
     var paw = new Paw();
