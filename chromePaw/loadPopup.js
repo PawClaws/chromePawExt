@@ -1,8 +1,13 @@
 $(document).ready(()=>{
+/*-------VIEW-INJECTION-------------------------------------------------------------------------*/
+    //Set document as angular app and control
     $('html').attr("ng-app", "record");
     $('html').attr("ng-controller", "recordCtrl");       
+    
+    //Injected View
     var angularCode=
-            [ 
+            [
+                   '<div id="guiContainer" style="position:absolute!important; top:0!important; left:0!important; overflow:visible!important; width:100%; height:100%; background:none!important; z-index:100000!important; pointer-events:none!important;">', 
                    '<div id="dragBox" class="ui-widget-content allowEvents">',
                    '<div id="drawer" class="allowEvents">',
                    '<button id="btnRecord" style="margin-left: 4px;"  class="btn modern embossed-link allowEvents" ng-click="fn.toggleRecord()">{{m.btnMsg}}</button>',
@@ -12,60 +17,33 @@ $(document).ready(()=>{
                    '<button class="btn modern embossed-link allowEvents" ng-disabled="!m.script.length || m.isRecording" ng-click="fn.del($index)">Delete</button>',
 			       '<button class="btn modern embossed-link allowEvents" ng-disabled="!m.script.length || m.isRecording" ng-click="fn.hide($index)">Hide</button>',
 			       '</br>',
-			       'Paw Script Filename:',
-			       '</br>',
                    '<input type="text" class = "mac" ng-model="r.name" ng-blur="fn.addGestureToPaw($index)" ng-focus="fn.removeGestureFromPaw($index)" ng-change="fn.generatePawScript()" required pattern="[a-zA-Z0-9]+" class="allowEvents"/>',
-                   '</div>',
-                   '</div>',    
-                   '</div>'
-            ];        
-    var code=angularCode.reduce((xi0,xi1)=>xi0+xi1);               
-    code+=' </div> '
-    code=' <div id="guiContainer" style="position:absolute!important; top:0!important; left:0!important; overflow:visible!important; width:100%; height:100%; background:none!important; z-index:100000!important; pointer-events:none!important;"> '+code
-    $('body').append(code);   
+                   '</div></div></div></div>'
+            ];
+                               
+    $('body').append(angularCode.reduce((xi0,xi1)=>xi0+xi1));   
     $('#dragBox').draggable();
+/*-----------------------------------------------------------------------------------------------------*/   
+/*---ANGULAR-CONTROLLER--------------------------------------------------------------------------------*/
+    var paw = new Paw();
 
-    
-
-
-/*-------------------------------------------------------------------------------------*/
-var paw = new Paw();
-angular.module('record', ['cfp.hotkeys'])
-    .config([
-        '$compileProvider',
-        function($compileProvider) {$compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|blob):/);}])
+    angular.module('record', ['cfp.hotkeys']).config(['$compileProvider', function($compileProvider){
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|blob):/);}])
     .controller('recordCtrl', function($scope, $http, hotkeys) {
-    var tab = '    ';        
-        var autoStopInterval;
+        var tab = '    ';        
         var mouseDown = false; // move to top
-        var eventsToRecord = [
-            'click',
-            'scroll',
-            'contextmenu',
-            'mouseup',
-            'mousedown',
-            'mousemove',
-            'mousewheel',
-            'touchstart',
-            'touchend',
-            'touchmove',
-            'touchcancel'
-        ];
+        var eventsToRecord = ['click','scroll','contextmenu','mouseup','mousedown','mousemove','mousewheel'];
         $scope.m = {
-            secondsLeft: 0,
             isRecording: false,
             btnMsg: 'Record',
-            msg: 'Press ESC to stop recording',
             recording: [],
             recordings: [],
             script: null,
             relative: true,
             umd: 'None'
         };
-
         function copyTouches(ev) {
             var result = [];
-            //console.log(ev);
             var touches = ev.touches;
             if (touches) {
                 var len = touches.length;
@@ -261,7 +239,6 @@ angular.module('record', ['cfp.hotkeys'])
         $scope.fn.generatePawScript();
     });
 /*-------------------------------------------------------------------------------------*/    
-
 });
     
     
