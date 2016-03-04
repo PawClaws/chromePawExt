@@ -34,6 +34,7 @@ $(document).ready(()=>{
     angular.module('record', ['cfp.hotkeys']).config(['$compileProvider', function($compileProvider){
         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|blob):/);}])
     .controller('recordCtrl', function($scope, $http, hotkeys) {
+        
         hotkeys.add('r', 'Toggle Recording', function() {
             $scope.fn.toggleRecord();
         });
