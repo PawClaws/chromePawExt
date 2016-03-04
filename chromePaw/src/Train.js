@@ -189,7 +189,9 @@
                 lastDeferred.promise.then(task);
             }
             else {
+                try{
                 task();
+                }catch(e){console.log(e)};
             }
 
             return self;
