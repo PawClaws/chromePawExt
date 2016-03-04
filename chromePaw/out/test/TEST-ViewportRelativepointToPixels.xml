@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+
+  <testsuite name="ViewportRelative.pointToPixels" errors="0" tests="8" failures="0" time="0.008" timestamp="2016-03-04T22:19:42.133Z">
+    
+      <testcase assertions="2" classname="ViewportRelative.pointToPixels" name="should handle points with x,y as numbers" time="0.001">
+        
+      </testcase>
+    
+      <testcase assertions="2" classname="ViewportRelative.pointToPixels" name="should handle points with x,y as a string with 2 pixel numbers" time="0.001">
+        
+      </testcase>
+    
+      <testcase assertions="2" classname="ViewportRelative.pointToPixels" name="should handle points with x,y as a string with 2 pixel numbers with px units" time="0.001">
+        
+      </testcase>
+    
+      <testcase assertions="2" classname="ViewportRelative.pointToPixels" name="should handle points with x,y as a string with 2 percentage numbers" time="0">
+        
+      </testcase>
+    
+      <testcase assertions="2" classname="ViewportRelative.pointToPixels" name="should handle points with x,y as a string with mixed numbers" time="0">
+        
+      </testcase>
+    
+      <testcase assertions="18" classname="ViewportRelative.pointToPixels" name="should handle points with x,y as a string with two words" time="0.001">
+        
+      </testcase>
+    
+      <testcase assertions="4" classname="ViewportRelative.pointToPixels" name="should handle points with x,y as a string with two words in the wrong order" time="0.001">
+        
+      </testcase>
+    
+      <testcase assertions="4" classname="ViewportRelative.pointToPixels" name="should handle points with x,y as a string with two words of mixed types" time="0.001">
+        
+      </testcase>
+    
+  </testsuite>
+
+</testsuites>

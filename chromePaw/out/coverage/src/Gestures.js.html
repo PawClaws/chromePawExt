@@ -1,0 +1,1181 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/Gestures.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">src/</a> Gestures.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">91.35% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>95/104</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">88% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>44/50</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">95.45% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>21/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">91.35% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>95/104</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">23×</span>
+<span class="cline-any cline-yes">23×</span>
+<span class="cline-any cline-yes">23×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">141×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">133×</span>
+<span class="cline-any cline-yes">169×</span>
+<span class="cline-any cline-yes">169×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">133×</span>
+<span class="cline-any cline-yes">133×</span>
+<span class="cline-any cline-yes">133×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">54×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">33×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-yes">32×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ * Copyright 2014-2015 Workiva Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+&nbsp;
+/* global module */
+(function(root, factory) {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof exports === 'object') {
+<span class="cstat-no" title="statement not covered" >        module.exports = factory(require('src/WheelEventSimulator'));</span>
+    }
+    else <span class="missing-if-branch" title="else path not taken" >E</span>if (typeof define === 'function' &amp;&amp; define.amd) {
+        define('paw/Gestures', ['paw/WheelEventSimulator'], factory);
+    }
+    else {
+<span class="cstat-no" title="statement not covered" >        root.Gestures = factory(root.WheelEventSimulator);</span>
+    }
+}(this, function(WheelEventSimulator) {
+&nbsp;
+    /**
+     * This provides functionality for Paw and not meant to be used separately
+     *
+     * @mixin
+     * @exports paw/Gestures
+     */
+    var Gestures = {
+&nbsp;
+        /**
+         * Touch at a certain location or locations
+         *
+         * @chainable
+         * @method
+         * @param {object} [where] Either an object with an x and y property
+         *   or an array of objects each with x and y properties
+         *   The array indicates the number of fingers to touch with
+         *   Ex: {x: 100, y: 100} or [{x: 100, y: 100}, {x: 400, y: 200}]
+         */
+        touch: function(where) {
+            where = where || this.getDefaultTouchLocation();
+            this.setTouches(where);
+            this._triggerStart();
+        },
+&nbsp;
+        /**
+         * Same as touch, but doesn't remove existing touches
+         *
+         * @chainable
+         * @method
+         * @param {(object|string)} where a where expression
+         */
+        addTouch: function(where) {
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (!where) {
+<span class="cstat-no" title="statement not covered" >                throw new Error('"where" parameter can not be empty when adding a touch');</span>
+            }
+            where = this._buildTouches(where);
+            this.touches = this.touches.concat(where);
+            this._triggerStart();
+        },
+&nbsp;
+        /**
+         * Remove a touch
+         *
+         * @chainable
+         * @method
+         * @param {Number} [fingerNumber] The 0 based finger number to remove
+         */
+        removeTouch: function(fingerNumber) {
+            if (!this.touches.length) {
+                return;
+            }
+&nbsp;
+            // use the last touch as the finger if the finger number is invalid
+            if (fingerNumber !== 0 &amp;&amp; !fingerNumber) {
+                fingerNumber = this.touches.length - 1;
+            }
+&nbsp;
+            if (0 &lt;= fingerNumber &amp;&amp; fingerNumber &lt; this.touches.length) {
+                this.touches.splice(fingerNumber, 1);
+                this.clearTouchIndicators();
+                this.indicateTouches(this.touches);
+            }
+        },
+&nbsp;
+        /**
+         * Moves the existing touches to the next location without releasing
+         * The move is "instantaneous" and not over a duration.
+         * Multiple moves make up a swipe.
+         *
+         * @chainable
+         * @method
+         * @param {object|string|object[]} toWhere a where expression
+         */
+        move: function(toWhere) {
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (!this.touches || this.touches.length === 0) {
+<span class="cstat-no" title="statement not covered" >                throw new Error('There are no current touches to move from.');</span>
+            }
+            this.setTouches(toWhere);
+            this._triggerMove();
+        },
+&nbsp;
+        /**
+         * Moves the currently set touches to new positions, in multiple moves over a duration.
+         * If the duration is omitted or &lt;= zero, the drag is instantaneous
+         * otherwise the drag is spread out over the duration given
+         *
+         * @chainable
+         * @method
+         * @param {(object|string)} toWhere A where expression Ex: {x: 100, y: 100, duration: 300} or {duration: 300, end: [{x: 100, y: 100}, {x: 400, y: 200}] }
+         * @param {Number} [duration] How long the swipe will take
+         */
+        drag: function(toWhere, duration, done) {
+            var self = this;
+            var deltas = [];
+            var deltaX;
+            var deltaY;
+            var interval = 16;
+            var segments;
+            var k = 0;
+            var i = 0;
+            var point;
+            var len = 0;
+&nbsp;
+            duration = Math.max(0, duration &gt;= 0 ? duration : this.getDefaultDuration());
+            segments = Math.floor(duration / interval);
+&nbsp;
+            // do an instantaneous move with no extra work
+            if (duration === 0) {
+                self.setTouches(toWhere);
+                self._triggerMove();
+                done();
+            }
+&nbsp;
+            var endWhere = self._buildTouches(toWhere);
+            len = self.touches.length;
+            for (i = 0; i &lt; len; i++) {
+                point = self.touches[i];
+                <span class="missing-if-branch" title="else path not taken" >E</span>if (i &lt; endWhere.length) {
+                    deltaX = (endWhere[i].x - point.x) / segments;
+                    deltaY = (endWhere[i].y - point.y) / segments;
+                    deltas.push({
+                        x: deltaX,
+                        y: deltaY
+                    });
+                }
+            }
+&nbsp;
+            function eachSegment() {
+                if (k &gt;= segments) {
+                    self.setTouches(endWhere);
+                    self._triggerMove();
+                    done();
+                    return;
+                }
+                else {
+                    for (i = 0; i &lt; self.touches.length; i++) {
+                        self.touches[i].x += deltas[i].x;
+                        self.touches[i].y += deltas[i].y;
+                    }
+                    self._triggerMove();
+                    k++;
+                    setTimeout(eachSegment, interval);
+                }
+            }
+            eachSegment();
+        },
+&nbsp;
+        /**
+         * Trigger a touch release event
+         *
+         * @chainable
+         * @method
+         */
+        release: function() {
+            this._triggerEnd();
+        },
+&nbsp;
+        /**
+         * Waits for a duration
+         *
+         * @chainable
+         * @method
+         * @param {Number} [duration] in milliseconds. Ex: 100
+         */
+        wait: function(duration, done) {
+            duration = duration || this.getDefaultDuration();
+            if (typeof(duration) !== 'number') {
+                throw new TypeError('duration should be a number');
+            }
+&nbsp;
+            var start = Date.now();
+            var end = start + duration;
+&nbsp;
+            function checkDone() {
+                var timeLeft = (end - Date.now());
+                <span class="missing-if-branch" title="else path not taken" >E</span>if (timeLeft &lt;= 1) {
+                    done();
+                }
+                else {
+<span class="cstat-no" title="statement not covered" >                    setTimeout(checkDone, timeLeft);</span>
+                }
+            }
+            setTimeout(checkDone, duration);
+        },
+&nbsp;
+        /**
+         * Touch and release. If touch is not available on the device, it will use mouse events.
+         *
+         * @chainable
+         * @method
+         * @param {object|string} [where] Example: {x: 100, y: 100} or [{x: 100, y: 100},{x: 100, y: 100}]
+         * where can also be a string DOM selector,
+         * or a single DOM node or an array of DOM nodes
+         * or relative 'top left', '10% 40%' style strings
+         */
+        tap: function(where) {
+            where = where || this.getDefaultTouchLocation();
+            if (this.isTouchSupported) {
+                this.touch(where).release();
+            }
+            else {
+                this.click(where);
+            }
+        },
+&nbsp;
+        /**
+         * Tap, wait for a duration, and then tap again
+         *
+         * @chainable
+         * @method
+         * @param {object} where Example: {x: 100, y: 100 } | '100 100' | 'center center'
+         * @param {Number} [msBetweenTaps] the number of milliseconds to wait between taps
+         */
+        doubleTap: function(where, msBetweenTaps, done) {
+            msBetweenTaps = Number(msBetweenTaps) || this.getDefaultDoubleTapDuration();
+            this.tap(where).wait(msBetweenTaps).tap(where).then(done);
+        },
+&nbsp;
+        /**
+         * Touch and hold for a duration, and then release
+         *
+         * @chainable
+         * @method
+         * @param {object|string} where  Example: {x: 100, y: 100} | 'top center' | '#selector'
+         * @param {Number} [msToHold] How lond to hold the touch
+         */
+        hold: function(where, msToHold, done) {
+            msToHold = Number(msToHold) || this.getDefaultDuration();
+            this.touch(where).wait(msToHold).release().then(done);
+        },
+&nbsp;
+        /**
+         * Click at a certain location(s)
+         *
+         * @chainable
+         * @method
+         * @param {object} [where] Either an object with an x and y property
+         *   or an array of objects each with x and y properties
+         *   The array indicates the number of fingers to touch with
+         *   Ex: {x: 100, y: 100} or [{x: 100, y: 100}, {x: 400, y: 200}]
+         */
+        click: function(where) {
+            this.setTouches(where || this.getDefaultTouchLocation());
+            this._triggerClick();
+        },
+&nbsp;
+        /**
+         * Performs any gesture by touching at the fromWhere location(s)
+         * dragging to the toWhere locations, and releasing.
+         * This is a shortcut for paw.touch(fromWhere).drag(toWhere, duration).release();
+         *
+         * @chainable
+         * @method
+         * @param {object|object[]|string} fromWhere
+         * @param {object|object[]|string} toWhere
+         * @param {number} duration
+         **/
+        gesture: function(fromWhere, toWhere, duration, done) {
+            this.touch(fromWhere).drag(toWhere, duration).release().then(done);
+        },
+&nbsp;
+        /**
+         * Perform a swipe up gesture by swiping from the default swipe
+         * location in array position zero, to position one.
+         *
+         * @chainable
+         * @method
+         **/
+        swipeUp: function(duration, done) {
+            var def = this.getDefaultSwipeLocations();
+            this.touch(def[1]).drag(def[0], duration).release().then(done);
+        },
+&nbsp;
+        /**
+         * Perform a swipe down gesture by swiping from the default swipe
+         * location in array position one, to position zero.
+         *
+         * @chainable
+         * @method
+         **/
+        swipeDown: function(duration, done) {
+            var def = this.getDefaultSwipeLocations();
+            this.touch(def[0]).drag(def[1], duration).release().then(done);
+        },
+&nbsp;
+        /**
+         * Perform a pinch out gesture. Usually results in a zoom in.
+         *
+         * @chainable
+         * @method
+         **/
+        pinchOut: function(duration, done) {
+            var def = this.getDefaultPinchLocations();
+            this.touch(def[0]).drag(def[1], duration).release().then(done);
+        },
+&nbsp;
+        /**
+         * Perform a pinch in gesture. Usually results in a zoom out.
+         *
+         * @chainable
+         * @method
+         **/
+        pinchIn: function(duration, done) {
+            var def = this.getDefaultPinchLocations();
+            this.touch(def[1]).drag(def[0], duration).release().then(done);
+        },
+&nbsp;
+        /**
+         * Run any function in the call chain. If you want
+         * to do something asynchronous the function should take 1 param a done function
+         *
+         * @chainable
+         * @method
+         * @param {function} func - The function to call
+         **/
+        then: function(func, done) {
+            if (func.length &gt; 0) {
+                func(done);
+            }
+            else {
+                func();
+                done();
+            }
+        },
+&nbsp;
+        /**
+         * Simulate a wheel event.
+         * @param {(Object|String)} where an object with x and y, or a string "where" expression
+         * @param {Object} [deltas]
+         * @param {Number} [deltas.deltaX] The wheel delta along the x-axis.
+         * @param {Number} [deltas.deltaY] The wheel delta along the y-axis.
+         * @param {Function} [done] Callback invoked after the simulated events are dispatched.
+         **/
+        wheel: <span class="fstat-no" title="function not covered" >function(where, deltas, done) {</span>
+<span class="cstat-no" title="statement not covered" >            where = this._buildTouches(where);</span>
+<span class="cstat-no" title="statement not covered" >            var simulator = new WheelEventSimulator();</span>
+<span class="cstat-no" title="statement not covered" >            simulator.dispatch(where[0], deltas);</span>
+<span class="cstat-no" title="statement not covered" >            done();</span>
+        }
+    };
+&nbsp;
+    return Gestures;
+}));
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Mar 04 2016 15:19:46 GMT-0700 (MST)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>

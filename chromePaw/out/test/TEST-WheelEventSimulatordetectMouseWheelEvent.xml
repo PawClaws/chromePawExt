@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+
+  <testsuite name="WheelEventSimulator#detectMouseWheelEvent" errors="0" tests="3" failures="0" time="0.002" timestamp="2016-03-04T22:19:42.139Z">
+    
+      <testcase assertions="1" classname="WheelEventSimulator#detectMouseWheelEvent" name="should return &quot;wheel&quot; for IE9+" time="0">
+        
+      </testcase>
+    
+      <testcase assertions="1" classname="WheelEventSimulator#detectMouseWheelEvent" name="should return &quot;onmousewheel&quot; for webkit" time="0">
+        
+      </testcase>
+    
+      <testcase assertions="1" classname="WheelEventSimulator#detectMouseWheelEvent" name="should return &quot;DOMMouseScroll&quot; for other browsers" time="0">
+        
+      </testcase>
+    
+  </testsuite>
+
+</testsuites>

@@ -20,7 +20,7 @@
         module.exports = factory(require('src/WheelEventSimulator'));
     }
     else if (typeof define === 'function' && define.amd) {
-        define('src/Gestures', ['src/WheelEventSimulator'], factory);
+        define('paw/Gestures', ['paw/WheelEventSimulator'], factory);
     }
     else {
         root.Gestures = factory(root.WheelEventSimulator);
