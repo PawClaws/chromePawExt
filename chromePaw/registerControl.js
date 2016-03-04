@@ -1,17 +1,17 @@
-var toggleHide=function(){
+/*var toggleHide=function(){
     chrome.tabs.executeScript(
         {
-            "code":"$('#guiContainer').toggleClass('hidden');"
+            "code":""
         });
 }
 
 var toggleRecord=function(){
     chrome.tabs.executeScript(
         {
-            "code":"$('#btnRecord').click();"
+            "code":""
         });
 }
 
 document.getElementById('btnToggleVisible').onclick=toggleHide;
-document.getElementById('btnToggleRecord').onclick=toggleRecord;
+document.getElementById('btnToggleRecord').onclick=toggleRecord;*/
 

@@ -1,4 +1,7 @@
 $(document).ready(()=>{
+    $($('.cfp-hotkeys-container').find('table')).hide();
+    $($('.cfp-hotkeys-container').find('.cfp-hotkeys-close')).hide();
+});
 /*-------VIEW-INJECTION-------------------------------------------------------------------------*/
     //Set document as angular app and control
     $('html').attr("ng-app", "record");
@@ -21,16 +24,24 @@ $(document).ready(()=>{
                    '</div></div></div></div>'
             ];
                                
-    $('body').append(angularCode.reduce((xi0,xi1)=>xi0+xi1));   
-    $('#dragBox').draggable();
+    //$('body').append(angularCode.reduce((xi0,xi1)=>xi0+xi1));   
+    //$('#dragBox').draggable();
     
 /*-----------------------------------------------------------------------------------------------------*/   
 /*---ANGULAR-CONTROLLER--------------------------------------------------------------------------------*/
+    
     var paw = new Paw();
-
     angular.module('record', ['cfp.hotkeys']).config(['$compileProvider', function($compileProvider){
         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|blob):/);}])
     .controller('recordCtrl', function($scope, $http, hotkeys) {
+        hotkeys.add('r', 'Toggle Recording', function() {
+            $scope.fn.toggleRecord();
+        });
+
+      hotkeys.add('p', 'Playback', function() {
+            $scope.fn.playback(0);
+        });        
+        
         var tab = '    ';        
         var mouseDown = false; // move to top
         var eventsToRecord = ['click','scroll','contextmenu','mouseup','mousedown','mousemove','mousewheel'];
@@ -191,12 +202,14 @@ $(document).ready(()=>{
                         fn: null
                     };
                     $scope.m.recordings.push($scope.m.recording);
+                   
                     $scope.m.lastEvent = null;
                     $scope.m.script = '/* Nothing here yet */';
                     $scope.m.recording.data.push('            this');
                 }
             },
-            playback: function(r) {
+            playback: function(i) {
+                var r=$scope.m.recordings[i];
                 paw[r.name].call(paw);
             },
             del: function(i) {
@@ -235,12 +248,16 @@ $(document).ready(()=>{
                         SAVE OFF GENERATE SCRIPT HERE
                     */
                 }
-            }
+                
+            },
+
         };
         $scope.fn.generatePawScript();
     });
+    
+    
 /*-------------------------------------------------------------------------------------*/    
-});
+
     
     
 

@@ -4,31 +4,14 @@
   "name": "PawClaws",
   "description": "PawClaws",
   "version": "0.1",
-"content_security_policy": "script-src 'unsafe-eval' 'self'; object-src 'self'; font-src 'self'",
+"content_security_policy": "script-src 'self'; object-src 'self'; font-src 'self'",
 "content_scripts":[{
     "matches":["https://*/*","http://*/*"],
       "css":[
-        "siteStyle/style.css",
-        "siteScript/jquery-ui-1.11.4/jquery-ui.theme.min.css",
-        "siteScript/jquery-ui-1.11.4/jquery-ui.structure.min.css",
-        "siteScript/jquery-ui-1.11.4/jquery-ui.min.css",
-        "siteStyle/FloatingLabels.css",
-        "siteScript/bootstrap/css/bootstrap.min.css"
+
         ],
       "js": [
         "siteScript/jquery-2.1.4.min.js",
-        "siteScript/bootstrap/js/bootstrap.js",
-        "siteScript/jquery-ui-1.11.4/jquery-ui.min.js",
-        "loadPopup.js",
-        "siteScript/FloatingLabels.js",
-        "siteScript/transparency.js",
-        "siteScript/plates.js",
-        "siteScript/mori.js",
-        "siteScript/immutable.js",
-        "siteScript/underscore-observe-master/demo/js/underscore.js",
-        "siteScript/underscore-observe-master/demo/js/json2.js",
-        "siteScript/underscore-observe-master/underscore-observe.js",
-        "siteScript/jquery.directive.js-master/jquery.directive.js",
         "bower_components/angular/angular.js",
         "bower_components/angular-hotkeys/src/hotkeys.js",
         "bower_components/mousetrap/mousetrap.min.js",
@@ -37,10 +20,10 @@
         "src/Train.js",
         "src/WheelEventSimulator.js",
         "src/Gestures.js",
-        "src/Paw.js"
-        
+        "src/Paw.js",
+        "loadPopup.js"
         ],
-   "run_at":"document_end" 
+   "run_at":"document_start" 
 }],
     "browser_action":{
       "default_popup":"popup.html"
