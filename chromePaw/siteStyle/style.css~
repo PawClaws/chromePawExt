@@ -16,6 +16,8 @@ body,.trans{background-color:rgba(0,0,0,0)!important;}
     cursor:move;
 }
 
+
+
 .script-border{
 
 	border: 2px solid;
