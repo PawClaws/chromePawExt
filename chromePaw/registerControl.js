@@ -3,10 +3,7 @@ var emitEventOnClick=(selector,event)=>{
                 chrome.tabs.executeScript({
                     "code":"jQuery(window).trigger('"+event+"')"
                 });
-            
             });
-            
-
 }
 $(document).ready(()=>{
     emitEventOnClick('#btnRecord','toggleRecord');
