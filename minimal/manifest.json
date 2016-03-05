@@ -1,0 +1,40 @@
+{
+  "manifest_version": 2,
+
+  "name": "PawClaws_TestPackage",
+  "description": "PawClaws",
+  "version": "0.1",
+"content_security_policy": "script-src 'self'; object-src 'self'; font-src 'self'",
+"content_scripts":[{
+    "matches":["https://*/*","http://*/*"],
+      "css":[
+
+        ],
+      "js": [
+        "siteScript/jquery-2.1.4.min.js",    
+        "bower_components/angular/angular.js",
+        "bower_components/angular-hotkeys/src/hotkeys.js",
+        "bower_components/mousetrap/mousetrap.min.js",
+        "bower_components/q/q.js",
+        "src/ViewportRelative.js",
+        "src/Train.js",
+        "src/WheelEventSimulator.js",
+        "src/Gestures.js",
+        "src/Paw.js",
+        "loadPopup.js"
+        ],
+   "run_at":"document_start" 
+}],
+    "browser_action":{
+      "default_popup":"popup.html"
+    },
+  "permissions": [
+    "activeTab",
+    "tabs"
+    
+    
+  ],
+  "web_accessible_resources":[]
+  
+}
+
