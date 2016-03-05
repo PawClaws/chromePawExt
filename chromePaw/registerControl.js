@@ -1,17 +1,16 @@
-/*var toggleHide=function(){
-    chrome.tabs.executeScript(
-        {
-            "code":""
-        });
-}
+var emitEventOnClick=(selector,event)=>{
+        $(selector).click(()=>{
+                chrome.tabs.executeScript({
+                    "code":"jQuery(window).trigger('"+event+"')"
+                });
+            
+            });
+            
 
-var toggleRecord=function(){
-    chrome.tabs.executeScript(
-        {
-            "code":""
-        });
 }
+$(document).ready(()=>{
+    emitEventOnClick('#btnRecord','toggleRecord');
+    emitEventOnClick('#btnPlay','play0');        
+});
 
-document.getElementById('btnToggleVisible').onclick=toggleHide;
-document.getElementById('btnToggleRecord').onclick=toggleRecord;*/
 
