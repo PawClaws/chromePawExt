@@ -12,6 +12,7 @@
         ],
       "js": [
         "siteScript/jquery-2.1.4.min.js",
+        "siteScript/keyvent.min.js",
         "bower_components/angular/angular.js",
         "bower_components/angular-hotkeys/src/hotkeys.js",
         "bower_components/mousetrap/mousetrap.min.js",
@@ -36,7 +37,7 @@
     "<all_urls>"
     
   ],
-  "web_accessible_resources":[]
+  "web_accessible_resources":["injectableController.js"]
   
 }
 

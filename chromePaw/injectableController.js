@@ -1,42 +1,18 @@
-$(document).ready(()=>{
-    $($('.cfp-hotkeys-container').find('table')).hide();
-    $($('.cfp-hotkeys-container').find('.cfp-hotkeys-close')).hide();
-});
-/*-------VIEW-INJECTION-------------------------------------------------------------------------*/
-    //Set document as angular app and control
-    $('html').attr("ng-app", "record");
-    $('html').attr("ng-controller", "recordCtrl");       
-        
-/*-----------------------------------------------------------------------------------------------------*/   
 /*---ANGULAR-CONTROLLER--------------------------------------------------------------------------------*/
-    
+    $('html').attr("ng-app", "record");
+    $('html').attr("ng-controller", "recordCtrl");    
     var paw = new Paw();
     angular.module('record', ['cfp.hotkeys']).config(['$compileProvider', function($compileProvider){
         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|blob):/);}])
     .controller('recordCtrl', function($scope, $http, hotkeys) {
-      
-      /*CUSTOM EVENTS*******************************************/
-      jQuery(window).on('toggleRecord',function(){
-        $scope.fn.toggleRecord();
-      });
         
-        hotkeys.add('esc', 'Toggle Recording', function() {
+        hotkeys.add('r', 'Toggle Recording', function() {
             $scope.fn.toggleRecord();
         });
-       
-      [0,1,2,3,4,5,6,7,8,9].forEach((e,i,a)=>{
-          jQuery(window).on('play'+e.toString(),function(){
-            if($scope.m.recordings[e]){
-                $scope.fn.playback(e);
-            }
-          });
-          hotkeys.add(e.toString(), 'Play recording #', function() {
-            if($scope.m.recordings[e]){
-                $scope.fn.playback(e);
-            }
-            })
-        })
-    /***********************************************************************/     
+
+      hotkeys.add('p', 'Playback', function() {
+            $scope.fn.playback(0);
+        });        
         
         var tab = '    ';        
         var mouseDown = false; // move to top
