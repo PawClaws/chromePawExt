@@ -1,0 +1,12 @@
+(function(root, factory) {
+    if (typeof exports === 'object') {
+        module.exports = factory();
+    }
+    else if (typeof define === 'function' && define.amd) {
+        define('paw/Store', [], factory);
+    }
+    else {
+        root.Store = factory();
+    }
+}(this, function() {
+}
