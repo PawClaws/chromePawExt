@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
 
-  <testsuite name="ViewportRelative.isOrderReversed" errors="0" tests="1" failures="0" time="0.003" timestamp="2016-03-08T21:05:00.517Z">
+  <testsuite name="ViewportRelative.isOrderReversed" errors="0" tests="1" failures="0" time="0.002" timestamp="2016-03-08T21:29:39.951Z">
     
-      <testcase assertions="28" classname="ViewportRelative.isOrderReversed" name="should handle reversed x and y values" time="0.002">
+      <testcase assertions="28" classname="ViewportRelative.isOrderReversed" name="should handle reversed x and y values" time="0.001">
         
       </testcase>
     

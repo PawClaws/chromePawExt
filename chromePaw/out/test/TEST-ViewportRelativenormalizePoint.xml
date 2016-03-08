@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
 
-  <testsuite name="ViewportRelative.normalizePoint" errors="0" tests="1" failures="0" time="0.001" timestamp="2016-03-08T21:05:00.544Z">
+  <testsuite name="ViewportRelative.normalizePoint" errors="0" tests="1" failures="0" time="0.001" timestamp="2016-03-08T21:29:39.970Z">
     
       <testcase assertions="12" classname="ViewportRelative.normalizePoint" name="should normalize a point" time="0">
         

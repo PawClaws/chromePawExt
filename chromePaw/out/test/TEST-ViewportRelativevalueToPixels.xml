@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
 
-  <testsuite name="ViewportRelative.valueToPixels" errors="0" tests="6" failures="0" time="0.012" timestamp="2016-03-08T21:05:00.530Z">
+  <testsuite name="ViewportRelative.valueToPixels" errors="0" tests="6" failures="0" time="0.006" timestamp="2016-03-08T21:29:39.958Z">
     
       <testcase assertions="8" classname="ViewportRelative.valueToPixels" name="should handle bad input" time="0.001">
         
@@ -11,7 +11,7 @@
         
       </testcase>
     
-      <testcase assertions="3" classname="ViewportRelative.valueToPixels" name="should handle percentages for y" time="0.001">
+      <testcase assertions="3" classname="ViewportRelative.valueToPixels" name="should handle percentages for y" time="0">
         
       </testcase>
     

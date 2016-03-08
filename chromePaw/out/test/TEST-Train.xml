@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
 
-  <testsuite name="Train" errors="0" tests="6" failures="0" time="0.006" timestamp="2016-03-08T21:05:00.576Z">
+  <testsuite name="Train" errors="0" tests="6" failures="0" time="0.007" timestamp="2016-03-08T21:29:44.519Z">
     
-      <testcase assertions="1" classname="Train" name="should exist" time="0">
+      <testcase assertions="1" classname="Train" name="should exist" time="0.001">
         
       </testcase>
     
-      <testcase assertions="2" classname="Train" name="should handle empty args" time="0.001">
+      <testcase assertions="2" classname="Train" name="should handle empty args" time="0">
         
       </testcase>
     

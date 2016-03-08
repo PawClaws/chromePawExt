@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
 
-  <testsuite name="ViewportRelative.pointToString" errors="0" tests="2" failures="0" time="0.031" timestamp="2016-03-08T21:05:00.513Z">
+  <testsuite name="ViewportRelative.pointToString" errors="0" tests="2" failures="0" time="0.026" timestamp="2016-03-08T21:29:39.948Z">
     
-      <testcase assertions="3" classname="ViewportRelative.pointToString" name="should convert a point to a string correctly" time="0.026">
+      <testcase assertions="3" classname="ViewportRelative.pointToString" name="should convert a point to a string correctly" time="0.021">
         
       </testcase>
     
-      <testcase assertions="3" classname="ViewportRelative.pointToString" name="should not convert objects that are not points" time="0">
+      <testcase assertions="3" classname="ViewportRelative.pointToString" name="should not convert objects that are not points" time="0.001">
         
       </testcase>
     
