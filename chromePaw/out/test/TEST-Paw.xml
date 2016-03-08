@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+
+  <testsuite name="Paw" errors="0" tests="41" failures="2" time="4.556" timestamp="2016-03-08T21:05:05.134Z">
+    
+      <testcase assertions="3" classname="Paw" name="should not set defaults to invalid values" time="0.005">
+        
+      </testcase>
+    
+      <testcase assertions="2" classname="Paw" name="should throw exceptions for missing input" time="0.002">
+        
+      </testcase>
+    
+      <testcase assertions="6" classname="Paw" name="should report viewport size" time="0.003">
+        
+      </testcase>
+    
+      <testcase assertions="5" classname="Paw" name="should mixin an objects methods passed in the constructor" time="0.003">
+        
+      </testcase>
+    
+      <testcase assertions="11" classname="Paw" name="should set touch locations correctly" time="0.003">
+        
+      </testcase>
+    
+      <testcase assertions="2" classname="Paw" name="should not add touches if where is not specified" time="0.002">
+        
+      </testcase>
+    
+      <testcase assertions="5" classname="Paw" name="should set and get defaults" time="0.001">
+        
+      </testcase>
+    
+      <testcase assertions="4" classname="Paw" name="should swipe over a duration of 500ms" time="0.509">
+        
+      </testcase>
+    
+      <testcase assertions="3" classname="Paw" name="should swipe correctly with 0 duration" time="0.006">
+        
+      </testcase>
+    
+      <testcase assertions="1" classname="Paw" name="should swipe correctly with defaults" time="0.307">
+        
+      </testcase>
+    
+      <testcase assertions="6" classname="Paw" name="should remove touches" time="0.006">
+        
+      </testcase>
+    
+      <testcase assertions="1" classname="Paw" name="should not remove touches if there are none" time="0.002">
+        
+      </testcase>
+    
+      <testcase assertions="1" classname="Paw" name="should remove the middle touch" time="0.005">
+        
+      </testcase>
+    
+      <testcase assertions="1" classname="Paw" name="should not remove anything if the finger number is greater than the touches" time="0.004">
+        
+      </testcase>
+    
+      <testcase assertions="2" classname="Paw" name="should wait" time="0.321">
+        
+      </testcase>
+    
+      <testcase assertions="1" classname="Paw" name="should wait for a default duration of 300ms" time="0.306">
+        
+      </testcase>
+    
+      <testcase assertions="1" classname="Paw" name="should throw if the wait duration is not a number" time="0.004">
+        
+          <failure>Expected function to throw an exception.</failure>
+        
+      </testcase>
+    
+      <testcase assertions="9" classname="Paw" name="should correctly identify an array of DOM nodes" time="0.017">
+        
+      </testcase>
+    
+      <testcase assertions="1" classname="Paw" name="should dispatch mousedown, mouseup, and click when click() is invoked" time="0.005">
+        
+      </testcase>
+    
+      <testcase assertions="1" classname="Paw" name="should click in a default location when tap() is invoked and touch is not supported" time="0.015">
+        
+          <failure>Expected [ 'mousedown', 'mouseup', 'click', 'touchend' ] to equal [ 'mousedown', 'mouseup', 'click' ].</failure>
+        
+      </testcase>
+    
+      <testcase assertions="1" classname="Paw" name="should dispatch mousedown, mouseup, click, when tap() is invoked and touch is not supported" time="0.014">
+        
+      </testcase>
+    
+      <testcase assertions="1" classname="Paw" name="should dispatch touchstart, touchend when tap() is invoked and touch is supported" time="0.014">
+        
+      </testcase>
+    
+      <testcase assertions="1" classname="Paw" name="should dispatch touchend when release() is invoked" time="0.002">
+        
+      </testcase>
+    
+      <testcase assertions="1" classname="Paw" name="should dispatch touchstart, touchmove when touch() then move() is invoked" time="0.004">
+        
+      </testcase>
+    
+      <testcase assertions="23" classname="Paw" name="should dispatch touchstart, touchmove, touchend when swipeUp() is invoked and touch is supported" time="0.306">
+        
+      </testcase>
+    
+      <testcase assertions="17" classname="Paw" name="should dispatch touchstart, touchmove, touchend when gesture() is invoked and touch is supported" time="0.208">
+        
+      </testcase>
+    
+      <testcase assertions="23" classname="Paw" name="should dispatch touchstart, touchmove, touchend when swipeDown() is invoked and touch is supported" time="0.318">
+        
+      </testcase>
+    
+      <testcase assertions="1" classname="Paw" name="should double-click when doubleTap() is invoked and touch is not supported" time="0.128">
+        
+      </testcase>
+    
+      <testcase assertions="2" classname="Paw" name="should doubleTap with specified delay between taps" time="0.207">
+        
+      </testcase>
+    
+      <testcase assertions="1" classname="Paw" name="should hold" time="0.307">
+        
+      </testcase>
+    
+      <testcase assertions="2" classname="Paw" name="should hold with specified delay" time="0.205">
+        
+      </testcase>
+    
+      <testcase assertions="22" classname="Paw" name="should have a greater distance between touches after pinchOut()" time="0.325">
+        
+      </testcase>
+    
+      <testcase assertions="22" classname="Paw" name="should have a smaller distance between touches after pinchIn()" time="0.307">
+        
+      </testcase>
+    
+      <testcase assertions="3" classname="Paw" name="should buildTouches with a DOM element" time="0.004">
+        
+      </testcase>
+    
+      <testcase assertions="3" classname="Paw" name="should build touches from string selectors" time="0.003">
+        
+      </testcase>
+    
+      <testcase assertions="1" classname="Paw" name="should not create touch indicators if showTouches is false" time="0.003">
+        
+      </testcase>
+    
+      <testcase assertions="2" classname="Paw" name="should not throw when clearing nonexistent touch indicators" time="0.004">
+        
+      </testcase>
+    
+      <testcase assertions="5" classname="Paw" name="should clear touch indicators after a timeout if set" time="0.608">
+        
+      </testcase>
+    
+      <testcase assertions="2" classname="Paw" name="should polyfill creation of touchLists" time="0.003">
+        
+      </testcase>
+    
+      <testcase assertions="1" classname="Paw" name="should call indicate Touches a minimal amount of times" time="0.015">
+        
+      </testcase>
+    
+      <testcase assertions="0" classname="Paw" name="should dispatch a wheel event" time="0.002">
+        
+      </testcase>
+    
+  </testsuite>
+
+</testsuites>

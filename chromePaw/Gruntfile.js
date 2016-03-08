@@ -2,7 +2,7 @@ module.exports = function(grunt) {
 
     // For configuration details, see:
     // https://github.com/WebFilings/wf-grunt
-    /*require('wf-grunt').init(grunt, {
+    require('wf-grunt').init(grunt, {
         options: {
             coverageThresholds: {
                 statements: 0,
@@ -18,18 +18,5 @@ module.exports = function(grunt) {
                 shim: {}
             }
         }
-    });*/
-
-    grunt.initConfig({
-	jasmine: {
-	    pivotal: {
-		src: ['src/Paw.js','!Gruntfile.js'],
-	    	options: {
-		    specs: 'test/PawSpecTest.js',
-		    helpers: 'spec/*Helper.js'
-	        }
-       	    }
-    	}
     });
-	grunt.loadNpmTasks('grunt-contrib-jasmine')
-}
+};

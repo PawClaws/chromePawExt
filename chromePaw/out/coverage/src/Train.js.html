@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/Train.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../prettify.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../index.html">all files</a> / <a href="index.html">src/</a> Train.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">90.35% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>103/114</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">89.8% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>44/49</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">88.24% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>15/17</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">90.35% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>103/114</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">923×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">923×</span>
+<span class="cline-any cline-yes">923×</span>
+<span class="cline-any cline-yes">923×</span>
+<span class="cline-any cline-yes">923×</span>
+<span class="cline-any cline-yes">923×</span>
+<span class="cline-any cline-yes">923×</span>
+<span class="cline-any cline-yes">923×</span>
+<span class="cline-any cline-yes">1673×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">923×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">923×</span>
+<span class="cline-any cline-yes">876×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">47×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">318×</span>
+<span class="cline-any cline-yes">318×</span>
+<span class="cline-any cline-yes">64×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">41×</span>
+<span class="cline-any cline-yes">41×</span>
+<span class="cline-any cline-yes">41×</span>
+<span class="cline-any cline-yes">42×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">41×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">930×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">924×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">923×</span>
+<span class="cline-any cline-yes">923×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">923×</span>
+<span class="cline-any cline-yes">161×</span>
+<span class="cline-any cline-yes">161×</span>
+<span class="cline-any cline-yes">161×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">160×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">141×</span>
+<span class="cline-any cline-yes">141×</span>
+<span class="cline-any cline-yes">139×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">161×</span>
+<span class="cline-any cline-yes">161×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">161×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">181×</span>
+<span class="cline-any cline-yes">60×</span>
+<span class="cline-any cline-yes">60×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">121×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">160×</span>
+<span class="cline-any cline-yes">160×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">159×</span>
+<span class="cline-any cline-yes">100×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">159×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">161×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">160×</span>
+<span class="cline-any cline-yes">160×</span>
+<span class="cline-any cline-yes">54×</span>
+<span class="cline-any cline-yes">54×</span>
+<span class="cline-any cline-yes">54×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">160×</span>
+<span class="cline-any cline-yes">160×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">160×</span>
+<span class="cline-any cline-yes">53×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">107×</span>
+<span class="cline-any cline-yes">107×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">160×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">923×</span>
+<span class="cline-any cline-yes">923×</span>
+<span class="cline-any cline-yes">923×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">89×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">89×</span>
+<span class="cline-any cline-yes">89×</span>
+<span class="cline-any cline-yes">89×</span>
+<span class="cline-any cline-yes">89×</span>
+<span class="cline-any cline-yes">89×</span>
+<span class="cline-any cline-yes">965×</span>
+<span class="cline-any cline-yes">965×</span>
+<span class="cline-any cline-yes">922×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">89×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ * Copyright 2014-2015 Workiva Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+&nbsp;
+/* global module */
+(function(root, factory) {
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof exports === 'object') {
+<span class="cstat-no" title="statement not covered" >        module.exports = factory(require('Q'));</span>
+    }
+    else <span class="missing-if-branch" title="else path not taken" >E</span>if (typeof define === 'function' &amp;&amp; define.amd) {
+        define('paw/Train', ['Q'], factory);
+    }
+    else {
+<span class="cstat-no" title="statement not covered" >        root.Train = factory(root.Q);</span>
+    }
+}(this, function(Q) {
+&nbsp;
+    'use strict';
+    var Train = {};
+&nbsp;
+&nbsp;
+    // borrowed from angular injector that looks at parameter names
+    var FN_ARGS = /^function\s*[^\(]*\(\s*([^\)]*)\)/m;
+    var FN_ARG_SPLIT = /,/;
+    var STRIP_COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
+&nbsp;
+    // Extract param names from the function definition
+&nbsp;
+    function getParamNames(fn) {
+        var fnText,
+            argDecl,
+            paramNames;
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (typeof fn === 'function') {
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (!(paramNames = fn.$params)) {
+                paramNames = [];
+                fnText = fn.toString().replace(STRIP_COMMENTS, '');
+                argDecl = fnText.match(FN_ARGS);
+                var list = argDecl[1].split(FN_ARG_SPLIT);
+                for (var i = 0; i &lt; list.length; i++) {
+                    paramNames.push(list[i].trim());
+                }
+            }
+        }
+        return paramNames;
+    }
+&nbsp;
+    function makeObjectChainable(target) {
+        if (!target || target.__mix) {
+            return;
+        }
+        target.__mix = {
+            deferredStack: [],
+            deferreds: [],
+&nbsp;
+            /*
+             * Cleans up the deferred chain
+             */
+            cleanQueue: function() {
+                var self = target;
+                while (self.__mix.deferreds.length &gt; 0 &amp;&amp; self.__mix.deferreds[0].promise.isFulfilled()) {
+                    self.__mix.deferreds.shift();
+                }
+            },
+&nbsp;
+            /*
+             * Clear out the wait queue. Should not normally be needed unless a gesture never calls done
+             */
+            reset: function() {
+                var self = target;
+                var len = self.__mix.deferreds.length;
+                for (var i = 0; i &lt; len; ++i) {
+                    self.__mix.deferreds[i].resolve(this);
+                }
+                self.__mix.deferreds.length = 0;
+            },
+&nbsp;
+            toString: <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >                var self = target;</span>
+<span class="cstat-no" title="statement not covered" >                var result = '',</span>
+                    s, d;
+<span class="cstat-no" title="statement not covered" >                var len = self.__mix.deferreds.length;</span>
+<span class="cstat-no" title="statement not covered" >                for (var i = 0; i &lt; len; ++i) {</span>
+<span class="cstat-no" title="statement not covered" >                    d = self.__mix.deferreds[i];</span>
+<span class="cstat-no" title="statement not covered" >                    s = d.promise.inspect();</span>
+<span class="cstat-no" title="statement not covered" >                    result += ' ' + String(d.NAME) + ':' + String(s.state);</span>
+                }
+<span class="cstat-no" title="statement not covered" >                return result.trim();</span>
+            }
+&nbsp;
+        };
+    }
+&nbsp;
+    /*
+     * Add a function to target that is wrapped and chainable.
+     * The function should take 2 arguments an options and a
+     * done method to call when finished.
+     * @param {object} target
+     * @param {string} name
+     * @param {function} func
+     * @returns {boolean} If the function was mixed in, false if not
+     */
+    Train.mixFunctionInto = function(target, name, func) {
+        if (!target || !name || !func) {
+            return false;
+        }
+&nbsp;
+        if (target[name]) {
+            return false; // should we overwrite or not. Right now we only mix once.
+        }
+&nbsp;
+        makeObjectChainable(target);
+        var params = getParamNames(func);
+&nbsp;
+        target[name] = function() {
+            var self = this;
+            var d = Q.defer();
+            d.NAME = name;
+&nbsp;
+            function done() {
+                if (d.queue &amp;&amp; d.queue.length) {
+                    // wait for other things in this sub-queue to finish before resolving
+                    Q.all(d.queue).then(function() {
+                        d.resolve();
+                        setTimeout(function() {
+                            self.__mix.cleanQueue();
+                        }, 0);
+                    });
+                }
+                else {
+                    d.resolve();
+                    setTimeout(function() {
+                        self.__mix.cleanQueue();
+                    }, 0);
+                }
+            }
+&nbsp;
+            // build up the arguments to call the wrapped function with
+            var args = [];
+            var matchedDone = false;
+&nbsp;
+            for (var i = 0; i &lt; func.length; i++) {
+                // magic to automatically pass the done func to the param named done
+                if (params[i] === 'done') {
+                    matchedDone = true;
+                    args[i] = done;
+                }
+                else {
+                    args[i] = arguments[i];
+                }
+            }
+&nbsp;
+            function task() {
+                self.__mix.deferredStack.push(d);
+                func.apply(self, args);
+                // auto call done if the function doesn't take a done callback
+                if (func.length &lt; args.length || !matchedDone) {
+                    done();
+                }
+                self.__mix.deferredStack.pop();
+            }
+&nbsp;
+            self.__mix.cleanQueue.call(self);
+&nbsp;
+            var taskQueue = self.__mix.deferreds;
+            if (self.__mix.deferredStack.length &gt; 0) {
+                var top = self.__mix.deferredStack[self.__mix.deferredStack.length - 1];
+                top.queue = top.queue || [];
+                taskQueue = top.queue;
+            }
+&nbsp;
+            // if there are existing pending promises, chain it on the end
+            var lastDeferred = taskQueue[taskQueue.length - 1];
+            taskQueue.push(d);
+&nbsp;
+            if (lastDeferred &amp;&amp; d !== lastDeferred) {
+                lastDeferred.promise.then(task);
+            }
+            else {
+                try{
+                task();
+                }catch(e){console.log(e)};
+            }
+&nbsp;
+            return self;
+        };
+        target[name].$params = params;
+        target[name].$orig = func;
+        return true;
+    };
+&nbsp;
+    /*
+     * Adds all of the functions from source onto target as wrapped chainable functions
+     * @param {object} source
+     */
+    Train.mixObjectInto = function(target, source) {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!source || typeof source !== 'object') {
+<span class="cstat-no" title="statement not covered" >            return false;</span>
+        }
+        var keys = Object.keys(source);
+        var len = keys.length;
+        var i = 0;
+        var key = '';
+        for (; i &lt; len; ++i) {
+            key = keys[i];
+            if (typeof source[key] === 'function') {
+                Train.mixFunctionInto(target, key, source[key]);
+            }
+        }
+        return true;
+    };
+&nbsp;
+    /*
+     * Create a new object by mixing together all of the passed in objects
+     * @param object[] arguments
+     */
+    Train.create = function() {
+        var result = <span class="fstat-no" title="function not covered" >function() {</span>};
+        var len = arguments.length;
+        var i = 0;
+        var arg;
+        for (; i &lt; len; ++i) {
+            arg = arguments[i];
+            if (typeof arg === 'object') {
+                Train.mixObjectInto(result, arg);
+            }
+        }
+        return result;
+    };
+&nbsp;
+    return Train;
+}));
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Mar 08 2016 14:05:05 GMT-0700 (MST)
+</div>
+</div>
+<script src="../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../sorter.js"></script>
+</body>
+</html>
