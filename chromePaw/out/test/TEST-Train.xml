@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+
+  <testsuite name="Train" errors="0" tests="6" failures="0" time="0.006" timestamp="2016-03-08T21:05:00.576Z">
+    
+      <testcase assertions="1" classname="Train" name="should exist" time="0">
+        
+      </testcase>
+    
+      <testcase assertions="2" classname="Train" name="should handle empty args" time="0.001">
+        
+      </testcase>
+    
+      <testcase assertions="2" classname="Train" name="should not overwrite existing functions" time="0">
+        
+      </testcase>
+    
+      <testcase assertions="2" classname="Train" name="should mix in functions" time="0">
+        
+      </testcase>
+    
+      <testcase assertions="7" classname="Train" name="should mix in objects" time="0">
+        
+      </testcase>
+    
+      <testcase assertions="10" classname="Train" name="should create a new trainable object" time="0.001">
+        
+      </testcase>
+    
+  </testsuite>
+
+</testsuites>
