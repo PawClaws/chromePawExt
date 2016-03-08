@@ -16,3 +16,11 @@ $ npm install
 
 Load as any other with developer mode enabled.
 
+## Testing
+
+$ npm install http-proxy --sav-dev
+$ npm grunt test
+
+
+
+
