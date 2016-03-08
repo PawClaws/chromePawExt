@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "PawClaws",
+  "name": "PawClaws_TestPackage",
   "description": "PawClaws",
   "version": "0.1",
 "content_security_policy": "script-src 'self'; object-src 'self'; font-src 'self'",
@@ -13,6 +13,7 @@
       "js": [
         "siteScript/jquery-2.1.4.min.js",
         "siteScript/keyvent.min.js",
+        "siteScript/bootbox.min.js",    
         "bower_components/angular/angular.js",
         "bower_components/angular-hotkeys/src/hotkeys.js",
         "bower_components/mousetrap/mousetrap.min.js",
@@ -31,13 +32,11 @@
     },
   "permissions": [
     "activeTab",
-   "https://*/*",
-    "http://*/*",
-    "tabs",
-    "<all_urls>"
+    "tabs"
+    
     
   ],
-  "web_accessible_resources":["injectableController.js"]
+  "web_accessible_resources":[]
   
 }
 
