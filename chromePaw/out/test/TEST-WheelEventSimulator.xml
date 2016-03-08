@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites>
+
+  <testsuite name="WheelEventSimulator" errors="0" tests="0" failures="0" time="" timestamp="">
+    
+  </testsuite>
+
+  <testsuite name="WheelEventSimulator dispatching in browsers supporting &quot;wheel&quot; event" errors="0" tests="6" failures="0" time="0.006" timestamp="2016-03-08T21:29:39.979Z">
+    
+      <testcase assertions="2" classname="WheelEventSimulator dispatching in browsers supporting &quot;wheel&quot; event" name="should dispatch a &quot;wheel&quot; event" time="0.002">
+        
+      </testcase>
+    
+      <testcase assertions="2" classname="WheelEventSimulator dispatching in browsers supporting &quot;wheel&quot; event" name="should set event deltaX to options.deltaX" time="0.001">
+        
+      </testcase>
+    
+      <testcase assertions="2" classname="WheelEventSimulator dispatching in browsers supporting &quot;wheel&quot; event" name="should set event deltaY to options.deltaY" time="0.001">
+        
+      </testcase>
+    
+      <testcase assertions="4" classname="WheelEventSimulator dispatching in browsers supporting &quot;wheel&quot; event" name="should set event delta to whichever of x or y is non-zero" time="0">
+        
+      </testcase>
+    
+      <testcase assertions="2" classname="WheelEventSimulator dispatching in browsers supporting &quot;wheel&quot; event" name="should set event deltaZ to 0" time="0">
+        
+      </testcase>
+    
+      <testcase assertions="2" classname="WheelEventSimulator dispatching in browsers supporting &quot;wheel&quot; event" name="should set event deltaMode to pixel" time="0.001">
+        
+      </testcase>
+    
+  </testsuite>
+
+  <testsuite name="WheelEventSimulator dispatching in browsers supporting &quot;mousewheel&quot; event" errors="0" tests="4" failures="0" time="0.003" timestamp="2016-03-08T21:29:39.983Z">
+    
+      <testcase assertions="2" classname="WheelEventSimulator dispatching in browsers supporting &quot;mousewheel&quot; event" name="should dispatch a &quot;mousewheel&quot; event" time="0">
+        
+      </testcase>
+    
+      <testcase assertions="2" classname="WheelEventSimulator dispatching in browsers supporting &quot;mousewheel&quot; event" name="should set event wheelDeltaX to the inverse of options.deltaX" time="0">
+        
+      </testcase>
+    
+      <testcase assertions="2" classname="WheelEventSimulator dispatching in browsers supporting &quot;mousewheel&quot; event" name="should set event wheelDeltaY to the inverse of options.deltaY" time="0.001">
+        
+      </testcase>
+    
+      <testcase assertions="4" classname="WheelEventSimulator dispatching in browsers supporting &quot;mousewheel&quot; event" name="should set event delta to the inverse of whichever of x or y is non-zero" time="0">
+        
+      </testcase>
+    
+  </testsuite>
+
+  <testsuite name="WheelEventSimulator dispatching in old browsers not supporting &quot;wheel&quot; or &quot;mousewheel&quot;" errors="0" tests="2" failures="0" time="0.002" timestamp="2016-03-08T21:29:39.985Z">
+    
+      <testcase assertions="1" classname="WheelEventSimulator dispatching in old browsers not supporting &quot;wheel&quot; or &quot;mousewheel&quot;" name="should throw" time="0.001">
+        
+      </testcase>
+    
+      <testcase assertions="1" classname="WheelEventSimulator dispatching in old browsers not supporting &quot;wheel&quot; or &quot;mousewheel&quot;" name="should not dispatch an event" time="0">
+        
+      </testcase>
+    
+  </testsuite>
+
+  <testsuite name="WheelEventSimulator dispatching at screen position" errors="0" tests="1" failures="0" time="0.008" timestamp="2016-03-08T21:29:39.994Z">
+    
+      <testcase assertions="1" classname="WheelEventSimulator dispatching at screen position" name="should dispatch on the element at screen position" time="0.007">
+        
+      </testcase>
+    
+  </testsuite>
+
+</testsuites>
