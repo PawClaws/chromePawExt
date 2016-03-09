@@ -7,8 +7,17 @@
     "url": "git://github.com/Workiva/paw.git"
   },
   "scripts": {
+    "start": "./record.js",
     "install": "bower install",
     "update": "bower install"
+  },
+  "bin": {
+    "paw-record": "./record.js"
+  },
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "wf-grunt": "git+ssh://git@github.com:WebFilings/wf-grunt.git#0.4.0"
   },
   "dependencies": {
     "connect": "^2.17.3",
@@ -18,10 +27,5 @@
     "moment": "^2.6.0",
     "open": "0.0.5",
     "raw-body": "^1.1.6"
-  },
-  "devDependencies": {
-    "grunt": "~0.4.5",
-    "grunt-contrib-jshint": "~1.0.0",
-    "grunt-contrib-jasmine": "~1.0.0"
   }
 }

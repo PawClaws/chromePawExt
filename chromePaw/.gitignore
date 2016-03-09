@@ -1,0 +1,14 @@
+.grunt/
+.idea/
+*.sublime-*
+
+bower_components/
+docs/api/
+node_modules/
+out/
+build/
+
+_*.runner.html
+npm_debug.log
+*.orig
+CustomGestures.*.js

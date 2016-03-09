@@ -17,10 +17,10 @@
 /* global module */
 (function(root, factory) {
     if (typeof exports === 'object') {
-        module.exports = factory(require('src/WheelEventSimulator'));
+        module.exports = factory(require('paw/WheelEventSimulator'));
     }
     else if (typeof define === 'function' && define.amd) {
-        define('src/Gestures', ['src/WheelEventSimulator'], factory);
+        define('paw/Gestures', ['paw/WheelEventSimulator'], factory);
     }
     else {
         root.Gestures = factory(root.WheelEventSimulator);

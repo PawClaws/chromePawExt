@@ -2,6 +2,17 @@
   "name": "paw",
   "version": "1.0.0",
   "private": true,
+  "ignore": [
+    "bower_components/",
+    "node_modules/",
+    "test/",
+    "tools/",
+    "Gruntfile.js",
+    "index.html",
+    "init.sh",
+    "package.json",
+    "smithy.yaml"
+  ],
   "dependencies": {
     "q": "0.9.7"
   },
