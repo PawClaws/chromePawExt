@@ -15,6 +15,7 @@
         
     }
 else{
+
     $('html').attr("ng-app", "record");
     $('html').attr("ng-controller", "recordCtrl");
     
