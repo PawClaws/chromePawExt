@@ -1,11 +1,27 @@
 /*-------VIEW-INJECTION------------------------*/
-    //Set document as angular app and control
+    //Set document as angular app and control    
+    var selector=$('[ng-app]')
+    
+    if(selector.length>0){
+       
+        alert('PawClaws Says: Recording is not currently available on pages built with Angular js. Playback is available manually via the altPlay event');
+        
+        $(window).on('altPlay',(ev,script)=>{
+            console.log(ev);
+            var altPlay=new Paw();
+            Train.mixFunctionInto(altPlay,'altPlayScript', script);
+            altPlay['altPlayScript'].call(altPlay);
+        });
+        
+    }
+else{
     $('html').attr("ng-app", "record");
     $('html').attr("ng-controller", "recordCtrl");
-
+    
+    
     var paw = new Paw();
 /*------Controller Instantiation----------------------------------*/
-    var app=angular.module('record', ['cfp.hotkeys']);
+    var app=angular.module('record', ['cfp.hotkeys']);   
     app.config(['$compileProvider', function($compileProvider){
         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|blob):/);}]);
     app.controller('recordCtrl', function($scope, $http, hotkeys) {
@@ -255,7 +271,7 @@
         $($('.cfp-hotkeys-container').find('.cfp-hotkeys-close')).hide();
     });
 /*-------------------------------------------------------------------------------------*/    
-
+}
   
 
     
