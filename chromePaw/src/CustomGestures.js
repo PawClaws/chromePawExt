@@ -1,5 +1,5 @@
-/* paw script generated at Thu Feb 04 2016 15:34:50 GMT-0700 (MST) */
+/* paw script generated at Mon Jun 09 2014 15:00:48 GMT-0600 (MDT) */
 define(function(/* require */) {
-    var gestures = {};
+    var gestures = { };
     return gestures;
 });

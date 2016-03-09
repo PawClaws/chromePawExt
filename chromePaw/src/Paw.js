@@ -236,8 +236,8 @@
 
     Paw.prototype._triggerClick = function() {
         this.indicateTouches(this.touches);
-        //this._triggerMouse('start');
-        //this._triggerMouse('end');
+        this._triggerMouse('start');
+        this._triggerMouse('end');
         this._triggerMouse('click');
         this.indicateTouches(); // clears touch indicators
     };

@@ -1,0 +1,117 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/iojs', '/usr/local/bin/npm', 'install' ]
+2 info using npm@2.13.0
+3 info using node@v2.4.0
+4 verbose readDependencies loading dependencies from /home/node-a/Desktop/PawGit/chromePaw/package.json
+5 warn package.json paw@1.0.0 No license field.
+6 verbose install where, deps [ '/home/node-a/Desktop/PawGit/chromePaw',
+6 verbose install   [ 'connect',
+6 verbose install     'gulp',
+6 verbose install     'ip',
+6 verbose install     'mkdirp',
+6 verbose install     'moment',
+6 verbose install     'open',
+6 verbose install     'raw-body',
+6 verbose install     'grunt',
+6 verbose install     'wf-grunt' ] ]
+7 verbose install where, peers [ '/home/node-a/Desktop/PawGit/chromePaw', [] ]
+8 verbose installManyTop reading for lifecycle /home/node-a/Desktop/PawGit/chromePaw/package.json
+9 info preinstall paw@1.0.0
+10 verbose installManyTop reading scoped package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/connect/package.json
+11 verbose installManyTop reading scoped package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/grunt/package.json
+12 verbose installManyTop reading scoped package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/grunt-contrib-jasmine/package.json
+13 verbose installManyTop reading scoped package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/grunt-contrib-jshint/package.json
+14 verbose installManyTop reading scoped package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/gulp/package.json
+15 verbose installManyTop reading scoped package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/ip/package.json
+16 verbose installManyTop reading scoped package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/mkdirp/package.json
+17 verbose installManyTop reading scoped package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/moment/package.json
+18 verbose installManyTop reading scoped package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/open/package.json
+19 verbose installManyTop reading scoped package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/raw-body/package.json
+20 info package.json grunt@0.4.5 No license field.
+21 verbose readDependencies loading dependencies from /home/node-a/Desktop/PawGit/chromePaw/package.json
+22 verbose targetResolver reading package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/connect/package.json
+23 verbose targetResolver reading package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/grunt/package.json
+24 verbose targetResolver reading package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/grunt-contrib-jasmine/package.json
+25 verbose targetResolver reading package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/grunt-contrib-jshint/package.json
+26 verbose targetResolver reading package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/gulp/package.json
+27 verbose targetResolver reading package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/ip/package.json
+28 verbose targetResolver reading package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/mkdirp/package.json
+29 verbose targetResolver reading package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/moment/package.json
+30 verbose targetResolver reading package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/open/package.json
+31 verbose targetResolver reading package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/raw-body/package.json
+32 verbose targetResolver reading package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/.bin/gulp/package.json
+33 verbose targetResolver reading package data from /home/node-a/Desktop/PawGit/chromePaw/node_modules/.bin/mkdirp/package.json
+34 verbose already installed skipping gulp@^3.6.2 /home/node-a/Desktop/PawGit/chromePaw
+35 verbose already installed skipping ip@^0.3.0 /home/node-a/Desktop/PawGit/chromePaw
+36 verbose already installed skipping mkdirp@^0.5.0 /home/node-a/Desktop/PawGit/chromePaw
+37 verbose already installed skipping moment@^2.6.0 /home/node-a/Desktop/PawGit/chromePaw
+38 verbose already installed skipping open@0.0.5 /home/node-a/Desktop/PawGit/chromePaw
+39 verbose already installed skipping raw-body@^1.1.6 /home/node-a/Desktop/PawGit/chromePaw
+40 verbose already installed skipping grunt@~0.4.1 /home/node-a/Desktop/PawGit/chromePaw
+41 silly cache add args [ 'wf-grunt@git+ssh://git@github.com/WebFilings/wf-grunt.git#0.4.0',
+41 silly cache add   null ]
+42 verbose cache add spec wf-grunt@git+ssh://git@github.com/WebFilings/wf-grunt.git#0.4.0
+43 verbose already installed skipping connect@^2.17.3 /home/node-a/Desktop/PawGit/chromePaw
+44 silly cache add parsed spec { raw: 'wf-grunt@git+ssh://git@github.com/WebFilings/wf-grunt.git#0.4.0',
+44 silly cache add   scope: null,
+44 silly cache add   name: 'wf-grunt',
+44 silly cache add   rawSpec: 'git+ssh://git@github.com/WebFilings/wf-grunt.git#0.4.0',
+44 silly cache add   spec: 'git+ssh://git@github.com/WebFilings/wf-grunt.git#0.4.0',
+44 silly cache add   type: 'hosted',
+44 silly cache add   hosted:
+44 silly cache add    { type: 'github',
+44 silly cache add      ssh: 'git@github.com:WebFilings/wf-grunt.git#0.4.0',
+44 silly cache add      sshUrl: 'git+ssh://git@github.com/WebFilings/wf-grunt.git#0.4.0',
+44 silly cache add      httpsUrl: 'git+https://github.com/WebFilings/wf-grunt.git#0.4.0',
+44 silly cache add      gitUrl: 'git://github.com/WebFilings/wf-grunt.git#0.4.0',
+44 silly cache add      shortcut: 'github:WebFilings/wf-grunt#0.4.0',
+44 silly cache add      directUrl: 'https://raw.githubusercontent.com/WebFilings/wf-grunt/0.4.0/package.json' } }
+45 verbose addRemoteGit caching git+ssh://git@github.com/WebFilings/wf-grunt.git#0.4.0
+46 verbose addRemoteGit git+ssh://git@github.com/WebFilings/wf-grunt.git#0.4.0 is a repository hosted by github
+47 silly tryClone cloning git+ssh://git@github.com/WebFilings/wf-grunt.git#0.4.0 via git+ssh://git@github.com/WebFilings/wf-grunt.git#0.4.0
+48 verbose tryClone ssh-git-github-com-WebFilings-wf-grunt-git-40c1b777 not in flight; caching
+49 verbose makeDirectory /home/node-a/.npm/_git-remotes creation not in flight; initializing
+50 silly makeDirectory /home/node-a/.npm/_git-remotes uid: 1000 gid: 1000
+51 info git [ 'clone',
+51 info git   '--template=/home/node-a/.npm/_git-remotes/_templates',
+51 info git   '--mirror',
+51 info git   'ssh://git@github.com/WebFilings/wf-grunt.git',
+51 info git   '/home/node-a/.npm/_git-remotes/ssh-git-github-com-WebFilings-wf-grunt-git-40c1b777' ]
+52 error git clone --template=/home/node-a/.npm/_git-remotes/_templates --mirror ssh://git@github.com/WebFilings/wf-grunt.git /home/node-a/.npm/_git-remotes/ssh-git-github-com-WebFilings-wf-grunt-git-40c1b777: Cloning into bare repository '/home/node-a/.npm/_git-remotes/ssh-git-github-com-WebFilings-wf-grunt-git-40c1b777'...
+52 error git clone --template=/home/node-a/.npm/_git-remotes/_templates --mirror ssh://git@github.com/WebFilings/wf-grunt.git /home/node-a/.npm/_git-remotes/ssh-git-github-com-WebFilings-wf-grunt-git-40c1b777: Warning: Permanently added 'github.com,192.30.252.129' (RSA) to the list of known hosts.
+52 error git clone --template=/home/node-a/.npm/_git-remotes/_templates --mirror ssh://git@github.com/WebFilings/wf-grunt.git /home/node-a/.npm/_git-remotes/ssh-git-github-com-WebFilings-wf-grunt-git-40c1b777: Permission denied (publickey).
+52 error git clone --template=/home/node-a/.npm/_git-remotes/_templates --mirror ssh://git@github.com/WebFilings/wf-grunt.git /home/node-a/.npm/_git-remotes/ssh-git-github-com-WebFilings-wf-grunt-git-40c1b777: fatal: Could not read from remote repository.
+52 error git clone --template=/home/node-a/.npm/_git-remotes/_templates --mirror ssh://git@github.com/WebFilings/wf-grunt.git /home/node-a/.npm/_git-remotes/ssh-git-github-com-WebFilings-wf-grunt-git-40c1b777:
+52 error git clone --template=/home/node-a/.npm/_git-remotes/_templates --mirror ssh://git@github.com/WebFilings/wf-grunt.git /home/node-a/.npm/_git-remotes/ssh-git-github-com-WebFilings-wf-grunt-git-40c1b777: Please make sure you have the correct access rights
+52 error git clone --template=/home/node-a/.npm/_git-remotes/_templates --mirror ssh://git@github.com/WebFilings/wf-grunt.git /home/node-a/.npm/_git-remotes/ssh-git-github-com-WebFilings-wf-grunt-git-40c1b777: and the repository exists.
+53 verbose stack Error: Command failed: git clone --template=/home/node-a/.npm/_git-remotes/_templates --mirror ssh://git@github.com/WebFilings/wf-grunt.git /home/node-a/.npm/_git-remotes/ssh-git-github-com-WebFilings-wf-grunt-git-40c1b777
+53 verbose stack Cloning into bare repository '/home/node-a/.npm/_git-remotes/ssh-git-github-com-WebFilings-wf-grunt-git-40c1b777'...
+53 verbose stack Warning: Permanently added 'github.com,192.30.252.129' (RSA) to the list of known hosts.
+53 verbose stack Permission denied (publickey).
+53 verbose stack fatal: Could not read from remote repository.
+53 verbose stack
+53 verbose stack Please make sure you have the correct access rights
+53 verbose stack and the repository exists.
+53 verbose stack
+53 verbose stack     at ChildProcess.exithandler (child_process.js:197:12)
+53 verbose stack     at emitTwo (events.js:87:13)
+53 verbose stack     at ChildProcess.emit (events.js:172:7)
+53 verbose stack     at maybeClose (internal/child_process.js:764:16)
+53 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:211:5)
+54 verbose cwd /home/node-a/Desktop/PawGit/chromePaw
+55 error Linux 3.16.0-38-generic
+56 error argv "/usr/local/bin/iojs" "/usr/local/bin/npm" "install"
+57 error node v2.4.0
+58 error npm  v2.13.0
+59 error code 128
+60 error Command failed: git clone --template=/home/node-a/.npm/_git-remotes/_templates --mirror ssh://git@github.com/WebFilings/wf-grunt.git /home/node-a/.npm/_git-remotes/ssh-git-github-com-WebFilings-wf-grunt-git-40c1b777
+60 error Cloning into bare repository '/home/node-a/.npm/_git-remotes/ssh-git-github-com-WebFilings-wf-grunt-git-40c1b777'...
+60 error Warning: Permanently added 'github.com,192.30.252.129' (RSA) to the list of known hosts.
+60 error Permission denied (publickey).
+60 error fatal: Could not read from remote repository.
+60 error
+60 error Please make sure you have the correct access rights
+60 error and the repository exists.
+61 error If you need help, you may report this error at:
+61 error     <https://github.com/npm/npm/issues>
+62 verbose exit [ 1, true ]

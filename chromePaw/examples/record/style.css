@@ -1,0 +1,56 @@
+body, html {
+    margin: 0px;
+}
+#viewport {
+    width: 100vw;
+    height: 100vh;
+    background: #28343b;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#viewport h1 {
+    color: white;
+    margin: auto;
+    width: 70%;
+    text-align: center;
+}
+#drawer {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left:0px;
+    top: 0px;
+    height: 100vh;
+    width: 100vw;
+    border-left: solid 3px #BADA55;
+    border-right: solid 3px #BADA55;
+    background: #e3e3e3;
+}
+#drawer div {
+    flex-grow: 0.4;
+}
+.drawer_collapsed {
+    width: 0 !important;
+    opacity: 0;
+}
+.source {
+    background: white;
+    width:30vw;
+    height: 20vh;
+    margin: auto;
+    overflow: auto
+}
+.red {
+    background: red !important;
+}
+.js {
+    background: white;
+    width: 100%;
+    height: 40vh;
+    overflow: scroll;
+    flex-grow: 1;
+}
+.ng-cloak: {
+    display: none;
+}
