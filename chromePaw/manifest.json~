@@ -8,7 +8,8 @@
 "content_security_policy": "script-src 'unsafe-eval' 'self'; object-src 'self'",
   "options_ui": {
     "page": "options.html",
-    "chrome_style": true
+    "chrome_style": true,
+    "open_in_tab": true
   },
 "content_scripts":[{
     "matches":["https://*/*","http://*/*"],

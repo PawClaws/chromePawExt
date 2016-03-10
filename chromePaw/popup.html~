@@ -48,7 +48,7 @@
 
     <!-- The tool drawer -->
 		<div id="drawer" class='ng-scope my-div'>
-			<button id="go-to-options">Go to options</button>
+			
 			<button style="margin-left: 4px;"  class="btn modern embossed-link" ng-click="fn.toggleRecord()">{{m.btnMsg}}</button>
 			
 			<button id = "showBtn" class="btn modern embossed-link" ng-hide="!m.script.length || m.isRecording" ng-click="fn.showHideAll()">Hide All</button>
