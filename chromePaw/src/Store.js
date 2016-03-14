@@ -3,7 +3,7 @@
         module.exports = factory();
     }
     else if (typeof define === 'function' && define.amd) {
-        define('paw/Store', [], factory);
+        define('paw/Store', ['paw/Gdrive'], factory);
     }
     else {
         root.Store = factory();
@@ -12,33 +12,38 @@
     'use strict';
 
     function Store() {
+
     }
+
 
     /*
      * Store a script with a given name for a given URL.
      * @param {string} url - The url the script is for
      * @param {string} name - The name of the script
      * @param {Object} data - The script to store along with any other data
-     * Currently, will over-write scripts without warning. Name and URL will be escaped correctly.
+     * @param {Function} errorcallback - The function to call on an error
+     * Name and URL will be escaped correctly.
      */
-    Store.prototype.storeScript = function(url, name, data) {
+    Store.prototype.storeScript = function(url, name, data, errorcallback) {
     };
 
     /*
      * Grab a script with a given name for a given URL.
      * @param {string} url - The url the script is for
      * @param {string} name - The name of the script
+     * @param {Function} errorcallback - The function to call on an error
      * Name and URL will be escaped correctly.
      */
-    Store.prototype.getScript = function(url, name) {
+    Store.prototype.getScript = function(url, name, errorcallback) {
     };
 
     /*
      * Grab a list of all scripts for a given URL.
      * @param {string} url - The url the script is for
+     * @param {Function} errorcallback - The function to call on an error
      * URL will be escaped correctly.
      */
-    Store.prototype.listScripts = function(url) {
+    Store.prototype.listScripts = function(url, errorcallback) {
     };
 
     return Store;
