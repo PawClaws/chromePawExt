@@ -24,7 +24,8 @@
      * @param {Function} errorcallback - The function to call on an error
      * Name and URL will be escaped correctly.
      */
-    Store.prototype.storeScript = function(url, name, data, errorcallback) {
+    Store.prototype.storeScript = function(url, name, data) {
+        return Gdrive.upload(encodeURIComponent(url) + ":" + encodeURIComponent(name), data);
     };
 
     /*
@@ -34,7 +35,8 @@
      * @param {Function} errorcallback - The function to call on an error
      * Name and URL will be escaped correctly.
      */
-    Store.prototype.getScript = function(url, name, errorcallback) {
+    Store.prototype.getScript = function(url, name) {
+        return Gdrive.getUrl(encodeURIComponent(url) + ":" + encodeURIComponent(name)).execute(resp => return resp.items[0]);
     };
 
     /*
@@ -43,7 +45,8 @@
      * @param {Function} errorcallback - The function to call on an error
      * URL will be escaped correctly.
      */
-    Store.prototype.listScripts = function(url, errorcallback) {
+    Store.prototype.listScripts = function(url) {
+        return Gdrive.find(encodeURIComponent(url)).execute(resp => return resp.items);
     };
 
     return Store;
