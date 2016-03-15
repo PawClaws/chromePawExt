@@ -2,31 +2,27 @@
 <html>
 <head>
   <title>My Test Extension Options</title>
+	<script src="options.js"></script>
   <style>
     body: { padding: 10px; }
   </style>
 </head>
 
 <body>
-  Favorite color:
-  <select id="color">
-   <option value="red">red</option>
-   <option value="green">green</option>
-   <option value="blue">blue</option>
-   <option value="yellow">yellow</option>
+  Load on Start up:
+  <select id="startup">
+   <option value="yes">Yes</option>
+   <option value="no">No</option>
   </select>
 
   <label>
-    <input type="checkbox" id="like">
-    I like colors.
+    <input type="checkbox" id="autosave">
+    Autosave
   </label>
 
   <div id="status"></div>
-  <button id="save">Save</button>
+  <button id="save" onclick="save_options()">Save</button>
 
   <script src="options.js"></script>
-
-  Load on startup:
-
 </body>
 </html>

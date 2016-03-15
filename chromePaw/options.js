@@ -1,7 +1,7 @@
 // Saves options to chrome.storage.sync.
 function save_options() {
-  var color = document.getElementById('color').value;
-  var likesColor = document.getElementById('like').checked;
+  var color = document.getElementById('startup').value;
+  var likesColor = document.getElementById('autosave').checked;
   chrome.storage.sync.set({
     favoriteColor: color,
     likesColor: likesColor
@@ -10,23 +10,28 @@ function save_options() {
     var status = document.getElementById('status');
     status.textContent = 'Options saved.';
     setTimeout(function() {
-      status.textContent = '';
-    }, 750);
+      status.textContent = 'No beuno';
+    }, 150);
   });
 }
 
+function test(){
+  var status = document.getElementById('status');
+  status.setContent = 'Options set';
+}
 // Restores select box and checkbox state using the preferences
 // stored in chrome.storage.
 function restore_options() {
   // Use default value color = 'red' and likesColor = true.
   chrome.storage.sync.get({
-    favoriteColor: 'red',
+    favoriteColor: 'yes',
     likesColor: true
   }, function(items) {
-    document.getElementById('color').value = items.favoriteColor;
-    document.getElementById('like').checked = items.likesColor;
+    document.getElementById('startUp').value = items.favoriteColor;
+    document.getElementById('autosave').checked = items.likesColor;
   });
 }
+
 document.addEventListener('DOMContentLoaded', restore_options);
-document.getElementById('save').addEventListener('click',
-    save_options);
+
+document.getElementById('save').addEventListener('click', test);
