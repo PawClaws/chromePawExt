@@ -31,7 +31,7 @@ var scriptPickerInit=()=>{
 $(document).ready(()=>{
     pawScript='function(done){this.touch("50% 20%").wait(40).drag("50% 40%").wait(40).drag("50% 20%").wait(40).release().then(done);}';
     emitEventOnClick('#btnRecord','toggleRecord',null,'[]');
-    emitEventOnClick('#gotoSettings','gotoSettings',null,'[]');
+    emitEventOnClick('#btnRecord','toggleRecord',null,'[]');
     emitEventOnClick('#btnPlay','altPlay',null,'['+pawScript+']');
     scriptPickerInit();        
 });
