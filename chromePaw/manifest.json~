@@ -16,7 +16,7 @@
         "src/Paw.js","loadPopup.js"],"run_at":"document_start"}],
   "options_ui": {
     "page": "options.html",
-	"chrome_style": true
+	"chrome_style": true,
   },
   "browser_action":{"default_popup":"popup.html"},
   "permissions":["activeTab","tabs","background"],
