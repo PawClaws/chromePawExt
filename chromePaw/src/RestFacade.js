@@ -75,37 +75,38 @@ function insertFile(fileName, fileData, callback, onerror) {
     var token = gapi.auth.getToken();
     if (!token) {
         auth_(function(res) { console.log('auth attempt: ' + res); insertFIle(fileName, fileData, callback, onerror); });
-    }
-    
-    var accessToken = token.access_token;
-    var xhr = new XMLHttpRequest('POST', 'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart');
-    xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-    xhr.setRequestHeader('Content-Type', 'multipart/related; boundary=' + boundary);
-    var request =
-        '--' + boundary + '\n'
-        + 'Content-Type: application/json; charset=UTF-8\n\n'
-        + JSON.stringify(metaData)
-        + '\n\n'
-        + '--' + boundary + '\n'
-        + 'Content-Type: application/json; charset=UTF-8\n\n'
-        + JSON.stringify(fileData) + '\n'
-        + boundary + '--';
-    xhr.setRequestHeader('Content-Length', request.length);
-    xhr.onload = function(res) {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                callback(xhr.responseText);
-            } else {
-                onerror(xhr.statusText);
+    } else {
+        
+        var accessToken = token.access_token;
+        var xhr = new XMLHttpRequest('POST', 'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart');
+        xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+        xhr.setRequestHeader('Content-Type', 'multipart/related; boundary=' + boundary);
+        var request =
+            '--' + boundary + '\n'
+            + 'Content-Type: application/json; charset=UTF-8\n\n'
+            + JSON.stringify(metaData)
+            + '\n\n'
+            + '--' + boundary + '\n'
+            + 'Content-Type: application/json; charset=UTF-8\n\n'
+            + JSON.stringify(fileData) + '\n'
+            + boundary + '--';
+        xhr.setRequestHeader('Content-Length', request.length);
+        xhr.onload = function(res) {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    callback(xhr.responseText);
+                } else {
+                    onerror(xhr.statusText);
+                }
             }
-        }
-    };
+        };
 
-    xhr.onerror = function(res) {
-        onerror(xhr.statusText);
-    };
+        xhr.onerror = function(res) {
+            onerror(xhr.statusText);
+        };
 
-    xhr.send(request);
+        xhr.send(request);
+    }
 
 }
 
