@@ -62,36 +62,109 @@ function listFiles(folderId)
 
 }
 
-function insertFile() {
-
+function insertFile(file) {
+    var accessToken = gapi.auth.getToken().access_token;
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://www.googleapis.com/drive/v3/files/' + file);
+    xhr.setRequestHeader('')
 
 
 }
 
+function alternativeDownload(file) {
+    var accessToken = gapi.auth.getToken().access_token; //get file access token Oauth
 
+    var fileId = file;
+    var dest = fs.createWriteStream('/tmp/photo.txt');
+
+    drive.files.get({
+            fileId: fileId,
+            alt: 'application/vnd.google-apps.script+json'
+        })
+        .on('end', function() {
+            console.log('Done');
+        })
+        .on('error', function(err) {
+            console.log('Error during download', err);
+        })
+        .pipe(dest);
+}
+
+function uploadFile(file) {
+
+    var accessToken = gapi.auth.getToken().access_token; //get file access token Oauth
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'https://www.googleapis.com/drive/v3/files/' + file + '/copy');
+}
+
+
+
+function callback(data) {
+    console.log(data)
+}
+
+function getFileMetaData(fileID, callback)
+{
+    fileMetaData = 'https://www.googleapis.com/drive/v2/files/' + file;
+    var accessToken = gapi.auth.getToken().access_token;
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET',fileMetaData );
+
+
+    xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+
+    xhr.onload = function() {
+
+        callback(xhr.responseText);
+    };
+    xhr.onerror = function() {
+        callback(null);
+    };
+    xhr.send();
+
+
+
+}
 /**
  * Download a file's content.
  *
- * @param {File} file Drive File instance.
+ * @param {File} file Drive File instance ID
  * @param {Function} callback Function to call when the request is complete.
  */
-function downloadFile(file) {
 
-        var accessToken = gapi.auth.getToken().access_token; //get file access token Oauth
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'https://www.googleapis.com/drive/v3/files/' + file);
-        xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-        xhr.onload = function () {
-            callback(xhr.responseText);
-        };
-        xhr.onerror = function () {
+function generateDownloadFile(fileID, callback) {
 
-        };
-        xhr.send();
-        console.log("Helo");
+        fileDownloadURL = 'https://docs.google.com/uc?id=' + file + '&export=download';
 
-    }
+}
 
+/**
+ * Download a file's content. This does not work in this context as it we have CORS conflicts.
+ *
+ * @param {File} file Drive File instance ID
+ * @param {Function} callback Function to call when the request is complete.
+ */
+
+function downloadFile(fileID, callback) {
+
+    fileDownloadURL = 'https://docs.google.com/uc?id=' + file + '&export=download';
+    var accessToken = gapi.auth.getToken().access_token;
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET',fileDownloadURL);
+
+
+    xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+
+    xhr.onload = function() {
+
+        callback(xhr.responseText);
+    };
+    xhr.onerror = function() {
+        callback(null);
+    };
+    xhr.send();
+
+}
     /**
      * Check if current user has authorized this application.
      */
