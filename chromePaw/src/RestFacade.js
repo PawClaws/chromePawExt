@@ -74,7 +74,7 @@ function insertFile(fileName, fileData, callback, onerror) {
     var metaData = { 'name' : fileName };
     var token = gapi.auth.getToken();
     if (!token) {
-        auth_(function(res) { insertFIle(fileName, fileData, callback, onerror); });
+        auth_(function(res) { console.log('auth attempt: ' + res); insertFIle(fileName, fileData, callback, onerror); });
     }
     
     var accessToken = token.access_token;
