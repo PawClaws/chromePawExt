@@ -1,13 +1,13 @@
 /*-------VIEW-INJECTION------------------------*/
     //Set document as angular app and control    
+var paw=new Paw();  
     var selector=$('[ng-app]')
     
     if(selector.length>0){
        
         alert('PawClaws Says: Recording is not currently available on pages built with Angular js. Playback is available manually via the altPlay event');
         
-        $(window).on('altPlay',(ev,script)=>{
-            console.log(ev);
+        jQuery(window).on('altPlay',(ev,script)=>{
             var altPlay=new Paw();
             Train.mixFunctionInto(altPlay,'altPlayScript', script);
             altPlay['altPlayScript'].call(altPlay);
@@ -19,15 +19,17 @@ else{
     $('html').attr("ng-app", "record");
     $('html').attr("ng-controller", "recordCtrl");
     
-    
-    var paw = new Paw();
+   
 /*------Controller Instantiation----------------------------------*/
     var app=angular.module('record', ['cfp.hotkeys']);   
     app.config(['$compileProvider', function($compileProvider){
         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|blob):/);}]);
     app.controller('recordCtrl', function($scope, $http, hotkeys) {
+             
       
       /*CUSTOM EVENTS*******************************************/
+
+             
       jQuery(window).on('scriptPicker',function(){
         $scope.fn.toggleRecord();
       });      
@@ -52,7 +54,35 @@ else{
             }
             })
         })
+    
+            chrome.runtime.sendMessage({action:"requestUpdate"},function(res){
+                if(res){
+                    if(res.paw){
+                       
+                            var retPaw=paw.importState(res.paw);
+                            console.log(retPaw)
+                            var mPaw=Immutable.Seq(paw);
+                            var rPaw=Immutable.Seq(retPaw);
+                            
+                            var mapIn=Immutable.Seq(rPaw.keys());
+                            mapIn=mapIn.filter(x=>!mPaw.includes(x))
+                            mapIn.forEach(x=>mPaw.get(x,rPaw.get(x)));
+                            paw=new Paw(mPaw.toJS());
+                            
+                            console.log(paw);
+                            
+                    }
+                }        
+
+                
+            });    
+    
+    
+    
+    
     /***********************************************************************/     
+
+
         
         var tab = '    ';        
         var mouseDown = false; // move to top
@@ -66,6 +96,26 @@ else{
             relative: true,
             umd: 'None'
         };
+function recordingToCode(name, records) {
+            var code = '';
+            var first = true;
+            for (var i = 0; i < records.length; i++) {
+                var line = records[i];
+                if (Array.isArray(line)) {
+                    if (first && line[1] === '.wait(') {
+                        first = false;
+                        continue;
+                    }
+                    first = false;
+                    code  += line.join('');
+                }
+                if (typeof(line) === 'string') {
+                    code  += line;
+                }
+                code += '\n';
+            }
+            return code;
+        }        
         function copyTouches(ev) {
             var result = [];
             var touches = ev.touches;
@@ -155,26 +205,7 @@ else{
                 ]);
             }
         }
-        function recordingToCode(name, records) {
-            var code = '';
-            var first = true;
-            for (var i = 0; i < records.length; i++) {
-                var line = records[i];
-                if (Array.isArray(line)) {
-                    if (first && line[1] === '.wait(') {
-                        first = false;
-                        continue;
-                    }
-                    first = false;
-                    code  += line.join('');
-                }
-                if (typeof(line) === 'string') {
-                    code  += line;
-                }
-                code += '\n';
-            }
-            return code;
-        }
+        
         function cancelEvent(event) {
             event.preventDefault();
         }
@@ -204,6 +235,7 @@ else{
                     eval(code); // creates fn
                     Train.mixFunctionInto(paw, $scope.m.recording.name, $scope.m.recording.fn);
                     $scope.fn.generatePawScript();
+                   
                 }
                 else {
                     // start recording, clear everything
@@ -220,9 +252,10 @@ else{
                     $scope.m.recording.data.push('            this');
                 }
             },
-            playback: function(i) {
+            playback: function(i) {           
                 var r=$scope.m.recordings[i];
                 paw[r.name].call(paw);
+            
             },
             del: function(i) {
                 var r = $scope.m.recordings[i];
@@ -256,24 +289,39 @@ else{
                         filename: $scope.m.scriptName,
                         code: $scope.m.script
                     };
-                    /*
-                        SAVE OFF GENERATE SCRIPT HERE
-                    */
-                }
-                
+
+            }    
+
+            
+                              
+                            chrome.runtime.sendMessage({
+                            action:"suggestUpdate",
+                            paw: paw.exportState()
+                            },
+                            function(res){
+                                console.log(res);
+                                console.log('updated');
+                            
+                            }); 
+            
+                                
             }
 
         };
+    
         $scope.fn.generatePawScript();
+        
     });
     
     angular.element(document).ready(()=>{
         $($('.cfp-hotkeys-container').find('table')).hide();
         $($('.cfp-hotkeys-container').find('.cfp-hotkeys-close')).hide();
+        
+        
     });
 /*-------------------------------------------------------------------------------------*/    
 }
-  
+ 
 
     
     
