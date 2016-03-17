@@ -53,8 +53,13 @@ else{
                 $scope.fn.playback(e);
             }
             })
+          hotkeys.add('ctrl+'+e.toString(),'Save recording #',function(){
+                if($scope.m.recordings[e]){
+                    console.log($scope.fn.generateSpecificPawScript(e));
+                }
+          })
         })
-    
+        
         chrome.runtime.sendMessage({action:"requestUpdate"},function(res){
                 if(res){
                     if(res.recordings){
@@ -250,7 +255,7 @@ function recordingToCode(name, records) {
             },
             playback: function(i) {           
                 var r=$scope.m.recordings[i];
-                    var code = recordingToCode(r.name,r.data);
+                var code = recordingToCode(r.name,r.data);
                    
                     eval(code);
                     Train.mixFunctionInto(paw, r.name,r.fn);                
@@ -302,6 +307,24 @@ function recordingToCode(name, records) {
   
 
             
+                                                              
+            },
+            generateSpecificPawScript: function(k) {
+         
+                    var cmds = [];
+                    var recording = null;
+                    // Add the gestures object
+                    //cmds.push('{');
+                   
+                   
+                        recording = $scope.m.recordings[k];
+
+                  
+                        var rFunc=recording.fn.toString();
+
+                        cmds.push('"'+rFunc+'"' + '');
+                    //cmds.push('}');
+                    return cmds.join('');
                                                               
             }
 
