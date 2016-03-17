@@ -180,12 +180,19 @@
             }
         }
     };
+    
+    
+
+
+    
+    
+    
 
     /*
      * Show the touches on screen.
      * @param object[] touches - Array of points
      * If touches is falsy or an empty array, it will remove the touch indicators from view
-     */
+     */     
     Paw.prototype.indicateTouches = function(touches) {
         var self = this,
             touch, i, id, ti, len;

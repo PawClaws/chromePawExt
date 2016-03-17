@@ -1,13 +1,13 @@
 /*-------VIEW-INJECTION------------------------*/
     //Set document as angular app and control    
+var paw=new Paw();  
     var selector=$('[ng-app]')
     
     if(selector.length>0){
        
         alert('PawClaws Says: Recording is not currently available on pages built with Angular js. Playback is available manually via the altPlay event');
         
-        $(window).on('altPlay',(ev,script)=>{
-            console.log(ev);
+        jQuery(window).on('altPlay',(ev,script)=>{
             var altPlay=new Paw();
             Train.mixFunctionInto(altPlay,'altPlayScript', script);
             altPlay['altPlayScript'].call(altPlay);
@@ -19,15 +19,17 @@ else{
     $('html').attr("ng-app", "record");
     $('html').attr("ng-controller", "recordCtrl");
     
-    
-    var paw = new Paw();
+   
 /*------Controller Instantiation----------------------------------*/
     var app=angular.module('record', ['cfp.hotkeys']);   
     app.config(['$compileProvider', function($compileProvider){
         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|blob):/);}]);
     app.controller('recordCtrl', function($scope, $http, hotkeys) {
+             
       
       /*CUSTOM EVENTS*******************************************/
+
+             
       jQuery(window).on('scriptPicker',function(){
         $scope.fn.toggleRecord();
       });      
@@ -51,10 +53,33 @@ else{
                 $scope.fn.playback(e);
             }
             })
+          hotkeys.add('ctrl+'+e.toString(),'Save recording #',function(){
+                if($scope.m.recordings[e]){
+                    console.log($scope.fn.generateSpecificPawScript(e));
+                }
+          })
         })
-    /***********************************************************************/     
         
-        var tab = '    ';        
+        chrome.runtime.sendMessage({action:"requestUpdate"},function(res){
+                if(res){
+                    if(res.recordings){
+                            $scope.m.recordings=res.recordings;
+                            
+                            
+                    }
+                }        
+
+                
+            }); 
+    
+    
+    
+    
+    /***********************************************************************/     
+
+
+        var sendUpdates=false;
+        var tab = '';        
         var mouseDown = false; // move to top
         var eventsToRecord = ['click','scroll','contextmenu','mouseup','mousedown','mousemove','mousewheel'];
         $scope.m = {
@@ -64,8 +89,29 @@ else{
             recordings: [],
             script: null,
             relative: true,
-            umd: 'None'
+            umd: 'None',
+            sendUpdates: false
         };
+function recordingToCode(name, records) {
+            var code = '';
+            var first = true;
+            for (var i = 0; i < records.length; i++) {
+                var line = records[i];
+                if (Array.isArray(line)) {
+                    if (first && line[1] === '.wait(') {
+                        first = false;
+                        continue;
+                    }
+                    first = false;
+                    code  += line.join('');
+                }
+                if (typeof(line) === 'string') {
+                    code  += line;
+                }
+                code += '';
+            }
+            return code;
+        }        
         function copyTouches(ev) {
             var result = [];
             var touches = ev.touches;
@@ -118,7 +164,7 @@ else{
                 if (prevRecord && prevRecord[1] === '.wait(') {
                     prevRecord[2] += wait;
                 } else {
-                    $scope.m.recording.data.push(['            ', '.wait(', wait, ')']);
+                    $scope.m.recording.data.push(['.wait(', wait, ')']);
                 }
             }
             $scope.m.lastEvent = Date.now();
@@ -128,23 +174,22 @@ else{
             var evtype = ev.type;
             if (evtype === 'touchstart' || evtype === 'mousedown') {
                 mouseDown = true;
-                $scope.m.recording.data.push(['            ', '.touch(', touchesToString(touches), ')']);
+                $scope.m.recording.data.push(['.touch(', touchesToString(touches), ')']);
             }
             else if (evtype === 'touchmove'  || evtype === 'mousemove') {
                 if (mouseDown==true) {
-                    $scope.m.recording.data.push(['            ', '.move(', touchesToString(touches), ')']);
+                    $scope.m.recording.data.push(['.move(', touchesToString(touches), ')']);
                 }
             }
             else if (evtype === 'touchend' || evtype === 'touchcancel' || evtype === 'mouseup') {
                 mouseDown = false;
-                $scope.m.recording.data.push(['            ', '.release()']);
+                $scope.m.recording.data.push(['.release()']);
             }
             else if (evtype === 'click') {
-                $scope.m.recording.data.push(['            ', '.tap(', touchesToString(touches), ')']);
+                $scope.m.recording.data.push(['.tap(', touchesToString(touches), ')']);
             }
             else if (evtype === 'mousewheel' || evtype === 'scroll') {
                 $scope.m.recording.data.push([
-                    '            ',
                     '.wheel(',
                     touchesToString(touches),
                     ', { deltaX: ',
@@ -155,26 +200,7 @@ else{
                 ]);
             }
         }
-        function recordingToCode(name, records) {
-            var code = '';
-            var first = true;
-            for (var i = 0; i < records.length; i++) {
-                var line = records[i];
-                if (Array.isArray(line)) {
-                    if (first && line[1] === '.wait(') {
-                        first = false;
-                        continue;
-                    }
-                    first = false;
-                    code  += line.join('');
-                }
-                if (typeof(line) === 'string') {
-                    code  += line;
-                }
-                code += '\n';
-            }
-            return code;
-        }
+        
         function cancelEvent(event) {
             event.preventDefault();
         }
@@ -196,14 +222,21 @@ else{
                 $scope.m.isRecording = !$scope.m.isRecording;
                 $scope.m.btnMsg = $scope.m.isRecording ? 'Stop' : 'Record';
                 if (!$scope.m.isRecording) {
-                    $scope.m.recording.data.unshift('$scope.m.recording.fn = function(options, done) {');
-                    $scope.m.recording.data.push('            .then(done);');
-                    $scope.m.recording.data.push('        }');
-                    var code = recordingToCode($scope.m.recording.name, $scope.m.recording.data);
-                    /*jshint -W061 */
-                    eval(code); // creates fn
-                    Train.mixFunctionInto(paw, $scope.m.recording.name, $scope.m.recording.fn);
-                    $scope.fn.generatePawScript();
+                    $scope.m.recording.data.unshift('r.fn = function(options, done) {');
+                    $scope.m.recording.data.push('.then(done);');
+                    $scope.m.recording.data.push('}');
+
+                    
+                     
+                   
+                    chrome.runtime.sendMessage({
+                            action:'suggestUpdate',
+                            recordings: $scope.m.recordings
+                            },
+                            function(res){
+
+                            
+                            });                   
                 }
                 else {
                     // start recording, clear everything
@@ -216,13 +249,19 @@ else{
                     $scope.m.recordings.push($scope.m.recording);
                    
                     $scope.m.lastEvent = null;
-                    $scope.m.script = '/* Nothing here yet */';
-                    $scope.m.recording.data.push('            this');
+                    $scope.m.script = '';
+                    $scope.m.recording.data.push('this');
                 }
             },
-            playback: function(i) {
+            playback: function(i) {           
                 var r=$scope.m.recordings[i];
+                var code = recordingToCode(r.name,r.data);
+                   
+                    eval(code);
+                    Train.mixFunctionInto(paw, r.name,r.fn);                
+                
                 paw[r.name].call(paw);
+            
             },
             del: function(i) {
                 var r = $scope.m.recordings[i];
@@ -242,38 +281,70 @@ else{
                     var cmds = [];
                     var recording = null;
                     // Add the gestures object
-                    cmds.push(tab + 'var gestures = {');
+                    cmds.push('{');
                     var batchlen = $scope.m.recordings.length;
                     for (var k = 0; k < batchlen; ++k) {
                         recording = $scope.m.recordings[k];
-                        cmds.push(tab + tab + recording.name + ': ' + recording.fn.toString() + (k + 1 === batchlen ? '' : ','));}
-                    cmds.push(tab + '};');
-                    $scope.m.script = cmds.join('\n');}
-                else {$scope.m.script = tab + 'var gestures = {};';}
-                $scope.m.script = '/* paw script generated at ' + new Date() + ' */\n' + $scope.m.script;
+
+                                       
+                        var rFunc=recording.fn.toString();
+
+                        cmds.push('"'+recording.name +'"'+ ': ' + '"'+rFunc+'"' + (k + 1 === batchlen ? '' : ','));}
+                    cmds.push('}');
+                    $scope.m.script = cmds.join('');
+
+                    }
+                else {$scope.m.script = '{}';}
+                //$scope.m.script = '/* paw script generated at ' + new Date() + ' */\n' + $scope.m.script;
                 if ($scope.m.script) {
                     var data = {
                         filename: $scope.m.scriptName,
                         code: $scope.m.script
                     };
-                    /*
-                        SAVE OFF GENERATE SCRIPT HERE
-                    */
-                }
-                
+
+            }    
+            
+  
+
+            
+                                                              
+            },
+            generateSpecificPawScript: function(k) {
+         
+                    var cmds = [];
+                    var recording = null;
+                    // Add the gestures object
+                    //cmds.push('{');
+                   
+                   
+                        recording = $scope.m.recordings[k];
+
+                  
+                        var rFunc=recording.fn.toString();
+
+                        cmds.push('"'+rFunc+'"' + '');
+                    //cmds.push('}');
+                    return cmds.join('');
+                                                              
             }
 
         };
+    
         $scope.fn.generatePawScript();
+          
+       
+        
     });
     
     angular.element(document).ready(()=>{
         $($('.cfp-hotkeys-container').find('table')).hide();
         $($('.cfp-hotkeys-container').find('.cfp-hotkeys-close')).hide();
+        
+        
     });
 /*-------------------------------------------------------------------------------------*/    
 }
-  
+ 
 
     
     

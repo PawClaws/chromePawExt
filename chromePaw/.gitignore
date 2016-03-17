@@ -1,8 +1,8 @@
 .grunt/
 .idea/
 *.sublime-*
-*.json
-*.html
+bower.json
+index.html
 LICENSE 
 Gruntfile.js
 *.sh
