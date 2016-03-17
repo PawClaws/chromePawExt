@@ -69,14 +69,10 @@ function auth_(callback) {
 }
 
 function insertFile(fileName, fileData, callback, onerror) {
-
     var boundary = '01234567890123456789';
     var metaData = { 'name' : fileName };
     var token = gapi.auth.getToken();
-    if (!token) {
-        auth_(function(res) { console.log('auth attempt: ' + res); insertFIle(fileName, fileData, callback, onerror); });
-    } else {
-        
+    if (token) {
         var accessToken = token.access_token;
         var xhr = new XMLHttpRequest('POST', 'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart');
         xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
@@ -106,8 +102,9 @@ function insertFile(fileName, fileData, callback, onerror) {
         };
 
         xhr.send(request);
+    } else {
+        auth_(function(res) { console.log('auth attempt: ' + res); insertFIle(fileName, fileData, callback, onerror); });
     }
-
 }
 
 
