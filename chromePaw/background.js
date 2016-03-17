@@ -1,26 +1,23 @@
-var init=(paw)=>{
+var paw=new Paw();
+var recordings=[];
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     
   if(request.action=='requestUpdate'){
-      sendResponse({paw:paw.exportState()});
+      sendResponse({recordings:recordings});
    }
    else if(request.action=='suggestUpdate'){
-        paw=paw.importState(request.paw);
-        init(paw);
-        //var state=paw.exportState();
-        //console.log(state);
-        //sendResponse({paw:state});
+        recordings=request.recordings;
+        
+        sendResponse({recordings:recordings});
         
    }
     
-   })
+   });
    
     
   
- };
  
-init(new Paw());
 
 
 

@@ -55,27 +55,17 @@ else{
             })
         })
     
-            chrome.runtime.sendMessage({action:"requestUpdate"},function(res){
+        chrome.runtime.sendMessage({action:"requestUpdate"},function(res){
                 if(res){
-                    if(res.paw){
-                       
-                            var retPaw=paw.importState(res.paw);
-                            console.log(retPaw)
-                            var mPaw=Immutable.Seq(paw);
-                            var rPaw=Immutable.Seq(retPaw);
+                    if(res.recordings){
+                            $scope.m.recordings=res.recordings;
                             
-                            var mapIn=Immutable.Seq(rPaw.keys());
-                            mapIn=mapIn.filter(x=>!mPaw.includes(x))
-                            mapIn.forEach(x=>mPaw.get(x,rPaw.get(x)));
-                            paw=new Paw(mPaw.toJS());
-                            
-                            console.log(paw);
                             
                     }
                 }        
 
                 
-            });    
+            }); 
     
     
     
@@ -83,8 +73,8 @@ else{
     /***********************************************************************/     
 
 
-        
-        var tab = '    ';        
+        var sendUpdates=false;
+        var tab = '';        
         var mouseDown = false; // move to top
         var eventsToRecord = ['click','scroll','contextmenu','mouseup','mousedown','mousemove','mousewheel'];
         $scope.m = {
@@ -94,7 +84,8 @@ else{
             recordings: [],
             script: null,
             relative: true,
-            umd: 'None'
+            umd: 'None',
+            sendUpdates: false
         };
 function recordingToCode(name, records) {
             var code = '';
@@ -112,7 +103,7 @@ function recordingToCode(name, records) {
                 if (typeof(line) === 'string') {
                     code  += line;
                 }
-                code += '\n';
+                code += '';
             }
             return code;
         }        
@@ -168,7 +159,7 @@ function recordingToCode(name, records) {
                 if (prevRecord && prevRecord[1] === '.wait(') {
                     prevRecord[2] += wait;
                 } else {
-                    $scope.m.recording.data.push(['            ', '.wait(', wait, ')']);
+                    $scope.m.recording.data.push(['.wait(', wait, ')']);
                 }
             }
             $scope.m.lastEvent = Date.now();
@@ -178,23 +169,22 @@ function recordingToCode(name, records) {
             var evtype = ev.type;
             if (evtype === 'touchstart' || evtype === 'mousedown') {
                 mouseDown = true;
-                $scope.m.recording.data.push(['            ', '.touch(', touchesToString(touches), ')']);
+                $scope.m.recording.data.push(['.touch(', touchesToString(touches), ')']);
             }
             else if (evtype === 'touchmove'  || evtype === 'mousemove') {
                 if (mouseDown==true) {
-                    $scope.m.recording.data.push(['            ', '.move(', touchesToString(touches), ')']);
+                    $scope.m.recording.data.push(['.move(', touchesToString(touches), ')']);
                 }
             }
             else if (evtype === 'touchend' || evtype === 'touchcancel' || evtype === 'mouseup') {
                 mouseDown = false;
-                $scope.m.recording.data.push(['            ', '.release()']);
+                $scope.m.recording.data.push(['.release()']);
             }
             else if (evtype === 'click') {
-                $scope.m.recording.data.push(['            ', '.tap(', touchesToString(touches), ')']);
+                $scope.m.recording.data.push(['.tap(', touchesToString(touches), ')']);
             }
             else if (evtype === 'mousewheel' || evtype === 'scroll') {
                 $scope.m.recording.data.push([
-                    '            ',
                     '.wheel(',
                     touchesToString(touches),
                     ', { deltaX: ',
@@ -227,15 +217,21 @@ function recordingToCode(name, records) {
                 $scope.m.isRecording = !$scope.m.isRecording;
                 $scope.m.btnMsg = $scope.m.isRecording ? 'Stop' : 'Record';
                 if (!$scope.m.isRecording) {
-                    $scope.m.recording.data.unshift('$scope.m.recording.fn = function(options, done) {');
-                    $scope.m.recording.data.push('            .then(done);');
-                    $scope.m.recording.data.push('        }');
-                    var code = recordingToCode($scope.m.recording.name, $scope.m.recording.data);
-                    /*jshint -W061 */
-                    eval(code); // creates fn
-                    Train.mixFunctionInto(paw, $scope.m.recording.name, $scope.m.recording.fn);
-                    $scope.fn.generatePawScript();
+                    $scope.m.recording.data.unshift('r.fn = function(options, done) {');
+                    $scope.m.recording.data.push('.then(done);');
+                    $scope.m.recording.data.push('}');
+
+                    
+                     
                    
+                    chrome.runtime.sendMessage({
+                            action:'suggestUpdate',
+                            recordings: $scope.m.recordings
+                            },
+                            function(res){
+
+                            
+                            });                   
                 }
                 else {
                     // start recording, clear everything
@@ -248,12 +244,17 @@ function recordingToCode(name, records) {
                     $scope.m.recordings.push($scope.m.recording);
                    
                     $scope.m.lastEvent = null;
-                    $scope.m.script = '/* Nothing here yet */';
-                    $scope.m.recording.data.push('            this');
+                    $scope.m.script = '';
+                    $scope.m.recording.data.push('this');
                 }
             },
             playback: function(i) {           
                 var r=$scope.m.recordings[i];
+                    var code = recordingToCode(r.name,r.data);
+                   
+                    eval(code);
+                    Train.mixFunctionInto(paw, r.name,r.fn);                
+                
                 paw[r.name].call(paw);
             
             },
@@ -275,15 +276,21 @@ function recordingToCode(name, records) {
                     var cmds = [];
                     var recording = null;
                     // Add the gestures object
-                    cmds.push(tab + 'var gestures = {');
+                    cmds.push('{');
                     var batchlen = $scope.m.recordings.length;
                     for (var k = 0; k < batchlen; ++k) {
                         recording = $scope.m.recordings[k];
-                        cmds.push(tab + tab + recording.name + ': ' + recording.fn.toString() + (k + 1 === batchlen ? '' : ','));}
-                    cmds.push(tab + '};');
-                    $scope.m.script = cmds.join('\n');}
-                else {$scope.m.script = tab + 'var gestures = {};';}
-                $scope.m.script = '/* paw script generated at ' + new Date() + ' */\n' + $scope.m.script;
+
+                                       
+                        var rFunc=recording.fn.toString();
+
+                        cmds.push('"'+recording.name +'"'+ ': ' + '"'+rFunc+'"' + (k + 1 === batchlen ? '' : ','));}
+                    cmds.push('}');
+                    $scope.m.script = cmds.join('');
+
+                    }
+                else {$scope.m.script = '{}';}
+                //$scope.m.script = '/* paw script generated at ' + new Date() + ' */\n' + $scope.m.script;
                 if ($scope.m.script) {
                     var data = {
                         filename: $scope.m.scriptName,
@@ -291,25 +298,18 @@ function recordingToCode(name, records) {
                     };
 
             }    
+            
+  
 
             
-                              
-                            chrome.runtime.sendMessage({
-                            action:"suggestUpdate",
-                            paw: paw.exportState()
-                            },
-                            function(res){
-                                console.log(res);
-                                console.log('updated');
-                            
-                            }); 
-            
-                                
+                                                              
             }
 
         };
     
         $scope.fn.generatePawScript();
+          
+       
         
     });
     

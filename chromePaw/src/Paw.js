@@ -180,29 +180,13 @@
             }
         }
     };
+    
+    
 
-    Paw.prototype.exportState = function() {
-        var p=new Paw();
-        return p._copy(this);
-    }; 
+
     
     
     
-    Paw.prototype.importState=function(state) {
-        let self =this;          
-        let p=new Paw();
-        
-        Object.keys(this).forEach((e,i,a)=>{p[e]=self[e]});
-        Object.keys(state).forEach((e,i,a)=>{p[e]=state[e]});
-        
-        return p;
-        
-        
-        
-        //var z=x.mergeDeep(y);
-        //return z.toJS(); 
-              
-    };
 
     /*
      * Show the touches on screen.
