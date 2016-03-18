@@ -358,7 +358,7 @@ angular.module('record', ['cfp.hotkeys'])
                 $scope.fn.generatePawScript();
 
                 // download to filesystem, leaving in for the future
-                /*
+
                 var blob = new Blob([$scope.m.script], {
                     type: 'text/javascript'
                 });
@@ -368,7 +368,7 @@ angular.module('record', ['cfp.hotkeys'])
                 a.href = scriptURL;
                 a.target = '_blank';
                 a.click();
-                */
+
             },
             generatePawScript: function() {
                 if ($scope.m.recordings.length > 0) {

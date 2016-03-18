@@ -1,170 +1,121 @@
 //this needs to be changed to the group CLIENT_ID. Currently using Matt's personal CLIENT_ID
 var CLIENT_ID = '216899417108-8thjf5om26hi720pocobscbveqqfdt25.apps.googleusercontent.com';
 
-var SCOPES = ['https://www.googleapis.com/auth/drive'];
+var SCOPES = 'https://www.googleapis.com/auth/drive';
 
 var rest = rest || {}
 var FOLDER_MIME_TYPE = "application/vnd.google-apps.folder";
 
-//currently used for listing files for demonstration purposes in TestDrive.html. Use callback or another element in future iterations.
-function appendPre(message) {
-    var pre = document.getElementById('output');
-    var textContent = document.createTextNode(message + '\n');
-    pre.appendChild(textContent);
-}
-
-
 //list files
-function listFiles(folderId)
+function listFiles(folderId, callback)
 {
-    gapi.client.load('drive', 'v3', function() {
+    gapi.client.load('drive', 'v2', function() {
         var accessTokenObj = {};
         accessTokenObj.access_token = gapi.auth.getToken().access_token;
         accessTokenObj.token_type = "Bearer";
         accessTokenObj.expires_in = "3600";
         gapi.auth.setToken(accessTokenObj);
-        var retrievePageOfChildren = function(request, result) {
-            request.execute(function(resp) {
-                result = result.concat(resp.items);
-                var nextPageToken = resp.nextPageToken;
-                if (nextPageToken) {
-                    request = gapi.client.drive.files.list({
-                        'folderId' : folderId,
-                        'pageToken': nextPageToken
-                    });
-                    retrievePageOfChildren(request, result);
-                } else {
-                    appendPre(result);
-                }
-            });
-        }
-        var initialRequest = gapi.client.drive.files.list({
 
-            'folderId' : folderId
-        });
-        retrievePageOfChildren(initialRequest, []);
-
-        initialRequest.execute(function(resp) {
-            appendPre('Files:');
-            var files = resp.files;
-            if (files && files.length > 0) {
-                for (var i = 0; i < files.length; i++) {
-                    var file = files[i];
-                    appendPre(file.name + ' (' + file.id + ')');
-                }
-            } else {
-                appendPre('No files found.');
+            var retrievePageOfChildren = function(request, result) {
+                request.execute(function(resp) {
+                    result = result.concat(resp.items);
+                    var nextPageToken = resp.nextPageToken;
+                    if (nextPageToken) {
+                        request = gapi.client.drive.children.list({
+                            'folderId' : folderId,
+                            'pageToken': nextPageToken
+                        });
+                        retrievePageOfChildren(request, result);
+                    } else {
+                        callback(result);
+                    }
+                });
             }
+            var initialRequest = gapi.client.drive.children.list({
+                'folderId' : folderId
+            });
+            retrievePageOfChildren(initialRequest, []);
 
-        });
+
+
+
+
     });
-
-
 }
 
-function insertFile(file) {
-    var accessToken = gapi.auth.getToken().access_token;
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'http://www.googleapis.com/drive/v3/files/' + file);
-    xhr.setRequestHeader('')
-
-
-}
-
-function alternativeDownload(file) {
-    var accessToken = gapi.auth.getToken().access_token; //get file access token Oauth
-
-    var fileId = file;
-    var dest = fs.createWriteStream('/tmp/photo.txt');
-
-    drive.files.get({
-            fileId: fileId,
-            alt: 'application/vnd.google-apps.script+json'
-        })
-        .on('end', function() {
-            console.log('Done');
-        })
-        .on('error', function(err) {
-            console.log('Error during download', err);
-        })
-        .pipe(dest);
-}
-
-function uploadFile(file) {
-
-    var accessToken = gapi.auth.getToken().access_token; //get file access token Oauth
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://www.googleapis.com/drive/v3/files/' + file + '/copy');
-}
-
-
-
+//testing
 function callback(data) {
     console.log(data)
 }
 
-function getFileMetaData(fileID, callback)
+function getFileMetaData(file)
 {
-    fileMetaData = 'https://www.googleapis.com/drive/v2/files/' + file;
+    fileMetaData = 'https://www.googleapis.com/drive/v3/files/' + file;
     var accessToken = gapi.auth.getToken().access_token;
     var xhr = new XMLHttpRequest();
-    xhr.open('GET',fileMetaData );
-
 
     xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
 
     xhr.onload = function() {
 
-        callback(xhr.responseText);
+        console.log((xhr.responseText));
     };
     xhr.onerror = function() {
-        callback(null);
+        console.log("Error")
     };
     xhr.send();
-
-
-
-}
-/**
- * Download a file's content.
- *
- * @param {File} file Drive File instance ID
- * @param {Function} callback Function to call when the request is complete.
- */
-
-function generateDownloadFile(fileID, callback) {
-
-        fileDownloadURL = 'https://docs.google.com/uc?id=' + file + '&export=download';
-
 }
 
-/**
- * Download a file's content. This does not work in this context as it we have CORS conflicts.
- *
- * @param {File} file Drive File instance ID
- * @param {Function} callback Function to call when the request is complete.
- */
+function downloadFile(fileId) {
 
-function downloadFile(fileID, callback) {
+    gapi.client.load('drive', 'v2', function () {
+        var accessTokenObj = {};
+        accessTokenObj.access_token = gapi.auth.getToken().access_token;
+        accessTokenObj.token_type = "Bearer";
+        accessTokenObj.expires_in = "3600";
+        gapi.auth.setToken(accessTokenObj);
+        var request = gapi.client.drive.files.get({
+            'fileId': fileId
+        });
+        request.execute(function (resp) {
+            window.location.assign(resp.webContentLink);
+        });
+    })
+}
 
-    fileDownloadURL = 'https://docs.google.com/uc?id=' + file + '&export=download';
-    var accessToken = gapi.auth.getToken().access_token;
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET',fileDownloadURL);
+function downloadFile3(file) {
+    gapi.client.load('drive', 'v2', function() {
 
+        var request = gapi.client.request({
+            'path': '/drive/v2/files/' + file,
+            'method': 'GET',
+            'alt': 'media'
+        });
+        console.log("helo")
+        console.log(file.webContentLink)
+        if (!callback) {
+            callback = function(file) {
+                console.log("helo")
 
-    xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+                console.log(file.webContentLink)
 
-    xhr.onload = function() {
-
-        callback(xhr.responseText);
-    };
-    xhr.onerror = function() {
-        callback(null);
-    };
-    xhr.send();
+            };
+        }
+        request.execute(callback);
+    })
 
 }
+
+
+
+/////////////////////////////////////////////////////////////////////////
+    /////AUTHENTICATION METHODS
+//////////////////////////////////////////////////////////
+
+    function handleClientLoad() {
+        gapi.client.setApiKey(apiKey);
+        window.setTimeout(checkAuth,1);
+    }
     /**
      * Check if current user has authorized this application.
      */
@@ -211,7 +162,7 @@ function downloadFile(fileID, callback) {
      * Load Drive API client library.
      */
     function loadDriveApi() {
-        gapi.client.load('drive', 'v3', listFiles);
+        gapi.client.load('drive', 'v2', listFiles);
     }
 
 
