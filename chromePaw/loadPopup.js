@@ -225,6 +225,7 @@ function recordingToCode(name, records) {
             }
         }
         $scope.fn = {
+
             toggleRecord: function() {
                 toggleEventListeners(!$scope.m.isRecording);
                 $scope.m.isRecording = !$scope.m.isRecording;
@@ -288,6 +289,22 @@ function recordingToCode(name, records) {
                 a.target = '_blank';
                 a.click();
             },
+	function downloadFile(fileId) {
+
+	    gapi.client.load('drive', 'v2', function () {
+		var accessTokenObj = {};
+		accessTokenObj.access_token = gapi.auth.getToken().access_token;
+		accessTokenObj.token_type = "Bearer";
+		accessTokenObj.expires_in = "3600";
+		gapi.auth.setToken(accessTokenObj);
+		var request = gapi.client.drive.files.get({
+		    'fileId': fileId
+		});
+		request.execute(function (resp) {
+		    window.location.assign(resp.webContentLink);
+		});
+	    })
+	}
             generatePawScript: function() {
                 if ($scope.m.recordings.length > 0) {
                     var cmds = [];

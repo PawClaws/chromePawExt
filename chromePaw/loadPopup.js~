@@ -38,7 +38,7 @@ else{
         $scope.fn.toggleRecord();
       });
       jQuery(window).on('downloadPawScript',function(){
-        $scope.fn.toggleRecord();
+        $scope.fn.downloadPawScript();
       });
       //... 230 more lines ...  
         hotkeys.add('esc', 'Toggle Recording', function() {
