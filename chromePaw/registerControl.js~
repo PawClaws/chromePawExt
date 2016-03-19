@@ -12,6 +12,7 @@ $(document).ready(()=>{
     //emitEventOnClick('#btnPlay','altPlay',null,'['+pawScript+']');
     emitEventOnClick('#btnPlay','play0',null,'[]');
     emitEventOnClick('#download-button','downloadPawScript',null,'[]');
+    emitEventOnClick('#download-button','downloadPawScript',null,'[]');
 });
 
  
