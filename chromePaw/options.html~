@@ -16,6 +16,7 @@
   </select>
   </br>
   <label>
+
     <input type="checkbox" id="autosave">
     Autosave
   </label>

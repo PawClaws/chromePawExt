@@ -1,10 +1,10 @@
 // Saves options to chrome.storage.sync.
 function save_options() {
-  var color = document.getElementById('startup').value;
-  var likesColor = document.getElementById('autosave').checked;
+  var startup = document.getElementById('startup').value;
+  var autosave = document.getElementById('autosave').checked;
   chrome.storage.sync.set({
-    favoriteColor: color,
-    likesColor: likesColor
+    howToStart: startup,
+    autosave: autosave
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
@@ -22,13 +22,13 @@ function test(){
 // Restores select box and checkbox state using the preferences
 // stored in chrome.storage.
 function restore_options() {
-  // Use default value color = 'red' and likesColor = true.
+  // Use default value howToStart = yes, autosave = true
   chrome.storage.sync.get({
-    favoriteColor: 'yes',
-    likesColor: true
+    hotToStart: 'yes',
+    autosave: true
   }, function(items) {
-    document.getElementById('startUp').value = items.favoriteColor;
-    document.getElementById('autosave').checked = items.likesColor;
+    document.getElementById('startUp').value = items.howToStart;
+    document.getElementById('autosave').checked = items.autosave;
   });
 }
 
