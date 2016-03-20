@@ -192,7 +192,7 @@ else{
         }
         $scope.fn = {
 // Saves options to chrome.storage
-	function save_options() {	
+	/*function save_options() {	
   	    var color = document.getElementById('color').value;
   	    var likesColor = document.getElementById('like').checked;
 	    chrome.storage.sync.set({
@@ -224,7 +224,7 @@ else{
 	document.addEventListener('DOMContentLoaded', restore_options);
 	document.getElementById('save').addEventListener('click',
 	    save_options);
-	//
+	*/
             toggleRecord: function() {
                 toggleEventListeners(!$scope.m.isRecording);
                 $scope.m.isRecording = !$scope.m.isRecording;

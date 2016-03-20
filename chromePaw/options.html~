@@ -14,7 +14,7 @@
    <option value="yes">Yes</option>
    <option value="no">No</option>
   </select>
-
+  </br>
   <label>
     <input type="checkbox" id="autosave">
     Autosave
