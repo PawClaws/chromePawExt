@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Test Extension Options</title>
+	<script src="options.js"></script>
+  <style>
+    body: { padding: 10px; }
+  </style>
+</head>
+
+<body>
+  Load on Start up:
+  <select id="startup">
+   <option value="yes">Yes</option>
+   <option value="no">No</option>
+  </select>
+  </br>
+  <label>
+
+    <input type="checkbox" id="autosave">
+    Autosave
+  </label>
+
+  <div id="status"></div>
+  <button id="save" onclick="save_options()">Save</button>
+
+  <script src="options.js"></script>
+</body>
+</html>

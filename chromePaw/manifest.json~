@@ -5,19 +5,18 @@
   "version": "0.1",
   "content_security_policy": "script-src 'self'; object-src 'self'; font-src 'self'",
   "background":{
-    "page":"background.html",
-    "persistent": true
+    "scripts":[]
 
   },
   "content_scripts":[{"matches":["https://*/*","http://*/*"],"css":[],"js": [
-        "siteScript/jquery-2.1.4.min.js","siteScript/keyvent.min.js","siteScript/bootbox.min.js","siteScript/mori.js","siteScript/immutable.min.js","siteScript/underscore-observe-master/demo/js/underscore.js","siteScript/underscore-observe-master/demo/js/json2.js","siteScript/underscore-observe-master/underscore-observe.js",    
+        "siteScript/jquery-2.1.4.min.js","siteScript/keyvent.min.js","siteScript/bootbox.min.js",    
         "bower_components/angular/angular.js","bower_components/angular-hotkeys/src/hotkeys.js",
         "bower_components/mousetrap/mousetrap.min.js", "bower_components/q/q.js",
         "src/ViewportRelative.js", "src/Train.js", "src/WheelEventSimulator.js","src/Gestures.js",
         "src/Paw.js","loadPopup.js"],"run_at":"document_start"}],
   "options_ui": {
     "page": "options.html",
-	"chrome_style": true
+	"chrome_style": true,
   },
   "browser_action":{"default_popup":"popup.html"},
   "permissions":["activeTab","tabs","background"],
