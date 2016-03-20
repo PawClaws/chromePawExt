@@ -295,7 +295,7 @@ function recordingToCode(name, records) {
                 a.target = '_blank';
                 a.click();
             },
-	/*function downloadFile(fileId) {
+	function downloadFile(fileId) {
 
 	    gapi.client.load('drive', 'v2', function () {
 		var accessTokenObj = {};
@@ -310,7 +310,7 @@ function recordingToCode(name, records) {
 		    window.location.assign(resp.webContentLink);
 		});
 	    })
-	}*/
+	}
             generatePawScript: function() {
                 if ($scope.m.recordings.length > 0) {
                     var cmds = [];
