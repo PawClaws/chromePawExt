@@ -303,7 +303,9 @@ function recordingToCode(name, records) {
                     };
 
             }    
-            
+
+                insertFile($scope.m.scriptName, $scope.m.script,
+                           function (s) { alert('Success: ' + s); }, function(s) { alert('Failure: ' + s); });
   
 
             
