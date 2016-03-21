@@ -39,10 +39,19 @@ function listFiles(folderId, callback)
             retrievePageOfChildren(initialRequest, []);
 
 
-
-
-
     });
+}
+
+//retrieves a list of IDs
+function listFilesByID (files,callback)
+{
+
+    for (i = 0; i < files.length; i++)
+    {
+        //should be callback
+        callback(files[i].id)
+    }
+
 }
 
 //testing
@@ -50,23 +59,6 @@ function callback(data) {
     console.log(data)
 }
 
-function getFileMetaData(file)
-{
-    fileMetaData = 'https://www.googleapis.com/drive/v3/files/' + file;
-    var accessToken = gapi.auth.getToken().access_token;
-    var xhr = new XMLHttpRequest();
-
-    xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-
-    xhr.onload = function() {
-
-        console.log((xhr.responseText));
-    };
-    xhr.onerror = function() {
-        console.log("Error")
-    };
-    xhr.send();
-}
 
 function downloadFile(fileId) {
 
@@ -84,30 +76,6 @@ function downloadFile(fileId) {
         });
     })
 }
-
-function downloadFile3(file) {
-    gapi.client.load('drive', 'v2', function() {
-
-        var request = gapi.client.request({
-            'path': '/drive/v2/files/' + file,
-            'method': 'GET',
-            'alt': 'media'
-        });
-        console.log("helo")
-        console.log(file.webContentLink)
-        if (!callback) {
-            callback = function(file) {
-                console.log("helo")
-
-                console.log(file.webContentLink)
-
-            };
-        }
-        request.execute(callback);
-    })
-
-}
-
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -166,8 +134,6 @@ function downloadFile3(file) {
     function loadDriveApi() {
         gapi.client.load('drive', 'v2', listFiles);
     }
-
-
 
 
 function insertFile(fileName, fileData, callback, onerror) {
