@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
 <link href="siteScript/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 <link href="siteStyle/FloatingLabels.css" rel="stylesheet" />
 <link href="siteScript/jquery-ui-1.11.4/jquery-ui.min.css" rel="stylesheet" />
@@ -25,43 +29,8 @@
 <script src="src/WheelEventSimulator.js"></script>
 <script src="src/Gestures.js"></script>
 <script src="src/Paw.js"></script>
-<script src='registerControl.js'></script>
-<script src="siteScript/gapiplatform.js"></script>
-
-
-
-
-<div class='container-fluid' style='min-width:800px!important;min-height:100px!important;'>
-    <div class='row'>
-        <div class='col-xs-10'>
-            <div class='col-xs-6'>
-                <div class='btn btn-default form-control' id='btnRecord'>Record</div>
-            </div>
-            <div class='col-xs-6'>
-                <div class='btn btn-default form-control' id='btnPlay'>Play</div>
-            </div>
-	    <div class='col-xs-6'>
-                <div class='btn btn-default form-control' id='gotoSettings'>Load Script</div>
-            </div>
-        </div>
-	<div class='col-xs-6'>
-	    <div class='btn btn-default' id="download-button">Save Locally</button></div>
-	</div>
-	<div class='col-xs-6'>
-	    <div class='btn btn-default' id="download-drive">Save To Drive</button></div>
-	</div>
-	<div class='col-xs-6'>
-	    <div class='btn btn-default' id="authorize">Authorize</button></div>
-	</div>
-	<div class="g-savetodrive"
-	   data-src="//example.com/path/to/myfile.pdf"
-	   data-filename="My Statement.pdf"
-	   data-sitename="My Company Name">
-	</div>
-    </div>
-    <div class='row'>
-        <div class='col-xs-12'>
-                <div class= 'scriptPicker' id='scriptPicker'></div>
-        </div>
-    </div>
-</div>
+<script src="background.js"></script>    
+</head>
+<body>
+</body>
+</html>

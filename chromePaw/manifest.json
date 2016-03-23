@@ -7,7 +7,6 @@
   "background":{
     "page":"background.html",
     "persistent": true
-
   },
   "content_scripts":[{"matches":["https://*/*","http://*/*"],"css":[],"js": [
         "siteScript/jquery-2.1.4.min.js","siteScript/keyvent.min.js","siteScript/bootbox.min.js","siteScript/mori.js","siteScript/immutable.min.js","siteScript/underscore-observe-master/demo/js/underscore.js","siteScript/underscore-observe-master/demo/js/json2.js","siteScript/underscore-observe-master/underscore-observe.js",    
@@ -19,8 +18,14 @@
     "page": "options.html",
 	"chrome_style": true
   },
+  "oauth2": {
+   "client_id": "411725052282-n37nc7lhq0fuc99fbffim4m2896a9o9k.apps.googleusercontent.com",
+   "scopes": [
+	"https://www.googleapis.com/auth/drive"
+   ]
+},
   "browser_action":{"default_popup":"popup.html"},
-  "permissions":["activeTab","tabs","background"],
+  "permissions":["activeTab","tabs","background","identity"],
   "web_accessible_resources":[]
 }
 

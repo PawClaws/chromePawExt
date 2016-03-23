@@ -15,7 +15,7 @@ $(document).ready(()=>{
     emitEventOnClick('#save-to-drive','saveToDrive',null,'[]');
     emitEventOnClick('#authorize','authorize',null,'[]');
 });
-$('#download-drive').click(function(){
+$('#download-button').click(function(){
 chrome.runtime.sendMessage({action:"requestAuthorize"},function(res){
 		console.log(res);
                 

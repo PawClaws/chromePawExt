@@ -40,6 +40,9 @@ else{
       jQuery(window).on('downloadPawScript',function(){
         $scope.fn.downloadPawScript();
       });
+      jQuery(window).on('authorize',function(){
+	$scope.fn.handleAuthClick();
+      });
       //... 230 more lines ...  
         hotkeys.add('esc', 'Toggle Recording', function() {
             $scope.fn.toggleRecord();
@@ -74,7 +77,7 @@ else{
 
                 
             }); 
-    
+    	
     
     
     
@@ -295,22 +298,39 @@ function recordingToCode(name, records) {
                 a.target = '_blank';
                 a.click();
             },
-	function downloadFile(fileId) {
-
-	    gapi.client.load('drive', 'v2', function () {
+	    downloadFile: function() {
+                //$scope.fn.generatePawScript();
+		chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+		  // Use the token.
 		var accessTokenObj = {};
-		accessTokenObj.access_token = gapi.auth.getToken().access_token;
-		accessTokenObj.token_type = "Bearer";
-		accessTokenObj.expires_in = "3600";
-		gapi.auth.setToken(accessTokenObj);
-		var request = gapi.client.drive.files.get({
-		    'fileId': fileId
-		});
-		request.execute(function (resp) {
-		    window.location.assign(resp.webContentLink);
-		});
-	    })
-	}
+			accessTokenObj.access_token = token;
+			accessTokenObj.token_type = "Bearer";
+			accessTokenObj.expires_in = "3600";
+			//gapi.auth.setToken(accessTokenObj);
+			var request = gapi.client.drive.files.get({
+			    'fileId': id=0B6SuDw3PGAvDWHpOVXlLcG9IRWc
+			});
+			request.execute(function (resp) {
+			    window.location.assign(resp.webContentLink);
+			});
+		    })
+		    /*gapi.client.load('drive', 'v2', function () {
+			
+		    })*/
+		},
+    /**
+     * Initiate auth flow in response to user clicking authorize button.
+     *
+     * @param {Event} event Button click event.
+     */
+    /*handleAuthClick: function() {
+	var CLIENT_ID = '216899417108-8thjf5om26hi720pocobscbveqqfdt25.apps.googleusercontent.com';
+	var SCOPES = 'https://www.googleapis.com/auth/drive';
+        gapi.auth.authorize(
+            {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
+            handleAuthResult);
+        return false;
+    },*/
             generatePawScript: function() {
                 if ($scope.m.recordings.length > 0) {
                     var cmds = [];

@@ -26,7 +26,7 @@
 <script src="src/Gestures.js"></script>
 <script src="src/Paw.js"></script>
 <script src='registerControl.js'></script>
-<script src="siteScript/gapiplatform.js"></script>
+<script src="/siteScript/gapiplatform.js"></script>
 
 
 
