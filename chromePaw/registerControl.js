@@ -11,9 +11,6 @@ $(document).ready(()=>{
     emitEventOnClick('#btnRecord','toggleRecord',null,'[]');
     //emitEventOnClick('#btnPlay','altPlay',null,'['+pawScript+']');
     emitEventOnClick('#btnPlay','play0',null,'[]');
-    emitEventOnClick('#download-button','downloadPawScript',null,'[]');
-    emitEventOnClick('#save-to-drive','saveToDrive',null,'[]');
-    emitEventOnClick('#authorize','authorize',null,'[]');
 
 $('#download-drive').click(function(){
     console.log("Attempting Download");

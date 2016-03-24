@@ -77,11 +77,13 @@ else{
 
 
             });
-        chrome.runtime.sendMessage({action:"download-drive"},function(res){
+        /*chrome.runtime.sendMessage({action:"download-drive"},function(token){
+		
+        });
 
-            });
-
-
+        chrome.runtime.sendMessage({action:"upload-drive", data: $scope.m.script}, function(token){
+		$scope.fn.generatePawScript();
+        });*/
 
     /***********************************************************************/
 
