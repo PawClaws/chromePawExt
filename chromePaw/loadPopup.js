@@ -40,8 +40,13 @@ else{
       jQuery(window).on('downloadPawScript',function(){
         $scope.fn.downloadPawScript();
       });
-      jQuery(window).on('authorize',function(){
-	$scope.fn.handleAuthClick();
+      jQuery(window).on('requestSave',function() {
+            console.log("load popup");
+          $scope.fn.generatePawScript();
+          chrome.runtime.sendMessage({action: "save", data: $scope.m.script},function(res){
+
+          });
+
       });
       //... 230 more lines ...
         hotkeys.add('esc', 'Toggle Recording', function() {
@@ -298,6 +303,7 @@ function recordingToCode(name, records) {
                 a.target = '_blank';
                 a.click();
             },
+
 
     /**
      * Initiate auth flow in response to user clicking authorize button.
