@@ -25,13 +25,17 @@ chrome.runtime.onMessage.addListener(
         sendResponse({recordings:recordings});
 
    }
-      else if(request.action=='requestAuthorize'){
+      else if(request.action=='upload-drive'){
       chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
           console.log(token);
-          downloadFile('0B3BcNfReJqCZVjZnTXBBWi1kbms',token);
+          downloadFile('0B6SuDw3PGAvDWHpOVXlLcG9IRWc',token);
       });
 
-
+   else if(request.action=='download-drive'){
+      chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
+          console.log(token);
+          downloadFile('0B6SuDw3PGAvDWHpOVXlLcG9IRWc',token);
+      });
 
    }
    });

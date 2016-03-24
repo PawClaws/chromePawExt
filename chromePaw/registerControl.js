@@ -14,14 +14,18 @@ $(document).ready(()=>{
     emitEventOnClick('#download-button','downloadPawScript',null,'[]');
     emitEventOnClick('#save-to-drive','saveToDrive',null,'[]');
     emitEventOnClick('#authorize','authorize',null,'[]');
+
 $('#download-drive').click(function(){
     console.log("Attempting Download");
-    chrome.runtime.sendMessage({action:"requestAuthorize"},function(res){
-
-
-
+    chrome.runtime.sendMessage({action:"download-drive"},function(res){
     });
 });
+$('#upload-drive').click(function(){
+    console.log("Attempting upload");
+    chrome.runtime.sendMessage({action:"upload-drive"},function(res){
+    });
+});
+
 });
 
 

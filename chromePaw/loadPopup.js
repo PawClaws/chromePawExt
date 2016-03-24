@@ -77,7 +77,9 @@ else{
 
 
             });
+        chrome.runtime.sendMessage({action:"download-drive"},function(res){
 
+            });
 
 
 
@@ -298,20 +300,7 @@ function recordingToCode(name, records) {
                 a.target = '_blank';
                 a.click();
             },
-
-    /**
-     * Initiate auth flow in response to user clicking authorize button.
-     *
-     * @param {Event} event Button click event.
-     */
-    /*handleAuthClick: function() {
-	var CLIENT_ID = '216899417108-8thjf5om26hi720pocobscbveqqfdt25.apps.googleusercontent.com';
-	var SCOPES = 'https://www.googleapis.com/auth/drive';
-        gapi.auth.authorize(
-            {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
-            handleAuthResult);
-        return false;
-    },*/
+	    
             generatePawScript: function() {
                 if ($scope.m.recordings.length > 0) {
                     var cmds = [];
