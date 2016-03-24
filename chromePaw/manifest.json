@@ -3,13 +3,14 @@
   "name": "PawClaws_TestPackage",
   "description": "PawClaws",
   "version": "0.1",
-  "content_security_policy": "script-src 'self'; object-src 'self'; font-src 'self'",
+  "content_security_policy": "script-src 'self' https://apis.google.com; object-src 'self';  font-src 'self'",
+    "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgyp1GfiKbH8F+aqf0/MtNTgtaRg0grTC7evVom24Ls3jS6kIZXBVdN6pdEkru0qKpodFZI7kGe6OUXWE69NsY1xpCqU93KJUyWqm/sljggd//dAlCPj3NC+enyMdU1h/+0Pa93pC46OVmjQ8BjhEA5Wsxd1JX6iQbRgtBfF7cIFZCfL3MKLVgt7xr0gzKheNPJj+9/1RgHuCbHrLaQU+PdMa5M17Gi0RJKeYbhHIG3v5ovneY57O2EgWbwvIcQtEwD9oYa+SlhEGMR+B0RfTskbu+8OzGiCRuvlyptup06vg3901GA4pYmuV8pBMgyirYoN8LhB01+wnE1hjFTejBQIDAQAB",
   "background":{
     "page":"background.html",
     "persistent": true
   },
   "content_scripts":[{"matches":["https://*/*","http://*/*"],"css":[],"js": [
-        "siteScript/jquery-2.1.4.min.js","siteScript/keyvent.min.js","siteScript/bootbox.min.js","siteScript/mori.js","siteScript/immutable.min.js","siteScript/underscore-observe-master/demo/js/underscore.js","siteScript/underscore-observe-master/demo/js/json2.js","siteScript/underscore-observe-master/underscore-observe.js",    
+        "siteScript/jquery-2.1.4.min.js","siteScript/keyvent.min.js","siteScript/bootbox.min.js","siteScript/mori.js","siteScript/immutable.min.js","siteScript/underscore-observe-master/demo/js/underscore.js","siteScript/underscore-observe-master/demo/js/json2.js","siteScript/underscore-observe-master/underscore-observe.js",
         "bower_components/angular/angular.js","bower_components/angular-hotkeys/src/hotkeys.js",
         "bower_components/mousetrap/mousetrap.min.js", "bower_components/q/q.js",
         "src/ViewportRelative.js", "src/Train.js", "src/WheelEventSimulator.js","src/Gestures.js",
@@ -19,13 +20,13 @@
 	"chrome_style": true
   },
   "oauth2": {
-   "client_id": "411725052282-n37nc7lhq0fuc99fbffim4m2896a9o9k.apps.googleusercontent.com",
+   "client_id": "411725052282-v0a0j0vb7k44m8e195vnjef3m593b819.apps.googleusercontent.com",
    "scopes": [
 	"https://www.googleapis.com/auth/drive"
    ]
 },
   "browser_action":{"default_popup":"popup.html"},
-  "permissions":["activeTab","tabs","background","identity"],
+  "permissions":["activeTab","tabs","background","identity","https://accounts.google.com/","https://www.googleapis.com/"],
   "web_accessible_resources":[]
 }
 

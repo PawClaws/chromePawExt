@@ -6,6 +6,102 @@ var SCOPES = 'https://www.googleapis.com/auth/drive';
 var rest = rest || {}
 var FOLDER_MIME_TYPE = "application/vnd.google-apps.folder";
 
+function insertFile(fileData,callback) {
+    const boundary = '-------314159265358979323846';
+    const delimiter = "\r\n--" + boundary + "\r\n";
+    const close_delim = "\r\n--" + boundary + "--";
+
+    var reader = new FileReader();
+    reader.readAsBinaryString(fileData);
+    reader.onload = function(e) {
+        var contentType = fileData.type || 'application/octet-stream';
+        var metadata = {
+            'title': fileData.fileName,
+            'mimeType': contentType
+        };
+
+        var base64Data = btoa(reader.result);
+        var multipartRequestBody =
+            delimiter +
+            'Content-Type: application/json\r\n\r\n' +
+            JSON.stringify(metadata) +
+            delimiter +
+            'Content-Type: ' + contentType + '\r\n' +
+            'Content-Transfer-Encoding: base64\r\n' +
+            '\r\n' +
+            base64Data +
+            close_delim;
+
+        var accessToken = token;
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://www.googleapis.com/upload/drive/v3/files?uploadType=media');
+        xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+
+        xhr.onload = function() {
+            callback(xhr.responseText);
+        };
+
+        xhr.send();
+
+        var request = gapi.client.request({
+
+            'path': '/upload/drive/v2/files',
+            'method': 'POST',
+            'params': {'uploadType': 'multipart'},
+            'headers': {
+                'Content-Type': 'multipart/mixed; boundary="' + boundary + '"'
+            },
+            'body': multipartRequestBody});
+        if (!callback) {
+            callback = function(file) {
+                console.log(file)
+            };
+        }
+        request.execute(callback);
+    }
+}
+function insertFile2(fileData,callback) {
+    const boundary = '-------314159265358979323846';
+    const delimiter = "\r\n--" + boundary + "\r\n";
+    const close_delim = "\r\n--" + boundary + "--";
+
+    var reader = new FileReader();
+    reader.readAsBinaryString(fileData);
+    reader.onload = function(e) {
+        var contentType = fileData.type || 'application/octet-stream';
+        var metadata = {
+            'title': fileData.fileName,
+            'mimeType': contentType
+        };
+
+        var base64Data = btoa(reader.result);
+        var multipartRequestBody =
+            delimiter +
+            'Content-Type: application/json\r\n\r\n' +
+            JSON.stringify(metadata) +
+            delimiter +
+            'Content-Type: ' + contentType + '\r\n' +
+            'Content-Transfer-Encoding: base64\r\n' +
+            '\r\n' +
+            base64Data +
+            close_delim;
+
+        var request = gapi.client.request({
+            'path': '/upload/drive/v2/files',
+            'method': 'POST',
+            'params': {'uploadType': 'multipart'},
+            'headers': {
+                'Content-Type': 'multipart/mixed; boundary="' + boundary + '"'
+            },
+            'body': multipartRequestBody});
+        if (!callback) {
+            callback = function(file) {
+                console.log(file)
+            };
+        }
+        request.execute(callback);
+    }
+}
 //list files
 function listFiles(folderId, callback)
 {
@@ -65,44 +161,51 @@ function getFileMetaData(file)
     };
     xhr.send();
 }
+function downloadFile2(file, token) {
 
-function downloadFile(fileId) {
+        var accessToken = token;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://www.googleapis.com/drive/v2/files/'+file + "?alt=media");
+        xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+        xhr.responseType = 'blob';
+        xhr.onload = function(e) {
 
-    gapi.client.load('drive', 'v2', function () {
-        var accessTokenObj = {};
-        accessTokenObj.access_token = gapi.auth.getToken().access_token;
-        accessTokenObj.token_type = "Bearer";
-        accessTokenObj.expires_in = "3600";
-        gapi.auth.setToken(accessTokenObj);
-        var request = gapi.client.drive.files.get({
-            'fileId': fileId
-        });
-        request.execute(function (resp) {
-            window.location.assign(resp.webContentLink);
-        });
-    })
+            var blob = new Blob([this.response], {
+                type: 'text/javascript'
+            });
+            var scriptURL = window.URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.download = "script.txt";
+            a.href = scriptURL;
+            a.target = '_blank';
+            a.click();
+        };
+
+        xhr.send();
+
 }
+function downloadFile(fileId,token) {
+        console.log("attempting download???");
+        gapi.client.load('drive', 'v2', function () {
+            var accessTokenObj = {};
+            accessTokenObj.access_token = token;
+            accessTokenObj.token_type = "Bearer";
+            accessTokenObj.expires_in = "3600";
+            gapi.auth.setToken(accessTokenObj);
+            var request = gapi.client.drive.files.get({
+                'fileId': fileId
+            });
+            request.execute(function (resp) {
 
-function downloadFile3(file) {
-    gapi.client.load('drive', 'v2', function() {
 
-        var request = gapi.client.request({
-            'path': '/drive/v2/files/' + file,
-            'method': 'GET',
-            'alt': 'media'
-        });
-        console.log("helo")
-        console.log(file.webContentLink)
-        if (!callback) {
-            callback = function(file) {
-                console.log("helo")
+                var a = document.createElement('a');
+                a.download = "script.txt";
+                a.href = resp.webContentLink;
+                a.target = '_blank';
+                a.click();
+            });
+        })
 
-                console.log(file.webContentLink)
-
-            };
-        }
-        request.execute(callback);
-    })
 
 }
 

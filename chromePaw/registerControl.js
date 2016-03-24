@@ -6,7 +6,7 @@ var emitEventOnClick=(selector,event,callback,functionParams)=>{
             });
 }
 // Chrome.tabs.background. windows to get context of background.js
-$(document).ready(()=>{ 
+$(document).ready(()=>{
     pawScript='function(done){this.touch("50% 20%").wait(40).drag("50% 40%").wait(40).drag("50% 20%").wait(40).release().then(done);}';
     emitEventOnClick('#btnRecord','toggleRecord',null,'[]');
     //emitEventOnClick('#btnPlay','altPlay',null,'['+pawScript+']');
@@ -14,15 +14,18 @@ $(document).ready(()=>{
     emitEventOnClick('#download-button','downloadPawScript',null,'[]');
     emitEventOnClick('#save-to-drive','saveToDrive',null,'[]');
     emitEventOnClick('#authorize','authorize',null,'[]');
-});
 $('#download-drive').click(function(){
-chrome.runtime.sendMessage({action:"requestAuthorize"},function(res){
-		console.log(res);
-                
-            });
+    console.log("Attempting Download");
+    chrome.runtime.sendMessage({action:"requestAuthorize"},function(res){
+
+
+
+    });
 });
- 
-                
+});
+
+
+
 
 
 
