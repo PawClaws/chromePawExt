@@ -5,18 +5,26 @@ var emitEventOnClick=(selector,event,callback,functionParams)=>{
                 },callback);
             });
 }
-
-$(document).ready(()=>{ 
+// Chrome.tabs.background. windows to get context of background.js
+$(document).ready(()=>{
     pawScript='function(done){this.touch("50% 20%").wait(40).drag("50% 40%").wait(40).drag("50% 20%").wait(40).release().then(done);}';
     emitEventOnClick('#btnRecord','toggleRecord',null,'[]');
     //emitEventOnClick('#btnPlay','altPlay',null,'['+pawScript+']');
     emitEventOnClick('#btnPlay','play0',null,'[]');
     emitEventOnClick('#download-button','downloadPawScript',null,'[]');
-    //emitEventOnClick('#download-button','downloadPawScript',null,'[]');
+
+    emitEventOnClick('#authorize','authorize',null,'[]');
+    emitEventOnClick('#save-to-drive','requestSave',null,'[]');
+$('#download-drive').click(function(){
+
+    chrome.runtime.sendMessage({action:"requestDownload"},function(res){
+
+    });
+});
 });
 
- 
-                
+
+
 
 
 

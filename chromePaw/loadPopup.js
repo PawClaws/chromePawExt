@@ -1,50 +1,58 @@
 /*-------VIEW-INJECTION------------------------*/
-    //Set document as angular app and control    
-var paw=new Paw();  
+    //Set document as angular app and control
+var paw=new Paw();
     var selector=$('[ng-app]')
-    
+
     if(selector.length>0){
-       
+
         alert('PawClaws Says: Recording is not currently available on pages built with Angular js. Playback is available manually via the altPlay event');
-        
+
         jQuery(window).on('altPlay',(ev,script)=>{
             var altPlay=new Paw();
             Train.mixFunctionInto(altPlay,'altPlayScript', script);
             altPlay['altPlayScript'].call(altPlay);
         });
-        
+
     }
 else{
 
     $('html').attr("ng-app", "record");
     $('html').attr("ng-controller", "recordCtrl");
-    
-   
+
+
 /*------Controller Instantiation----------------------------------*/
-    var app=angular.module('record', ['cfp.hotkeys']);   
+    var app=angular.module('record', ['cfp.hotkeys']);
     app.config(['$compileProvider', function($compileProvider){
         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|blob):/);}]);
     app.controller('recordCtrl', function($scope, $http, hotkeys) {
-             
-      
+
+
       /*CUSTOM EVENTS*******************************************/
 
-             
+
       jQuery(window).on('scriptPicker',function(){
         $scope.fn.toggleRecord();
-      });      
-      
+      });
+
       jQuery(window).on('toggleRecord',function(){
         $scope.fn.toggleRecord();
       });
       jQuery(window).on('downloadPawScript',function(){
         $scope.fn.downloadPawScript();
       });
-      //... 230 more lines ...  
+      jQuery(window).on('requestSave',function() {
+            console.log("load popup");
+          $scope.fn.generatePawScript();
+          chrome.runtime.sendMessage({action: "save", data: $scope.m.script},function(res){
+
+          });
+
+      });
+      //... 230 more lines ...
         hotkeys.add('esc', 'Toggle Recording', function() {
             $scope.fn.toggleRecord();
         });
-       
+
       [0,1,2,3,4,5,6,7,8,9].forEach((e,i,a)=>{
           jQuery(window).on('play'+e.toString(),function(){
             if($scope.m.recordings[e]){
@@ -62,27 +70,27 @@ else{
                 }
           })
         })
-        
+
         chrome.runtime.sendMessage({action:"requestUpdate"},function(res){
                 if(res){
                     if(res.recordings){
                             $scope.m.recordings=res.recordings;
-                            
-                            
-                    }
-                }        
 
-                
-            }); 
-    
-    
-    
-    
-    /***********************************************************************/     
+
+                    }
+                }
+
+
+            });
+
+
+
+
+    /***********************************************************************/
 
 
         var sendUpdates=false;
-        var tab = '';        
+        var tab = '';
         var mouseDown = false; // move to top
         var eventsToRecord = ['click','scroll','contextmenu','mouseup','mousedown','mousemove','mousewheel'];
         $scope.m = {
@@ -114,7 +122,7 @@ function recordingToCode(name, records) {
                 code += '';
             }
             return code;
-        }        
+        }
         function copyTouches(ev) {
             var result = [];
             var touches = ev.touches;
@@ -203,7 +211,7 @@ function recordingToCode(name, records) {
                 ]);
             }
         }
-        
+
         function cancelEvent(event) {
             event.preventDefault();
         }
@@ -230,17 +238,17 @@ function recordingToCode(name, records) {
                     $scope.m.recording.data.push('.then(done);');
                     $scope.m.recording.data.push('}');
 
-                    
-                     
-                   
+
+
+
                     chrome.runtime.sendMessage({
                             action:'suggestUpdate',
                             recordings: $scope.m.recordings
                             },
                             function(res){
 
-                            
-                            });                   
+
+                            });
                 }
                 else {
                     // start recording, clear everything
@@ -251,21 +259,21 @@ function recordingToCode(name, records) {
                         fn: null
                     };
                     $scope.m.recordings.push($scope.m.recording);
-                   
+
                     $scope.m.lastEvent = null;
                     $scope.m.script = '';
                     $scope.m.recording.data.push('this');
                 }
             },
-            playback: function(i) {           
+            playback: function(i) {
                 var r=$scope.m.recordings[i];
                 var code = recordingToCode(r.name,r.data);
-                   
+
                     eval(code);
-                    Train.mixFunctionInto(paw, r.name,r.fn);                
-                
+                    Train.mixFunctionInto(paw, r.name,r.fn);
+
                 paw[r.name].call(paw);
-            
+
             },
             del: function(i) {
                 var r = $scope.m.recordings[i];
@@ -284,7 +292,7 @@ function recordingToCode(name, records) {
                 $scope.fn.generatePawScript();
 
                 // download to filesystem, leaving in for the future
-                
+
                 var blob = new Blob([$scope.m.script], {
                     type: 'text/javascript'
                 });
@@ -295,22 +303,21 @@ function recordingToCode(name, records) {
                 a.target = '_blank';
                 a.click();
             },
-	/*function downloadFile(fileId) {
 
-	    gapi.client.load('drive', 'v2', function () {
-		var accessTokenObj = {};
-		accessTokenObj.access_token = gapi.auth.getToken().access_token;
-		accessTokenObj.token_type = "Bearer";
-		accessTokenObj.expires_in = "3600";
-		gapi.auth.setToken(accessTokenObj);
-		var request = gapi.client.drive.files.get({
-		    'fileId': fileId
-		});
-		request.execute(function (resp) {
-		    window.location.assign(resp.webContentLink);
-		});
-	    })
-	}*/
+
+    /**
+     * Initiate auth flow in response to user clicking authorize button.
+     *
+     * @param {Event} event Button click event.
+     */
+    /*handleAuthClick: function() {
+	var CLIENT_ID = '216899417108-8thjf5om26hi720pocobscbveqqfdt25.apps.googleusercontent.com';
+	var SCOPES = 'https://www.googleapis.com/auth/drive';
+        gapi.auth.authorize(
+            {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
+            handleAuthResult);
+        return false;
+    },*/
             generatePawScript: function() {
                 if ($scope.m.recordings.length > 0) {
                     var cmds = [];
@@ -321,7 +328,7 @@ function recordingToCode(name, records) {
                     for (var k = 0; k < batchlen; ++k) {
                         recording = $scope.m.recordings[k];
 
-                                       
+
                         var rFunc=recording.fn.toString();
 
                         cmds.push('"'+recording.name +'"'+ ': ' + '"'+rFunc+'"' + (k + 1 === batchlen ? '' : ','));}
@@ -337,52 +344,52 @@ function recordingToCode(name, records) {
                         code: $scope.m.script
                     };
 
-            }    
-            
-  
+            }
 
-            
-                                                              
+
+
+
+
             },
             generateSpecificPawScript: function(k) {
-         
+
                     var cmds = [];
                     var recording = null;
                     // Add the gestures object
                     //cmds.push('{');
-                   
-                   
+
+
                         recording = $scope.m.recordings[k];
 
-                  
+
                         var rFunc=recording.fn.toString();
 
                         cmds.push('"'+rFunc+'"' + '');
                     //cmds.push('}');
                     return cmds.join('');
-                                                              
+
             }
 
         };
-    
+
         $scope.fn.generatePawScript();
-          
-       
-        
+
+
+
     });
-    
+
     angular.element(document).ready(()=>{
         $($('.cfp-hotkeys-container').find('table')).hide();
         $($('.cfp-hotkeys-container').find('.cfp-hotkeys-close')).hide();
-        
-        
-    });
-/*-------------------------------------------------------------------------------------*/    
-}
- 
 
-    
-    
+
+    });
+/*-------------------------------------------------------------------------------------*/
+}
+
+
+
+
 
 
 
