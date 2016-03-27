@@ -23,7 +23,7 @@ function createFolder(folderName, token, callback) {
     request.execute(callback);
 }
 
-function insertFile(fileData,token,callback) {
+function insertFile_(folderId,fileData,token,callback) {
     const boundary = '-------314159265358979323846';
     const delimiter = "\r\n--" + boundary + "\r\n";
     const close_delim = "\r\n--" + boundary + "--";
@@ -36,6 +36,10 @@ function insertFile(fileData,token,callback) {
             'title': fileData.fileName,
             'mimeType': contentType
         };
+
+        if (folderId) {
+            metadata['parents'] = [folderId];
+        }
 
         var base64Data = btoa(reader.result);
         var multipartRequestBody =
@@ -71,6 +75,15 @@ function insertFile(fileData,token,callback) {
         request.execute(callback);
     }
 }
+
+function insertFile(fileData, token, callback) {
+    insertFile_(false, fileData, token, callback);
+}
+
+function insertFileIntoFolder(folderId, fileData, token, callback) {
+    insertFile_(folderId, fileData, token, callback);
+}
+
 //list files
 function listFiles(folderId, callback)
 {
