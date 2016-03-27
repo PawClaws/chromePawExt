@@ -6,6 +6,23 @@ var SCOPES = 'https://www.googleapis.com/auth/drive';
 var rest = rest || {}
 var FOLDER_MIME_TYPE = "application/vnd.google-apps.folder";
 
+function createFolder(folderName, token, callback) {
+    var request = gapi.client.request({
+        'path': '/drive/v2/files/',
+        'method': 'POST',
+        'headers': {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token,             
+        },
+        'body':{
+            "title" : folderName,
+            "mimeType" : FOLDER_MIME_TYPE,
+        }
+    });
+
+    request.execute(callback);
+}
+
 function insertFile(fileData,token,callback) {
     const boundary = '-------314159265358979323846';
     const delimiter = "\r\n--" + boundary + "\r\n";
