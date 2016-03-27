@@ -85,7 +85,7 @@ function insertFileIntoFolder(folderId, fileData, token, callback) {
 }
 
 //list files
-function listFiles(folderId, callback)
+function listFiles_(query, folderId, callback)
 {
     gapi.client.load('drive', 'v2', function() {
         var accessTokenObj = {};
@@ -99,19 +99,25 @@ function listFiles(folderId, callback)
                     result = result.concat(resp.items);
                     var nextPageToken = resp.nextPageToken;
                     if (nextPageToken) {
-                        request = gapi.client.drive.children.list({
-                            'folderId' : folderId,
-                            'pageToken': nextPageToken
-                        });
+                        var ireq = {'pageToken': nextPageToken};
+                        if (folderId) { ireq['folderId'] = folderId; }
+                        request = gapi.client.drive.children.list(ireq);
                         retrievePageOfChildren(request, result);
                     } else {
                         callback(result);
                     }
                 });
             }
-            var initialRequest = gapi.client.drive.children.list({
-                'folderId' : folderId
-            });
+            var req = {};
+            if (folderId) {
+                req['folderId'] = folderId;
+            }
+
+            if (query) {
+                req['q'] = query;
+            }
+        
+            var initialRequest = gapi.client.drive.children.list(req);
             retrievePageOfChildren(initialRequest, []);
 
 
@@ -119,6 +125,15 @@ function listFiles(folderId, callback)
 
 
     });
+}
+
+function listFiles(folderId, callback) {
+    return listFiles_(false, folderId, callback);
+}
+
+function listFoldersByName(name, callback) {
+    var query = 'mimeType = '+ FOLDER_MIME_TYPE + ' and name contains ' + name;
+    return listFiles_(query, false, callback);
 }
 
 //testing
