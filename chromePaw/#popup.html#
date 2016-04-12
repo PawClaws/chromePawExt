@@ -41,12 +41,12 @@
                 <div class='btn btn-default form-control' id='btnPlay'>Play</div>
             </div>
 	    <div class='col-xs-6'>
-              <div class='btn btn-default form-control' id='gotoSettings'>Load Script</div>
+              <div class='btn btn-default form-control' id='load-script'>Load Script</div>
 	      <div>
-<label for="file-upload" class="custom-file-upload">
-    Custom Upload
-</label>
-<input id="file-upload" type="file"/>
+		<label for="file-upload" class="custom-file-upload">
+		  Load Script
+		</label>
+		<input id="file-upload" type="file"/>
 	      </div>
 	      
             </div>
