@@ -234,6 +234,27 @@ function downloadFile(fileId,token) {
 
 }
 
+
+//get a paw script from drive (or file)
+function loadPawScriptDrive(fileId,token) {
+    gapi.client.load('drive', 'v2', function () {
+        var accessTokenObj = {};
+        accessTokenObj.access_token = token;
+        accessTokenObj.token_type = "Bearer";
+        accessTokenObj.expires_in = "3600";
+        gapi.auth.setToken(accessTokenObj);
+        var request = gapi.client.drive.files.get({
+            'fileId': fileId
+        });
+
+        request.execute(function (resp) {
+
+            callback(resp);
+        });
+
+
+    })
+}
 function createFolder(folderName, token, callback) {
     var FOLDER_MIME_TYPE = "application/vnd.google-apps.folder";
     var request = gapi.client.request({
