@@ -234,6 +234,7 @@ function downloadFile(fileId,token) {
 
 }
 
+
 function createFolder(folderName, token, callback) {
     var FOLDER_MIME_TYPE = "application/vnd.google-apps.folder";
     var request = gapi.client.request({
