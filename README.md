@@ -19,8 +19,11 @@ Load as any other with developer mode enabled.
 ## Testing
 
 $ npm install http-proxy --sav-dev
+
 $ npm grunt test
 
+## Credit 
 
+Workiva for letting us work with their code: https://github.com/Workiva/paw
 
 
