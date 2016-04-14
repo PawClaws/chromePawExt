@@ -8,17 +8,19 @@ Used for automated testing for web content on the Chrome browser using a Chrome 
 
 # Install on Linux
 
-`# navigate to directory you've downloaded PawClaws to`
-
+```
+# navigate to directory you've downloaded PawClaws to
 $ npm install
+```
+## Install using bower
 
-# Install using Bower
+```bash
+# install bower if you haven't already
+$ npm install -g bower
 
-> `# install bower if you haven't already
-`$ npm install -g bower
-
-> `# install this package
-`$ bower install git@github.com:Workiva/paw.git
+# install this package
+$ bower install git@github.com:Workiva/paw.git
+```
 
 ## Install Chrome Extension
 
@@ -32,6 +34,6 @@ $ npm grunt test
 
 ## Credit 
 
-Workiva for letting us work with their code: https://github.com/Workiva/paw
+Workiva for letting us work with their [code](https://github.com/Workiva/paw)
 
 
