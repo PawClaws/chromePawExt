@@ -15,10 +15,10 @@ $ npm install
 # Install using Bower
 
 > `# install bower if you haven't already
-$ npm install -g bower`
+`$ npm install -g bower
 
 > `# install this package
-$ bower install git@github.com:Workiva/paw.git`
+`$ bower install git@github.com:Workiva/paw.git
 
 ## Install Chrome Extension
 
