@@ -285,3 +285,14 @@ function moveFile(fileId, oldFolderId, newFolderId, callback) {
 
     request.execute(callback);
 }
+
+// Copy the file to a new folder, keeping previous folder
+function copyFile(fileId, newFolderId, callback) {
+    var body = {'addParents': [newFolderId]};
+    var request = gapi.client.drive.files.patch({
+        'fileId': fileId,
+        'resource': body
+    });
+
+    request.execute(callback);
+}
