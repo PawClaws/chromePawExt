@@ -263,3 +263,90 @@ function listFoldersByName(name, callback) {
     var query = 'mimeType = '+ FOLDER_MIME_TYPE + ' and name contains ' + name;
     return listFiles_(query, false, callback);
 }
+
+function renameFile(fileId, token, newName, callback) {
+    var accessTokenObj = {};
+    accessTokenObj.access_token = token;
+    accessTokenObj.token_type = "Bearer";
+    accessTokenObj.expires_in = "3600";
+    gapi.auth.setToken(accessTokenObj);
+    var body = {'title': newName};
+    var request = gapi.client.drive.files.patch({
+        'fileId': fileId,
+        'resource': body
+    });
+
+    request.execute(callback);
+}
+
+// Put the file in a new folder, disregarding previous folder
+function moveFile(fileId, token, oldFolderId, newFolderId, callback) {
+    var accessTokenObj = {};
+    accessTokenObj.access_token = token;
+    accessTokenObj.token_type = "Bearer";
+    accessTokenObj.expires_in = "3600";
+    gapi.auth.setToken(accessTokenObj);
+    var body = {'removeParents': [oldFolderId],
+                'addParents': [newFolderId]};
+    var request = gapi.client.drive.files.patch({
+        'fileId': fileId,
+        'resource': body
+    });
+
+    request.execute(callback);
+}
+
+// Copy the file to a new folder, keeping previous folder
+function copyFile(fileId, token, newFolderId, callback) {
+    var accessTokenObj = {};
+    accessTokenObj.access_token = token;
+    accessTokenObj.token_type = "Bearer";
+    accessTokenObj.expires_in = "3600";
+    gapi.auth.setToken(accessTokenObj);
+    var body = {'addParents': [newFolderId]};
+    var request = gapi.client.drive.files.patch({
+        'fileId': fileId,
+        'resource': body
+    });
+
+    request.execute(callback);
+}
+
+function trashFile(fileId, token, callback) {
+    var accessTokenObj = {};
+    accessTokenObj.access_token = token;
+    accessTokenObj.token_type = "Bearer";
+    accessTokenObj.expires_in = "3600";
+    gapi.auth.setToken(accessTokenObj);
+    var request = gapi.client.drive.files.trash({
+        'fileId': fileId
+    });
+
+    request.execute(callback);
+}
+
+function untrashFile(fileId, token, callback) {
+    var accessTokenObj = {};
+    accessTokenObj.access_token = token;
+    accessTokenObj.token_type = "Bearer";
+    accessTokenObj.expires_in = "3600";
+    gapi.auth.setToken(accessTokenObj);
+    var request = gapi.client.drive.files.untrash({
+        'fileId': fileId
+    });
+
+    request.execute(callback);
+}
+
+function deleteFile(fileId, token, callback) {
+    var accessTokenObj = {};
+    accessTokenObj.access_token = token;
+    accessTokenObj.token_type = "Bearer";
+    accessTokenObj.expires_in = "3600";
+    gapi.auth.setToken(accessTokenObj);
+    var request = gapi.client.drive.files.delete({
+        'fileId': fileId
+    });
+
+    request.execute(callback);
+}
