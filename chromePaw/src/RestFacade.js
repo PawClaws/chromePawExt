@@ -264,7 +264,12 @@ function listFoldersByName(name, callback) {
     return listFiles_(query, false, callback);
 }
 
-function renameFile(fileId, newName, callback) {
+function renameFile(fileId, token, newName, callback) {
+    var accessTokenObj = {};
+    accessTokenObj.access_token = token;
+    accessTokenObj.token_type = "Bearer";
+    accessTokenObj.expires_in = "3600";
+    gapi.auth.setToken(accessTokenObj);
     var body = {'title': newName};
     var request = gapi.client.drive.files.patch({
         'fileId': fileId,
@@ -275,7 +280,12 @@ function renameFile(fileId, newName, callback) {
 }
 
 // Put the file in a new folder, disregarding previous folder
-function moveFile(fileId, oldFolderId, newFolderId, callback) {
+function moveFile(fileId, token, oldFolderId, newFolderId, callback) {
+    var accessTokenObj = {};
+    accessTokenObj.access_token = token;
+    accessTokenObj.token_type = "Bearer";
+    accessTokenObj.expires_in = "3600";
+    gapi.auth.setToken(accessTokenObj);
     var body = {'removeParents': [oldFolderId],
                 'addParents': [newFolderId]};
     var request = gapi.client.drive.files.patch({
@@ -287,7 +297,12 @@ function moveFile(fileId, oldFolderId, newFolderId, callback) {
 }
 
 // Copy the file to a new folder, keeping previous folder
-function copyFile(fileId, newFolderId, callback) {
+function copyFile(fileId, token, newFolderId, callback) {
+    var accessTokenObj = {};
+    accessTokenObj.access_token = token;
+    accessTokenObj.token_type = "Bearer";
+    accessTokenObj.expires_in = "3600";
+    gapi.auth.setToken(accessTokenObj);
     var body = {'addParents': [newFolderId]};
     var request = gapi.client.drive.files.patch({
         'fileId': fileId,
