@@ -263,3 +263,13 @@ function listFoldersByName(name, callback) {
     var query = 'mimeType = '+ FOLDER_MIME_TYPE + ' and name contains ' + name;
     return listFiles_(query, false, callback);
 }
+
+function renameFile(fileId, newName, callback) {
+    var body = {'title': newName};
+    var request = gapi.client.drive.files.patch({
+        'fileId': fileId,
+        'resource': body
+    });
+
+    request.execute(callback);
+}
