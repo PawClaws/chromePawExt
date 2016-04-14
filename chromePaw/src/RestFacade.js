@@ -273,3 +273,15 @@ function renameFile(fileId, newName, callback) {
 
     request.execute(callback);
 }
+
+// Put the file in a new folder, disregarding previous folder
+function moveFile(fileId, oldFolderId, newFolderId, callback) {
+    var body = {'removeParents': [oldFolderId],
+                'addParents': [newFolderId]};
+    var request = gapi.client.drive.files.patch({
+        'fileId': fileId,
+        'resource': body
+    });
+
+    request.execute(callback);
+}
