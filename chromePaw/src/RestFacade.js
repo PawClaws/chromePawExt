@@ -107,11 +107,11 @@ function insertFileIntoFolder(folderId, fileData, token, callback) {
     insertFile_(folderId, fileData, token, callback);
 }
 //list files
-function listFiles_(query, folderId, callback)
+function listFiles_(query, folderId, token, callback)
 {
     gapi.client.load('drive', 'v2', function() {
         var accessTokenObj = {};
-        accessTokenObj.access_token = gapi.auth.getToken().access_token;
+        accessTokenObj.access_token = token;
         accessTokenObj.token_type = "Bearer";
         accessTokenObj.expires_in = "3600";
         gapi.auth.setToken(accessTokenObj);
@@ -150,11 +150,12 @@ function listFiles_(query, folderId, callback)
 }
 
 //list files
-function listFilesRoot(folderId, callback)
+function listFilesRoot(folderId,token)
 {
     gapi.client.load('drive', 'v2', function() {
+        console.log("running");
         var accessTokenObj = {};
-        accessTokenObj.access_token = gapi.auth.getToken().access_token;
+        accessTokenObj.access_token = token;
         accessTokenObj.token_type = "Bearer";
         accessTokenObj.expires_in = "3600";
         gapi.auth.setToken(accessTokenObj);
@@ -170,6 +171,8 @@ function listFilesRoot(folderId, callback)
                         });
                         retrievePageOfChildren(request, result);
                     } else {
+                        console.log(result);
+
                         callback(result);
                     }
                 });
@@ -189,24 +192,6 @@ function listFilesRoot(folderId, callback)
 //testing
 function callback(data) {
     console.log(data)
-}
-
-function getFileMetaData(file)
-{
-    fileMetaData = 'https://www.googleapis.com/drive/v3/files/' + file;
-    var accessToken = gapi.auth.getToken().access_token;
-    var xhr = new XMLHttpRequest();
-
-    xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-
-    xhr.onload = function() {
-
-        console.log((xhr.responseText));
-    };
-    xhr.onerror = function() {
-        console.log("Error")
-    };
-    xhr.send();
 }
 
 function downloadFile(fileId,token) {
@@ -255,11 +240,11 @@ function createFolder(folderName, token, callback) {
 }
 
 
-function listFiles(folderId, callback) {
-    return listFiles_(false, folderId, callback);
+function listFiles(folderId, token, callback) {
+    return listFiles_(false, folderId, token, callback);
 }
 
-function listFoldersByName(name, callback) {
+function listFoldersByName(name, token, callback) {
     var query = 'mimeType = '+ FOLDER_MIME_TYPE + ' and name contains ' + name;
     return listFiles_(query, false, callback);
 }
