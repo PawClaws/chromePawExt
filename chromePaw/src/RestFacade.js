@@ -1,12 +1,12 @@
 
-function insertFileRoot(fileData,token) {
+function insertFileRoot(fileData,token,callback) {
     const boundary = '-------314159265358979323846';
     const delimiter = "\r\n--" + boundary + "\r\n";
     const close_delim = "\r\n--" + boundary + "--";
 
     var reader = new FileReader();
     reader.readAsBinaryString(fileData);
-    reader.onload = function(e) {
+    reader.onload = function (e) {
         var contentType = fileData.type || 'application/octet-stream';
         var metadata = {
             'title': fileData.fileName,
@@ -36,13 +36,25 @@ function insertFileRoot(fileData,token) {
             'headers': {
                 'Content-Type': 'multipart/mixed; boundary="' + boundary + '"'
             },
-            'body': multipartRequestBody});
+            'body': multipartRequestBody
+        });
         if (!callback) {
-            callback = function(file) {
+            callback = function (file) {
                 console.log(file)
             };
         }
-        request.execute(callback);
+        request.execute(function (resp) {
+            if (resp.error.code == 401 && resp.error.data[0].reason == "authError") {
+                callback(resp.error);
+            }
+            else if (resp.error.code == 403 && resp.error.data[0].reason == "notFound") {
+                callback("File Not Found.");
+            }
+
+            else if (resp.error) {
+                callback("An error occurred. Please try again.");
+            }
+        });
     }
 }
 
@@ -52,11 +64,25 @@ function insertFile_(folderId,fileData,token,callback) {
     const close_delim = "\r\n--" + boundary + "--";
 
     var reader = new FileReader();
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if(dd<10) {
+        dd='0'+dd
+    }
+
+    if(mm<10) {
+        mm='0'+mm
+    }
+
+    today = "PawScript - " + mm+dd+yyyy;
     reader.readAsBinaryString(fileData);
     reader.onload = function(e) {
         var contentType = fileData.type || 'application/octet-stream';
         var metadata = {
-            'title': fileData.fileName,
+            'title': today,
             'mimeType': contentType
         };
 
@@ -95,9 +121,55 @@ function insertFile_(folderId,fileData,token,callback) {
                 console.log(file)
             };
         }
-        request.execute(callback);
+        request.execute(function(resp) {
+            if (resp && resp.error) {
+                if (resp.error.code == 401 && resp.error.data[0].reason == "authError") {
+                    callback(resp.error);
+                }
+                else if (resp.error.code == 403 && resp.error.data[0].reason == "notFound") {
+                    callback("File Not Found.");
+                }
+
+            }
+            //copy to another folder.
+            else if (resp)
+            {
+                callback(resp.id);
+                copyFileIntoFolder(folderId,resp.id, token,callback);
+            }
+
+        });
     }
 }
+
+function copyFileIntoFolder(folderId, fileId,token,callback) {
+    gapi.client.load('drive', 'v2', function() {
+    var body = {'id': folderId};
+    var accessTokenObj = {};
+    accessTokenObj.access_token = token;
+    accessTokenObj.token_type = "Bearer";
+    accessTokenObj.expires_in = "3600";
+    gapi.auth.setToken(accessTokenObj);
+    var request = gapi.client.drive.parents.insert({
+        'fileId': fileId,
+        'resource': body
+    });
+    request.execute(function(resp) {
+
+        if (resp.error.code == 401 && resp.error.data[0].reason == "authError") {
+            callback(resp.error);
+        }
+        else if (resp.error.code == 403 && resp.error.data[0].reason == "notFound") {
+            callback("File Not Found.");
+        }
+
+        else if (resp.error) {
+            callback("An error occurred. Please try again.");
+        }
+    });
+});
+}
+
 
 function insertFile(fileData, token, callback) {
     insertFile_(false, fileData, token, callback);
@@ -150,11 +222,11 @@ function listFiles_(query, folderId, callback)
 }
 
 //list files
-function listFilesRoot(folderId, callback)
+function listFilesRoot(folderId, token, callback)
 {
     gapi.client.load('drive', 'v2', function() {
         var accessTokenObj = {};
-        accessTokenObj.access_token = gapi.auth.getToken().access_token;
+        accessTokenObj.access_token = token;
         accessTokenObj.token_type = "Bearer";
         accessTokenObj.expires_in = "3600";
         gapi.auth.setToken(accessTokenObj);
@@ -191,26 +263,8 @@ function callback(data) {
     console.log(data)
 }
 
-function getFileMetaData(file)
-{
-    fileMetaData = 'https://www.googleapis.com/drive/v3/files/' + file;
-    var accessToken = gapi.auth.getToken().access_token;
-    var xhr = new XMLHttpRequest();
+function downloadFile(fileId,token,callback) {
 
-    xhr.setRequestHeader('Authorization', 'Bearer ' + accessToken);
-
-    xhr.onload = function() {
-
-        console.log((xhr.responseText));
-    };
-    xhr.onerror = function() {
-        console.log("Error")
-    };
-    xhr.send();
-}
-
-function downloadFile(fileId,token) {
-        console.log("attempting download???");
         gapi.client.load('drive', 'v2', function () {
             var accessTokenObj = {};
             accessTokenObj.access_token = token;
@@ -221,13 +275,24 @@ function downloadFile(fileId,token) {
                 'fileId': fileId
             });
             request.execute(function (resp) {
+                if (resp.error.code == 401 && resp.error.data[0].reason == "authError") {
+                    callback(resp.error);
+                }
+                else if (resp.error.code == 403 && resp.error.data[0].reason == "notFound") {
+                    callback("File Not Found.");
+                }
 
+                else if (resp.error) {
+                    callback("An error occurred. Please try again.");
+                }
 
                 var a = document.createElement('a');
                 a.download = "script.txt";
                 a.href = resp.webContentLink;
                 a.target = '_blank';
                 a.click();
+
+
             });
         })
 

@@ -41,7 +41,7 @@ else{
         $scope.fn.downloadPawScript();
       });
       jQuery(window).on('requestSave',function() {
-            console.log("load popup");
+            
           $scope.fn.generatePawScript();
           chrome.runtime.sendMessage({action: "save", data: $scope.m.script},function(res){
 

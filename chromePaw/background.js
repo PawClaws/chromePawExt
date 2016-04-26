@@ -30,7 +30,7 @@ chrome.runtime.onMessage.addListener(
           var blob = new Blob([request.data], {
               type: 'text/javascript'
           });
-          insertFile(blob,token);      });
+          insertFileIntoFolder('0B3BcNfReJqCZWU1nZlZNQnktQlU',blob,token,null);      });
 
 
 
