@@ -44,15 +44,25 @@ function insertFileRoot(fileData,token,callback) {
             };
         }
         request.execute(function (resp) {
-            if (resp.error.code == 401 && resp.error.data[0].reason == "authError") {
-                callback(resp.error);
-            }
-            else if (resp.error.code == 403 && resp.error.data[0].reason == "notFound") {
-                callback("File Not Found.");
-            }
+            if (resp && resp.error)
+            {
+                if (resp.error.code == 401 && resp.error.data[0].reason == "authError") {
+                    callback(resp.error);
+                }
+                else if (resp.error.code == 403) {
+                    callback("You do not have permission to view this file.");
+                }
 
-            else if (resp.error) {
-                callback("An error occurred. Please try again.");
+                else if (resp.error.code == 404 && resp.error.data[0].reason == "notFound") {
+                    callback("File not found.");
+
+                }
+                else {
+                    callback("An error occurred. Please try again.");
+                }
+
+
+
             }
         });
     }
@@ -122,20 +132,31 @@ function insertFile_(folderId,fileData,token,callback) {
             };
         }
         request.execute(function(resp) {
-            if (resp && resp.error) {
+            if (resp && resp.error)
+            {
                 if (resp.error.code == 401 && resp.error.data[0].reason == "authError") {
                     callback(resp.error);
                 }
-                else if (resp.error.code == 403 && resp.error.data[0].reason == "notFound") {
-                    callback("File Not Found.");
+                else if (resp.error.code == 403) {
+                    callback("You do not have permission to view this file.");
+                }
+
+                else if (resp.error.code == 404 && resp.error.data[0].reason == "notFound") {
+                    callback("File not found.");
+
+                }
+                else {
+                    callback("An error occurred. Please try again.");
                 }
 
             }
             //copy to another folder.
             else if (resp)
             {
-                callback(resp.id);
+                callback(resp);
+
                 copyFileIntoFolder(folderId,resp.id, token,callback);
+
             }
 
         });
@@ -155,16 +176,17 @@ function copyFileIntoFolder(folderId, fileId,token,callback) {
         'resource': body
     });
     request.execute(function(resp) {
+        if (resp && resp.error) {
+            if (resp.error.code == 401 && resp.error.data[0].reason == "authError") {
+                callback(resp.error);
+            }
+            else if (resp.error.code == 403 && resp.error.data[0].reason == "notFound") {
+                callback("File Not Found.");
+            }
 
-        if (resp.error.code == 401 && resp.error.data[0].reason == "authError") {
-            callback(resp.error);
-        }
-        else if (resp.error.code == 403 && resp.error.data[0].reason == "notFound") {
-            callback("File Not Found.");
-        }
-
-        else if (resp.error) {
-            callback("An error occurred. Please try again.");
+            else if (resp.error) {
+                callback("An error occurred. Please try again.");
+            }
         }
     });
 });
@@ -279,16 +301,31 @@ function downloadFile(fileId,token,callback) {
                 'fileId': fileId
             });
             request.execute(function (resp) {
-                if (resp.error.code == 401 && resp.error.data[0].reason == "authError") {
-                    callback(resp.error);
-                }
-                else if (resp.error.code == 403 && resp.error.data[0].reason == "notFound") {
-                    callback("File Not Found.");
+                if (resp && resp.error)
+                {
+                    if (resp.error.code == 401 && resp.error.data[0].reason == "authError") {
+                        callback(resp.error);
+                    }
+                    else if (resp.error.code == 403) {
+                        callback("You do not have permission to view this file.");
+                    }
+
+                    else if (resp.error.code == 404 && resp.error.data[0].reason == "notFound") {
+                        callback("File not found.");
+
+                    }
+                    else {
+                        callback("An error occurred. Please try again.");
+                    }
+
+
+
                 }
 
-                else if (resp.error) {
-                    callback("An error occurred. Please try again.");
+                else {
+                    callback("An error occurred.");
                 }
+
 
                 var a = document.createElement('a');
                 a.download = "script.txt";

@@ -3,7 +3,7 @@
 *.sublime-*
 bower.json
 index.html
-LICENSE 
+LICENSE
 Gruntfile.js
 *.sh
 README.*
@@ -16,7 +16,7 @@ out/
 build/
 test/
 examples/
-
+.idea/
 
 _*.runner.html
 npm_debug.log
