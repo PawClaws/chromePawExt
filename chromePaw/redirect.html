@@ -1,0 +1,91 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ -->
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/Resources/bootstrap.css" />
+	<link rel="stylesheet" href="/Resources/custom.css" />
+	<script src="/Resources/jquery-1.12.1.min.js"></script>
+	<script src="/Resources/bootstrap.min.js"></script>
+    <script src="guiController.js"></script>
+	<title>Paw Popup</title>
+  </head>
+  <body>
+	<ul class="nav nav-tabs">
+		<li class="active"><a data-toggle="tab" href="#playTab">Play</a></li>
+		<li><a data-toggle="tab" href="#recordTab">Record</a></li>
+	</ul>
+	<div class="tab-content">
+		<div id="playTab" class="tab-pane fade in active">
+			<div class="container-fluid containerBorder">
+				<h1>Paw Recordings Here</h1>           
+			</div>
+			<div class="container-fluid">
+				<form role="form">
+					<div class="form-group">
+						<label for="filename">Current Paw Recording:</label>
+						<input type="text" class="form-control" id="filename">
+					</div>
+					<label>Select A JS Module:</label>
+					</br>
+					<label class="radio-inline">
+						<input type="radio" name="modRadio">None
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="modRadio">AMD
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="modRadio">UMD
+					</label>
+				</form>
+			</div>
+			</br>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-4">
+						<button type="button" class="btn btn-primary" id="playBtn">Play</button>
+						<button type="button" class="btn btn-success" id="saveAsBtn">Save As</button>
+						<button type="button" class="btn btn-danger" id="delBtn">Delete</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="recordTab" class="tab-pane fade">
+			<div class="container-fluid containerBorder">
+				<h1>Paw Script Information Here</h1>           
+			</div>
+			<div class="container-fluid">
+				<form role="form">
+					<div class="form-group">
+						<label for="filename">Paw Recording File Name:</label>
+						<input type="text" class="form-control" id="filename">
+					</div>
+					<label>Select A JS Module:</label>
+					</br>
+					<label class="radio-inline">
+						<input type="radio" name="modRadio">None
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="modRadio">AMD
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="modRadio">UMD
+					</label>
+				</form>
+			</div>
+			</br>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-4">
+						<button type="button" class="btn btn-primary" id="recBtn">Record</button>
+						<button type="button" class="btn btn-success" id="saveBtn">Save</button>
+						<button type="button" class="btn btn-danger" id="delBtn">Delete</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+  </body>
+</html>

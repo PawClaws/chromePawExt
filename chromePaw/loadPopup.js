@@ -1,96 +1,122 @@
 /*-------VIEW-INJECTION------------------------*/
-    //Set document as angular app and control
-var paw=new Paw();
+    //Set document as angular app and control    
+var paw=new Paw();  
     var selector=$('[ng-app]')
-
+    
     if(selector.length>0){
-
+       
         alert('PawClaws Says: Recording is not currently available on pages built with Angular js. Playback is available manually via the altPlay event');
-
+        
         jQuery(window).on('altPlay',(ev,script)=>{
             var altPlay=new Paw();
             Train.mixFunctionInto(altPlay,'altPlayScript', script);
             altPlay['altPlayScript'].call(altPlay);
         });
-
+        
     }
 else{
 
     $('html').attr("ng-app", "record");
     $('html').attr("ng-controller", "recordCtrl");
-
-
+    
+   
 /*------Controller Instantiation----------------------------------*/
-    var app=angular.module('record', ['cfp.hotkeys']);
+    var app=angular.module('record', ['cfp.hotkeys']);   
     app.config(['$compileProvider', function($compileProvider){
         $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|blob):/);}]);
     app.controller('recordCtrl', function($scope, $http, hotkeys) {
-
-
+             
+      
       /*CUSTOM EVENTS*******************************************/
 
-
-      jQuery(window).on('scriptPicker',function(){
-        $scope.fn.toggleRecord();
-      });
-
+             
+     
+      
       jQuery(window).on('toggleRecord',function(){
         $scope.fn.toggleRecord();
       });
-      jQuery(window).on('downloadPawScript',function(){
-        $scope.fn.downloadPawScript();
-      });
-      jQuery(window).on('requestSave',function() {
-            
-          $scope.fn.generatePawScript();
-          chrome.runtime.sendMessage({action: "save", data: $scope.m.script},function(res){
-
-          });
-
-      });
-      //... 230 more lines ...
+ 
         hotkeys.add('esc', 'Toggle Recording', function() {
             $scope.fn.toggleRecord();
         });
+	  jQuery(window).on('stopRecording',function(){
+		if($scope.m.isRecording){
+            $scope.fn.toggleRecord();
+        }
+	  });
+      jQuery(window).on('beforeunload',function(){
+        if($scope.m.isRecording){
+            $scope.fn.toggleRecord();
+        }
+      }); 
+	  jQuery(window).on('append',function(ev,a){
+		console.log(a)
+		var arr=a.split('!');
+		var datParam=arr[2].toString().split(',')
+		datParam.shift();
+		datParam.shift();
+		datParam.unshift('r.fn=function(options, done) {');
+		var obj={name:arr[0],fn:arr[1],data: datParam}
+		$scope.m.recordings.push(obj);
+                    chrome.runtime.sendMessage({
+                            action:'suggestUpdate',
+                            recordings: $scope.m.recordings
+                            },
+                            function(res){
 
+                            
+                            }); 		
+		
+	  });
       [0,1,2,3,4,5,6,7,8,9].forEach((e,i,a)=>{
           jQuery(window).on('play'+e.toString(),function(){
             if($scope.m.recordings[e]){
                 $scope.fn.playback(e);
             }
           });
+          jQuery(window).on('save'+e.toString(),function(){
+            if($scope.m.recordings[e]){
+                    $scope.fn.downloadPawScript($scope.m.recordings[e])                
+            }
+          });
+          jQuery(window).on('del'+e.toString(),function(){
+            if($scope.m.recordings[e]){
+                $scope.fn.del(e);
+            }
+          });		  
           hotkeys.add(e.toString(), 'Play recording #', function() {
             if($scope.m.recordings[e]){
                 $scope.fn.playback(e);
             }
-            })
-          hotkeys.add('ctrl+'+e.toString(),'Save recording #',function(){
+            });
+          hotkeys.add('shift+'+e.toString(),'Save recording #',function(){
                 if($scope.m.recordings[e]){
-                    console.log($scope.fn.generateSpecificPawScript(e));
+					$scope.fn.downloadPawScript($scope.m.recordings[e])
                 }
-          })
-        })
+          });
 
+        });
+       
+        
         chrome.runtime.sendMessage({action:"requestUpdate"},function(res){
                 if(res){
                     if(res.recordings){
                             $scope.m.recordings=res.recordings;
-
-
+                            
+                            
                     }
-                }
-
-
-            });
-
-
-
-
-    /***********************************************************************/
+                }            
+            }); 
+        
+    
+    
+    
+    
+    /***********************************************************************/     
 
 
         var sendUpdates=false;
-        var tab = '';
+        var tab = '';        
         var mouseDown = false; // move to top
         var eventsToRecord = ['click','scroll','contextmenu','mouseup','mousedown','mousemove','mousewheel'];
         $scope.m = {
@@ -122,7 +148,7 @@ function recordingToCode(name, records) {
                 code += '';
             }
             return code;
-        }
+        }        
         function copyTouches(ev) {
             var result = [];
             var touches = ev.touches;
@@ -211,7 +237,7 @@ function recordingToCode(name, records) {
                 ]);
             }
         }
-
+        
         function cancelEvent(event) {
             event.preventDefault();
         }
@@ -234,52 +260,60 @@ function recordingToCode(name, records) {
                 $scope.m.isRecording = !$scope.m.isRecording;
                 $scope.m.btnMsg = $scope.m.isRecording ? 'Stop' : 'Record';
                 if (!$scope.m.isRecording) {
-                    $scope.m.recording.data.unshift('r.fn = function(options, done) {');
+                    $scope.m.recording.data.unshift('r.fn=function(options, done) {');
                     $scope.m.recording.data.push('.then(done);');
                     $scope.m.recording.data.push('}');
 
-
-
-
+                    
+                     
+                   
                     chrome.runtime.sendMessage({
                             action:'suggestUpdate',
                             recordings: $scope.m.recordings
                             },
                             function(res){
 
-
-                            });
+                            
+                            });                   
                 }
                 else {
                     // start recording, clear everything
-                    var name = 'gesture' + ($scope.m.recordings.length + 1);
+                    var name = 'gesture' + Date.now().toString();
                     $scope.m.recording = {
                         name: name,
                         data: [],
                         fn: null
                     };
                     $scope.m.recordings.push($scope.m.recording);
-
+                   
                     $scope.m.lastEvent = null;
                     $scope.m.script = '';
                     $scope.m.recording.data.push('this');
                 }
             },
-            playback: function(i) {
+            playback: function(i) { 
+				console.log('273')
                 var r=$scope.m.recordings[i];
-                var code = recordingToCode(r.name,r.data);
-
+                console.log('275')
+				var code = recordingToCode(r.name,r.data);
+                console.log('277')
                     eval(code);
-                    Train.mixFunctionInto(paw, r.name,r.fn);
-
+				console.log('279')	
+                    Train.mixFunctionInto(paw, r.name,r.fn);                
+                console.log('281')
                 paw[r.name].call(paw);
-
+				console.log('283')
+            
             },
             del: function(i) {
                 var r = $scope.m.recordings[i];
                 delete(paw[r.name]);
                 $scope.m.recordings.splice(i, 1);
                 $scope.fn.generatePawScript();
+                    chrome.runtime.sendMessage({
+                            action:'suggestUpdate',
+                            recordings: $scope.m.recordings
+                            }); 				
             },
             addGestureToPaw: function(i) {
                 var r = $scope.m.recordings[i];
@@ -288,36 +322,38 @@ function recordingToCode(name, records) {
             removeGestureFromPaw: function(i) {
                 var r = $scope.m.recordings[i];
                 delete(paw[r.name]);},
-	    downloadPawScript: function() {
+	    downloadPawScript: function(e) {
                 $scope.fn.generatePawScript();
 
                 // download to filesystem, leaving in for the future
-
-                var blob = new Blob([$scope.m.script], {
+                
+                var blob = new Blob([e.name,"!",e.fn,"!",e.data], {
                     type: 'text/javascript'
                 });
                 var scriptURL = window.URL.createObjectURL(blob);
                 var a = document.createElement('a');
-                a.download = $scope.m.scriptName;
+                a.download = "pawclaws_"+e.name+".txt";
                 a.href = scriptURL;
                 a.target = '_blank';
                 a.click();
             },
+            
+	/*function downloadFile(fileId) {
 
-
-    /**
-     * Initiate auth flow in response to user clicking authorize button.
-     *
-     * @param {Event} event Button click event.
-     */
-    /*handleAuthClick: function() {
-	var CLIENT_ID = '216899417108-8thjf5om26hi720pocobscbveqqfdt25.apps.googleusercontent.com';
-	var SCOPES = 'https://www.googleapis.com/auth/drive';
-        gapi.auth.authorize(
-            {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
-            handleAuthResult);
-        return false;
-    },*/
+	    gapi.client.load('drive', 'v2', function () {
+		var accessTokenObj = {};
+		accessTokenObj.access_token = gapi.auth.getToken().access_token;
+		accessTokenObj.token_type = "Bearer";
+		accessTokenObj.expires_in = "3600";
+		gapi.auth.setToken(accessTokenObj);
+		var request = gapi.client.drive.files.get({
+		    'fileId': fileId
+		});
+		request.execute(function (resp) {
+		    window.location.assign(resp.webContentLink);
+		});
+	    })
+	}*/
             generatePawScript: function() {
                 if ($scope.m.recordings.length > 0) {
                     var cmds = [];
@@ -326,9 +362,9 @@ function recordingToCode(name, records) {
                     cmds.push('{');
                     var batchlen = $scope.m.recordings.length;
                     for (var k = 0; k < batchlen; ++k) {
-                        recording = $scope.m.recordings[k];
+                        var recording = $scope.m.recordings[k];
 
-
+                                       
                         var rFunc=recording.fn.toString();
 
                         cmds.push('"'+recording.name +'"'+ ': ' + '"'+rFunc+'"' + (k + 1 === batchlen ? '' : ','));}
@@ -344,52 +380,52 @@ function recordingToCode(name, records) {
                         code: $scope.m.script
                     };
 
-            }
+            }    
+            
+  
 
-
-
-
-
+            
+                                                              
             },
             generateSpecificPawScript: function(k) {
-
+         
                     var cmds = [];
                     var recording = null;
                     // Add the gestures object
                     //cmds.push('{');
-
-
+                   
+                   
                         recording = $scope.m.recordings[k];
 
-
+                  
                         var rFunc=recording.fn.toString();
 
                         cmds.push('"'+rFunc+'"' + '');
                     //cmds.push('}');
                     return cmds.join('');
-
+                                                              
             }
 
         };
-
+    
         $scope.fn.generatePawScript();
-
-
-
+          
+       
+        
     });
-
+    
     angular.element(document).ready(()=>{
         $($('.cfp-hotkeys-container').find('table')).hide();
         $($('.cfp-hotkeys-container').find('.cfp-hotkeys-close')).hide();
-
-
+        
+        
     });
-/*-------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------*/    
 }
+ 
 
-
-
-
+    
+    
 
 
 

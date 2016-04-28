@@ -1,0 +1,116 @@
+<html class="myDim">
+<head>
+<link href="siteScript/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="siteStyle/FloatingLabels.css" rel="stylesheet" />
+<link href="siteScript/jquery-ui-1.11.4/jquery-ui.min.css" rel="stylesheet" />
+<link href="siteScript/jquery-ui-1.11.4/jquery-ui.structure.min.css" rel="stylesheet" />
+<link href="siteScript/jquery-ui-1.11.4/jquery-ui.theme.min.css" rel="stylesheet" />
+<link href="Resources/custom.css" rel="stylesheet"/>
+<script src="siteScript/jquery-2.1.4.min.js"></script>
+<script src="siteScript/bootstrap/js/bootstrap.js"></script>
+<script src="siteScript/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+<script src="siteScript/FloatingLabels.js"></script>
+<script src="siteScript/transparency.js"></script>
+<script src="siteScript/plates.js"></script>
+<script src="siteScript/mori.js"></script>
+<script src="siteScript/immutable.js"></script>
+<script src="siteScript/underscore-observe-master/demo/js/underscore.js"></script>
+<script src="siteScript/underscore-observe-master/demo/js/json2.js"></script>
+<script src="siteScript/underscore-observe-master/underscore-observe.js"></script>
+<script src="siteScript/jquery.directive.js-master/jquery.directive.js"></script> 
+<link rel="stylesheet" href="siteStyle/style.css">
+
+<!-- These next four entries are new but the icons stopped working all of the sudden -->
+<link href="Resources/semantic.min.css" rel="stylesheet" />
+<link href="Resources/icon.min.css" rel="stylesheet prefetch" />
+<script src="Resources/semantic.min.js"></script>
+<script src="Resources/myAdditions.js"></script>
+
+
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-hotkeys/src/hotkeys.js" ></script>
+<script src="bower_components/mousetrap/mousetrap.min.js"></script> 
+<script src="bower_components/q/q.js"></script>
+<script src="src/ViewportRelative.js"></script>
+<script src="src/Train.js"></script>
+<script src="src/WheelEventSimulator.js"></script>
+<script src="src/Gestures.js"></script>
+<script src="src/Paw.js"></script>
+
+<script src="./siteScript/dropzone.js"></script>
+<script src='registerControl.js'></script>
+<script src="siteScript/gapiplatform.js"></script>
+
+
+</head>
+<body>
+	<div class="ui pointing secondary demo menu">
+		<a class="active green item" data-tab="playTab">Play</a>
+		<a class="red item" data-tab="recTab">Record</a>
+		<a class="blue item" data-tab="infoTab">Info</a>
+		
+	</div>
+	<div class="ui tab segment" data-tab="recTab">
+		<form class="ui form ng-pristine ng-valid">
+			<div class="ui raised segment">
+				<a class="ui red ribbon label">Record A Paw Script</a>
+				<br></br>
+				<div class="three ui buttons">
+					<button class="ui button" id="recBtn">
+						<i class="record icon"></i>
+						Record
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="ui active tab segment" data-tab="playTab">
+		<form class="ui form ng-pristine ng-valid">
+			<div class="ui raised segment">
+				<a class="ui green ribbon label">Load A Paw Recording</a>
+				<br></br>
+				<input id='fileInput' type='file' accept='text/plain' />
+				<br></br>
+				<div class="ui positive message">
+					<div class="header"><h1>Recordings</h1></div>
+						<div id='recordingContainer' class="container-fluid">
+						</div>
+				</div>
+				
+			</div>
+		</form>
+	</div>
+	<div class="ui tab segment" data-tab="infoTab">
+		<form class="ui form ng-pristine ng-valid">
+			<div class="ui raised segment">
+				<a class="ui blue ribbon label">General Information</a>
+				<br></br>
+				<p>Only 10 Recordings May Be Recorded At A Time</p>
+				<p>All Unsaved Recordings Will Be Deleted Upon Exiting The Current Web Session</p>
+				<p>In Order To Record More Than 10 Paw Scripts In One Web Session, You Will Need To Delete Them From The Queue On The Play Tab</p>
+				<p>0-9 On The Keyboard Correspond To The Recordings Displayed On The Play Tab With 0 Being The Top Recording</p>
+				<p>
+				<br></br>
+				<a class="ui red ribbon label">Keyboard Shortcuts</a>
+				<br></br>
+				<p>ESC - Toggles The Record Function</p>
+				<p>0-9 - Plays The Corresponding Loaded Recording</p>
+				<p>Shift + 0-9 - Downloads The Corresponding Loaded Recording</p>
+			</div>
+		</form>
+	</div>
+</body>
+
+			<div class='hidden' id='abstractRecording'>
+	            <div class='row' style='border-style:solid!important'>
+	                <div class='col-xs-12'>
+				        <label for="filename_insertNum">_insertFileName</label>
+					</div>
+					<div class='col-xs-12'>
+						<button type="button" class="btn btn-primary btnPlay" >Play</button>
+						<button type="button" class="btn btn-success btnSave" >Save</button>
+						<button type="button" class="btn btn-danger btnDelete" >Delete</button>	
+					</div>
+				</div>					
+			</div>
+</html>
