@@ -53,11 +53,8 @@
         <div class='col-xs-6'>
             <div class='btn btn-default' id="save-to-drive">Save To Drive</button></div>
         </div>
-        <div>
-	<label for="file-upload" class="custom-file-upload">
-    	Choose Script
-	</label>
-	<input id="file-upload" type="file"/>
+	<div class='col-xs-6'>
+	    <div class='btn btn-default' id="authorize">Authorize</button></div>
 	</div>
 
     </div>

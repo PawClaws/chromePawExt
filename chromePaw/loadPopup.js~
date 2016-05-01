@@ -289,7 +289,6 @@ function recordingToCode(name, records) {
             removeGestureFromPaw: function(i) {
                 var r = $scope.m.recordings[i];
                 delete(paw[r.name]);},
-
 	    downloadPawScript: function() {
                 $scope.fn.generatePawScript();
 
@@ -331,7 +330,13 @@ function recordingToCode(name, records) {
                         filename: $scope.m.scriptName,
                         code: $scope.m.script
                     };
-            	}
+
+            }
+
+
+
+
+
             },
             generateSpecificPawScript: function(k) {
 

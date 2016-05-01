@@ -17,7 +17,7 @@ chrome.runtime.onMessage.addListener(
    else if(request.action=='requestDownload'){
       chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
           console.log(token);
-          downloadFile('0B6SuDw3PGAvDWHpOVXlLcG9IRWc',token);
+          downloadFile('0B3BcNfReJqCZVjZnTXBBWi1kbms',token);
       });
    }
 
